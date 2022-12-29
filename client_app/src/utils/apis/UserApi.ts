@@ -44,3 +44,17 @@ export const checkUserCredentials = async () => {
   const response = await axios.get('http://localhost:3000/api/auth/protected', {withCredentials: true});
   return response;
 }
+
+export const getAllUsers = async () => {
+  const response  = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users`);
+  console.log(response.data);
+  return response;
+}
+
+export const getAllEmployees = async () => {
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/register`);
+}
+
+export const getAllClients = async () => {
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/register`);
+}

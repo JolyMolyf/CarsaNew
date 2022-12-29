@@ -22,6 +22,7 @@ import CreateOrder from './pages/Order/CreateOrder';
 import ClientOrder from './pages/ClientPage/Orders/ClientOrders';
 import ClientPayments from './pages/ClientPage/Payments/ClientPayments';
 import CarSelectorAddCar from './pages/CarSelector/CarSelectorAddCar';
+import ManagerDashboard from './pages/Manager/ManagerDashboard';
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
         <Route path='/technician/dashboard' element={<TechnicianDashboard/>}/>
         <Route path='/technician/report/add/:id/:carId' element={<CreateReport/>}/>
         
+        <Route path='/manager/dashboard' element={<ManagerDashboard/>}></Route>
+
         <Route path='/car/edit/:id' element={<EditCar/>} />
 
 

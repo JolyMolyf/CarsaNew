@@ -7,6 +7,7 @@ import { invalidateSession, generateAccessToken, generateRefreshToken } from '..
 import { ClientRegistrationBody } from '../DTOs/clientRegistrationBody';
 import { CreatedClient } from '../DTOs/createdClient';
 import employeeHelper from '../services/helpers/employeeHelper';
+import userHelpers from '../services/helpers/userHelpers';
 
 const register = async (req: Request, res: Response) => {
     const clientBody: ClientRegistrationBody = req.body;
@@ -45,8 +46,6 @@ const login = async (req: Request, res: Response) => {
     const clientWithEmail = await clientHelper.getClientByEmail(email);
     const employeeWithEmail = await employeeHelper.getEmployeeByEmail(email);
 
-   
-
     if ((!clientWithEmail || !comparePasswords(password, clientWithEmail.password!)) && (!employeeWithEmail || !comparePasswords(password, employeeWithEmail.password!)  )) {
         return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Incorrect email or password' });
     }
@@ -74,6 +73,7 @@ const login = async (req: Request, res: Response) => {
         maxAge: 1000 * 60 * 60 * 24 * 30,
         httpOnly: true,
     });
+
     user.role = user.role || 'Client';
     return res.json(user);
 };
@@ -98,9 +98,28 @@ const getProtected = async (req: Request, res: Response) => {
     res.json({ sensetiveData: 'User private data' });
 }
 
+const getAllUsers = async (req:Request, res:Response) => {
+    const users = await userHelpers.getAllUsers()
+    console.log('USERS::::', users);
+    res.json({ status: 'OK', users})
+}
+
+const getAllClients = async (req:Request, res:Response) => {
+    
+    res.json({})
+}
+
+const getAllEmployees = async () => {
+
+}
+
 export default {
     register,
     login,
     logout,
-    getProtected
+    getProtected, 
+
+    getAllUsers,
+    getAllClients,
+    getAllEmployees,
 }

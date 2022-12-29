@@ -36,7 +36,15 @@ const getClientDataById = async (clientId: string) => {
   return selector;
 };
 
+const getAllUsers = async () => {
+  const clients = await db.Client.findAll({include: [db.Person]});
+  const selectors = await db.CarSelector.findAll({include: [{model: db.Employee, include: [db.Person]}]})
+  const technicians = await db.Technician.findAll({include: [{model: db.Employee, include: [db.Person]}]})
+  return [...clients, ...technicians, ...selectors];
+}
+
 export default {
   getSelectorDataById,
-  getClientDataById
+  getClientDataById,
+  getAllUsers
 };

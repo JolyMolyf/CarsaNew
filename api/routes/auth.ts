@@ -31,4 +31,8 @@ router.get(
     authController.getProtected
 );
 
+router.get('/clients', authController.getAllClients)
+router.get('/users', authController.getAllUsers)
+
+
 export default router;

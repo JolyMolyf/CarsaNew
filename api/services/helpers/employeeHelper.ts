@@ -4,10 +4,13 @@ import db from "../../../database/models"
 const getEmployeesPosition = async (person_id:string) => {
   const carSelectors = await  getAllCarSelectors();
   const technicians = await  getAllTechnicians();
+  const managers = await db.Manager.findAll();
   const technician = technicians.find((technician) => technician.person_id == person_id);
   const carSelector = carSelectors.find((carSelector)=> carSelector.person_id == person_id);
+  const manager = managers.find((manager)=> manager.person_id == person_id);
   if(technician) return 'Technician';
   if(carSelector) return 'CarSelector';
+  if(manager) return 'Manager'
 }
 
 
