@@ -3,15 +3,12 @@ import './Offers.scss';
 import Header from "../../components/header/Header";
 import ArteonImg from '../../images/HomePage/arteon.png'
 import DropDown from '../../components/common/dropdown/DropDown';
-import RangeSelect from '../../components/common/range/RangeSelect';
 import Button from '../../components/common/button/Button';
 import axios from 'axios'
 import { CarType } from '../../utils/models/Car';
-import { getAllGenerations, getAllModels, filterCars } from '../../utils/services/CarService'
-import {carType, fuelType } from '../../utils/constants/CarConstants';
-import { filterCar } from '../../utils/services/FilterCarService';
-import { getAllModelsForBrand, getRejectedCars } from '../../utils/apis/CarsApi';
+import { getAllGenerationsForModel, getAllModelsForBrand, getRejectedCars } from '../../utils/apis/CarsApi';
 import CarCard from '../../components/Cards/CarCard/CarCard';
+import TextInput from '../../components/common/input/TextInput';
 
 const OffersPage = () =>  {
   const [ cars, setCars ] = useState<Array<CarType>>([]);
@@ -26,22 +23,115 @@ const OffersPage = () =>  {
     setFilters({...filters, [placeholder]: option.name})
   }
 
+  const handleFilterInputChange = (e:any) => {
+    setFilters({...filters, [e.target.name]:e.target.value})
+  }
+
+
+  const handleReset = () => {
+    setFilters(undefined)
+    setFilteredCars(cars);
+    setModels([])
+    setGenerations([])
+  }
+
   const handleFilter = () => {
-    console.log(filters);  
-    const filteredCars  = cars.filter((car) => {
-      let flag = true;
-      const entries = Object.entries(filters);
-      console.log(Object.entries(car).flat(2), Object.entries(filters));
-    })
+    console.log(filters, cars);  
+    let filteredCars:Array<any> = [...cars];  
+
+    if(filters?.brand) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.CarBrand.name === filters.brand
+      });
+    }
+
+    if( filters?.models ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.CarModel.name === filters.model
+      })
+    }
+
+    if ( filters?.generations ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.CarGeneration.name = filters.generation;
+      })
+    }
+
+    if ( filters.fuel ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.Engine.fuel_type = filters.fuel;
+      })
+    }
+
+    if ( filters.drive )  {
+      filteredCars = filteredCars.filter((car) => {
+        return car.drive = filters.drive;
+      })
+    }
+
+    if ( filters.gearbox )  {
+      filteredCars = filteredCars.filter((car) => {
+        return car.transmission = filters.gearbox;
+      })
+    }
+
+    if ( filters?.maxPrice &&  filters?.maxPrice !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.price <= filters.maxPrice;
+      })
+    }
+
+    if ( filters?.minPrice && filters?.minPrice !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.minPrice >= filters.minPrice;
+      })
+    }
+
+    if ( filters?.maxYear && filters?.maxYear !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.year <= filters.maxYear;
+      })
+    }
+
+    if ( filters?.minYear && filters?.minYear !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.year >= filters.minYear;
+      })
+    }
+
+    if ( filters?.minPower && filters?.minPower !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.Engine.power >= filters.minPower;
+      })
+    }
+
+    if ( filters?.maxPower && filters?.maxPower !== '' ) {
+      filteredCars = filteredCars.filter((car) => {
+        return car.Engine.power <= filters.maxPower;
+      })
+    }
+
+    setFilteredCars(filteredCars)
+
   }
 
   useEffect(() => {
+    console.log(filters)
     if (filters?.brand) {
       getAllModelsForBrand(filters.brand).then((res:any) => {
         setModels(res);
       });
     }
+
+    if( filters?.model ) {
+      getAllGenerationsForModel(filters.model).then((res:any) => {
+        console.log(res)
+        setGenerations(res);
+      })
+    }
+
   }, [filters])
+
 
   useEffect(() => {
     getRejectedCars().then((res) => {
@@ -63,7 +153,18 @@ const OffersPage = () =>  {
           <div className='offers-wrapper-filter-form'>
               <DropDown placeholder='brand' options={brands} setOuterOptions={handleFilterEditing}></DropDown>
               <DropDown placeholder='model' options={models} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='generation' options={generations} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='fuel' options={[{id: 1, name: 'Benzyna'}, {id: 2, name: 'Diesel'}]} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='drive' options={[{id: 0, name: 'All'}, {id: 1, name: 'Front' },{id: 2, name: 'Rear'}]} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='gearbox' options={[{id: 0, name: 'Auto'}, {id: 1, name: 'Manual'}]} setOuterOptions={handleFilterEditing}></DropDown>
+              <TextInput name='minPrice' style={{ width: '40%' }} placeholder='Min Price' value={filters?.minPrice} onChange={handleFilterInputChange}  />
+              <TextInput name='maxPrice' style={{ width: '40%' }} placeholder='Max Price' value={filters?.maxPrice} onChange={handleFilterInputChange} />
+              <TextInput name='minPower' style={{ width: '40%' }}placeholder='Min Power' value={filters?.minPower} onChange={handleFilterInputChange} />
+              <TextInput name='maxPower' style={{ width: '40%' }} placeholder='Max Power' value={filters?.maxPower} onChange={handleFilterInputChange} />
+              <TextInput name='minYear' style={{ width: '40%' }} placeholder='Min Year' value={filters?.minYear} onChange={handleFilterInputChange} />
+              <TextInput name='maxYear' style={{ width: '40%' }} placeholder='Max Year' value={filters?.maxYear} onChange={handleFilterInputChange} />
               <Button type={true} name="Filter" onClick={handleFilter}></Button>
+              <Button type={true} name="Reset" onClick={handleReset}></Button>
           </div>
           <div className='offers-wrapper-filter-image'>
             <img src={ArteonImg}></img>

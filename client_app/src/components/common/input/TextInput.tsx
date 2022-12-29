@@ -9,13 +9,14 @@ interface IProps{
   error?: any,
   type?: string,
   className?: string,
+  style?:any
 }
 
 
-const TextInput = ({placeholder, value, className, onChange, error, name, type = 'text',}:IProps) => {
+const TextInput = ({placeholder, value, className, onChange, error, name, type = 'text', style}:IProps) => {
 
   return(
-    <div className={`textInput ${className} ${error?  'input-error' : ''}`}>
+    <div style={{...style}} className={`textInput ${className} ${error?  'input-error' : ''}`}>
       <input name={name} value={value} onChange={onChange} placeholder={placeholder} type={type}></input>
       { error?.hasError? <div className='input-error-message'>{ error?.message }</div> : '' }
     </div>
