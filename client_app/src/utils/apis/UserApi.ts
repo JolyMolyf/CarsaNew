@@ -47,7 +47,6 @@ export const checkUserCredentials = async () => {
 
 export const getAllUsers = async () => {
   const response  = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users`);
-  console.log(response.data);
   return response;
 }
 
@@ -57,4 +56,9 @@ export const getAllEmployees = async () => {
 
 export const getAllClients = async () => {
   const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/register`);
+}
+
+export const updateUser = async (user:any) => {
+    const response  = await axios.put(`${process.env.REACT_APP_API_URL}`, user)
+    return response
 }

@@ -328,8 +328,6 @@ const rejectCar = async (car_id: string ) => {
 const getRejectedCars = async () => {
   const car_order = await db.Car_Order.findAll(); 
   const car_order_ids = car_order.map((car_order) => car_order.car_id);
-  console.log(car_order_ids);
-
   const rejectedCars = await db.Car.findAll({
     where: {
       id: car_order_ids

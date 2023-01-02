@@ -23,15 +23,13 @@ const Label = styled.div`
 `
 const ManagerDashboard = () => {
 
-    const [users, setUsers] = useState<Array<any>>([]);
+    const [users, setUsers] = useState<any>({});
 
     useEffect(() => {
         getAllUsers().then((res) => {
-            setUsers([...res?.data.users || []]);
+            setUsers({...res?.data.users || {}});
         })
     }, [])
-
-    console.log(users);
 
     return(
         <div>
@@ -39,11 +37,24 @@ const ManagerDashboard = () => {
             <UsersContainer>
                 <Label>Users</Label>
                 <UsersData>
-                    { users?.map((user) => {
+                    { users?.clients?.map((user:any) => {
                         return(
-                            <UserCard user={user}/>
+                            <UserCard user={user} role='Client'/>
                         )
                     }) }
+
+                    { users?.selectors?.map((user:any) => {
+                        return(
+                            <UserCard user={user} role='Technician'/>
+                        )
+                    }) }
+
+                    { users?.technicians?.map((user:any) => {
+                        return(
+                            <UserCard user={user} role='Selector'/>
+                        )
+                    }) }
+
                 </UsersData>
             </UsersContainer>
         </div>

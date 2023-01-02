@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import db from '../../../database/models';
 
 const getSelectorDataById = async (selectorId: string) => {
@@ -37,10 +38,33 @@ const getClientDataById = async (clientId: string) => {
 };
 
 const getAllUsers = async () => {
-  const clients = await db.Client.findAll({include: [db.Person]});
-  const selectors = await db.CarSelector.findAll({include: [{model: db.Employee, include: [db.Person]}]})
-  const technicians = await db.Technician.findAll({include: [{model: db.Employee, include: [db.Person]}]})
-  return [...clients, ...technicians, ...selectors];
+  const clients:Array<any> = await db.Client.findAll({ 
+    attributes: [
+      [sequelize.col('Person.id'), 'id'],
+      [sequelize.col('Person.first_name'), 'first_name'],
+      [sequelize.col('Person.last_name'), 'last_name'],
+      'email',
+    ], 
+    include: [db.Person]
+  })
+
+  const selectors:Array<any> = await db.CarSelector.findAll({
+    attributes:  [
+      [sequelize.col('Employee.Person.id'), 'id'],
+      [sequelize.col('Employee.Person.first_name'), 'first_name'],
+      [sequelize.col('Employee.Person.last_name'), 'last_name'],
+      [sequelize.col('Employee.email'), 'email'],
+    ],
+    include: [{model: db.Employee, include: [db.Person]}]})
+  const technicians:Array<any> = await db.Technician.findAll({ 
+    attributes:  [
+      [sequelize.col('Employee.Person.id'), 'id'],
+      [sequelize.col('Employee.Person.first_name'), 'first_name'],
+      [sequelize.col('Employee.Person.last_name'), 'last_name'],
+      [sequelize.col('Employee.email'), 'email'],
+    ],
+    include: [{model: db.Employee, include: [db.Person]}]})
+  return {clients, technicians, selectors};
 }
 
 export default {

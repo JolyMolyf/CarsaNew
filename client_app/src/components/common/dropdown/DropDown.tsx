@@ -4,17 +4,21 @@ import './DropDown.scss'
 interface Props {
   placeholder:string;
   options:Array<any>;
-  setOuterOptions?: any;
-  outerOption?:any
+  onChange?: any;
+  outerOption?:any;
+  initialValue?: string;
+  disabled?:boolean;
 }
 
 const DropDown = (props:Props) => {
-  const { options, outerOption, setOuterOptions, placeholder } = props;
-  const [ selectedOption, setSelectedOption ] = useState<string>(placeholder?  `Choose  ${placeholder}` : 'Choose option');
+  const { options, outerOption, onChange, placeholder, initialValue, disabled } = props;
+  const [ selectedOption, setSelectedOption ] = useState<string>(initialValue ? initialValue : placeholder?  `Choose  ${placeholder}` : 'Choose option');
   const [ isOpened, setIsOpened ] = useState<boolean>(false); 
   
+  console.log(disabled);
+
   const handleClick = () => {
-    if (options.length > 0) {
+    if ( options.length > 0 && !disabled ) {
       setIsOpened(!isOpened)
     }
     
@@ -23,22 +27,23 @@ const DropDown = (props:Props) => {
   const handleItemSelect = (item:{ id:number, label: string, name: string }) => {
       setSelectedOption(item?.label ?? item.name);
       setIsOpened(!isOpened);
-      setOuterOptions(item, placeholder);  
+      onChange(item, placeholder);  
   }
 
   useEffect(() => {
     const isInOptions = !!!( options.filter((option) => {
       return option.name === selectedOption || option.label === selectedOption;
     }).length > 0 )
+
     if(isInOptions){
       setSelectedOption(placeholder?  `Choose  ${placeholder}` : 'Choose option')
     }
   }, [options])
 
   return(
-    <div className={`dropdown ${ options.length > 0 ? '' : 'inactive-dropdown' }`}>
+    <div className={`dropdown ${ options.length > 0 && !disabled ? '' : 'inactive-dropdown' }`}>
       <div className='dropdown-input' onClick={handleClick}>
-        <p>{outerOption?.[placeholder]? outerOption?.[placeholder] : selectedOption }</p>
+        <p>{outerOption?.[placeholder] ? outerOption?.[placeholder] : selectedOption }</p>
         <span className="material-icons dropdown-input-arrow">
           expand_more
         </span>

@@ -100,7 +100,6 @@ const getProtected = async (req: Request, res: Response) => {
 
 const getAllUsers = async (req:Request, res:Response) => {
     const users = await userHelpers.getAllUsers()
-    console.log('USERS::::', users);
     res.json({ status: 'OK', users})
 }
 

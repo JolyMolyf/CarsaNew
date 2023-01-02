@@ -36,7 +36,6 @@ const OffersPage = () =>  {
   }
 
   const handleFilter = () => {
-    console.log(filters, cars);  
     let filteredCars:Array<any> = [...cars];  
 
     if(filters?.brand) {
@@ -116,7 +115,6 @@ const OffersPage = () =>  {
   }
 
   useEffect(() => {
-    console.log(filters)
     if (filters?.brand) {
       getAllModelsForBrand(filters.brand).then((res:any) => {
         setModels(res);
@@ -125,7 +123,6 @@ const OffersPage = () =>  {
 
     if( filters?.model ) {
       getAllGenerationsForModel(filters.model).then((res:any) => {
-        console.log(res)
         setGenerations(res);
       })
     }
@@ -151,12 +148,12 @@ const OffersPage = () =>  {
       <div className='offers-wrapper'>
         <div className='offers-wrapper-filter'>
           <div className='offers-wrapper-filter-form'>
-              <DropDown placeholder='brand' options={brands} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='model' options={models} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='generation' options={generations} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='fuel' options={[{id: 1, name: 'Benzyna'}, {id: 2, name: 'Diesel'}]} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='drive' options={[{id: 0, name: 'All'}, {id: 1, name: 'Front' },{id: 2, name: 'Rear'}]} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='gearbox' options={[{id: 0, name: 'Auto'}, {id: 1, name: 'Manual'}]} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='brand' options={brands} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='model' options={models} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='generation' options={generations} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='fuel' options={[{id: 1, name: 'Benzyna'}, {id: 2, name: 'Diesel'}]} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='drive' options={[{id: 0, name: 'All'}, {id: 1, name: 'Front' },{id: 2, name: 'Rear'}]} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='gearbox' options={[{id: 0, name: 'Auto'}, {id: 1, name: 'Manual'}]} onChange={handleFilterEditing}></DropDown>
               <TextInput name='minPrice' style={{ width: '40%' }} placeholder='Min Price' value={filters?.minPrice} onChange={handleFilterInputChange}  />
               <TextInput name='maxPrice' style={{ width: '40%' }} placeholder='Max Price' value={filters?.maxPrice} onChange={handleFilterInputChange} />
               <TextInput name='minPower' style={{ width: '40%' }}placeholder='Min Power' value={filters?.minPower} onChange={handleFilterInputChange} />
