@@ -13,8 +13,9 @@ const UsersContainer = styled.div`
     margin: 0 auto;
 `
 
-const UsersData = styled.div`
-    display: flex;
+const Container = styled.div`
+    display: flex; 
+    flex-directon: row;
     flex-wrap: wrap;
 `
 const Label = styled.div`
@@ -35,27 +36,32 @@ const ManagerDashboard = () => {
         <div>
             <Header></Header>
             <UsersContainer>
-                <Label>Users</Label>
-                <UsersData>
-                    { users?.clients?.map((user:any) => {
-                        return(
-                            <UserCard user={user} role='Client'/>
-                        )
-                    }) }
-
+                    <Label>Clients</Label>
+                    <Container>
+                        { users?.clients?.map((user:any) => {
+                            return(
+                                <UserCard user={user} role='Client'/>
+                            )
+                        }) }
+                    </Container>
+                 
+                    <Label>Selectors</Label>
+                    <Container>
                     { users?.selectors?.map((user:any) => {
                         return(
                             <UserCard user={user} role='Technician'/>
                         )
                     }) }
+                    </Container>
 
+                    <Label>Technicians</Label>
+                    <Container>
                     { users?.technicians?.map((user:any) => {
                         return(
                             <UserCard user={user} role='Selector'/>
                         )
                     }) }
-
-                </UsersData>
+                    </Container>
             </UsersContainer>
         </div>
     )

@@ -1,5 +1,9 @@
+import e from 'express';
 import sequelize from 'sequelize';
+import { uuid } from '../../../client_app/src/utils/helpers/uuid';
 import db from '../../../database/models';
+import clientHelpers from './clientHelpers';
+import employeeHelper from './employeeHelper';
 
 const getSelectorDataById = async (selectorId: string) => {
   const selector = await db.CarSelector.findByPk(selectorId, {
@@ -23,7 +27,7 @@ const getSelectorDataById = async (selectorId: string) => {
 
 const getClientDataById = async (clientId: string) => {
   const selector = await db.Client.findByPk(clientId, {
-    attributes: ['person_id', 'Person.first_name', 'Person.last_name', 'email', 'phone'],
+    attributes: ['person_id', 'Person.first_name', 'Person.last_name', 'email', 'phone', 'password'],
     include: [
       {
         model: db.Person,
@@ -38,37 +42,28 @@ const getClientDataById = async (clientId: string) => {
 };
 
 const getAllUsers = async () => {
-  const clients:Array<any> = await db.Client.findAll({ 
-    attributes: [
-      [sequelize.col('Person.id'), 'id'],
-      [sequelize.col('Person.first_name'), 'first_name'],
-      [sequelize.col('Person.last_name'), 'last_name'],
-      'email',
-    ], 
-    include: [db.Person]
-  })
+  const clients:Array<any> = await clientHelpers.getAllClients();
+  const selectors:Array<any> = await employeeHelper.getAllCarSelectors();
+  const technicians:Array<any> = await employeeHelper.getAllTechnicians();
 
-  const selectors:Array<any> = await db.CarSelector.findAll({
-    attributes:  [
-      [sequelize.col('Employee.Person.id'), 'id'],
-      [sequelize.col('Employee.Person.first_name'), 'first_name'],
-      [sequelize.col('Employee.Person.last_name'), 'last_name'],
-      [sequelize.col('Employee.email'), 'email'],
-    ],
-    include: [{model: db.Employee, include: [db.Person]}]})
-  const technicians:Array<any> = await db.Technician.findAll({ 
-    attributes:  [
-      [sequelize.col('Employee.Person.id'), 'id'],
-      [sequelize.col('Employee.Person.first_name'), 'first_name'],
-      [sequelize.col('Employee.Person.last_name'), 'last_name'],
-      [sequelize.col('Employee.email'), 'email'],
-    ],
-    include: [{model: db.Employee, include: [db.Person]}]})
   return {clients, technicians, selectors};
+}
+
+const updateUserRole = async (user:any) => {
+  if ( ['Technician', 'Selector'].includes(user.role) ) {
+    const client = await getClientDataById(user.id);
+    console.log('Client:  : : ', client);
+    await db.Client.destroy({ where: { person_id: client.person_id }});
+    
+    const employee =  await employeeHelper.createEmployee({...user, person_id: client.person_id, password: client.password}, user.role || 'Selector');
+    return(employee);
+  } 
 }
 
 export default {
   getSelectorDataById,
   getClientDataById,
-  getAllUsers
+  getAllUsers,
+
+  updateUserRole,
 };

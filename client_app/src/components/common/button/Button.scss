@@ -15,6 +15,11 @@
   }
 }
 
+.disabled-button {
+  background-color: grey !important;
+  cursor:default;
+}
+
 .light_button{
   margin: 5px;
   width: 150px;

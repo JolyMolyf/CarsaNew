@@ -13,6 +13,18 @@ interface ClientByEmail {
   role?: string; 
 }
 
+const getAllClients = async () => {
+  return await db.Client.findAll({ 
+    attributes: [
+      [sequelize.col('Person.id'), 'id'],
+      [sequelize.col('Person.first_name'), 'first_name'],
+      [sequelize.col('Person.last_name'), 'last_name'],
+      'email',
+    ], 
+    include: [db.Person]
+  })
+}
+
 const getClientByEmail = async (email: string): Promise<ClientByEmail> => {
   const client = await db.Client.findOne({
     include: [
@@ -74,6 +86,7 @@ const createClient = async ({ first_name, last_name, email, phone, password }): 
 };
 
 export default {
+  getAllClients,
   getClientByEmail,
   isClientExist,
   createClient

@@ -59,11 +59,11 @@ export const getAllClients = async () => {
 }
 
 export const updateUser = async (user:any) => {
-    const response  = await axios.put(`${process.env.REACT_APP_API_URL}`, user)
+    const response  = await axios.put(`${process.env.REACT_APP_API_URL}/users`, user)
     return response
 }
 
 export const deleteUser = async (user:any) => {
-  const response  = await axios.delete(`${process.env.REACT_APP_API_URL}`, user)
+  const response  = await axios.delete(`${process.env.REACT_APP_API_URL}/users`,  { data: {...user } })
   return response
 }

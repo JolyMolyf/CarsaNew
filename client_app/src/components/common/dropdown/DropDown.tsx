@@ -14,8 +14,6 @@ const DropDown = (props:Props) => {
   const { options, outerOption, onChange, placeholder, initialValue, disabled } = props;
   const [ selectedOption, setSelectedOption ] = useState<string>(initialValue ? initialValue : placeholder?  `Choose  ${placeholder}` : 'Choose option');
   const [ isOpened, setIsOpened ] = useState<boolean>(false); 
-  
-  console.log(disabled);
 
   const handleClick = () => {
     if ( options.length > 0 && !disabled ) {
@@ -52,7 +50,7 @@ const DropDown = (props:Props) => {
         { options.map((item, index:number) => {
           return(
             <div key={index} className='dropdown-menu-item' onClick={() => { handleItemSelect(item) }}>
-              {item?.label ?? item.name}
+              { !item?.inactive &&( item?.label ?? item.name)}
             </div>
           )
         }) }

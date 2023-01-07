@@ -1,6 +1,10 @@
 import db from "../../../database/models"
 import { LocationType } from "../../../types/location"
 
+export const getAllLocations = async () => {
+  return await db.Location.findAll();
+}
+
 export const getLocationById = async (id:string) => {
   return await db.Location.findByPk(id)
 }
