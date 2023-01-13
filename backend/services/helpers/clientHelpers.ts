@@ -1,5 +1,5 @@
 import sequelize, { Op } from 'sequelize';
-import db from '../../../database/models';
+import db from '../../database/models';
 import { hashPassword } from '../utils/authUtils';
 import { CreatedClient } from '../../DTOs/createdClient';
 
@@ -10,14 +10,12 @@ interface ClientByEmail {
   email: string;
   phone: string;
   password?: string;
-  role?: string; 
+  role?: string;
 }
 
 const getClientByEmail = async (email: string): Promise<ClientByEmail> => {
   const client = await db.Client.findOne({
-    include: [
-      db.Person
-    ],
+    include: [db.Person],
     attributes: [
       [sequelize.col('Person.id'), 'client_id'],
       [sequelize.col('Person.first_name'), 'first_name'],
@@ -28,8 +26,8 @@ const getClientByEmail = async (email: string): Promise<ClientByEmail> => {
     ],
     where: { email },
     raw: true,
-    nest: true,
-  }).catch((e:any) =>{ 
+    nest: true
+  }).catch((e: any) => {
     console.error('Error occurred', e);
   });
 

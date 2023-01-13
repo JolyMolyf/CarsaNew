@@ -1,4 +1,4 @@
-import db from '../../../database/models';
+import db from '../../database/models';
 
 const getSelectorDataById = async (selectorId: string) => {
   const selector = await db.CarSelector.findByPk(selectorId, {

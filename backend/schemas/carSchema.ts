@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, check, matchedData, param } from 'express-validator';
-import db from '../../database/models';
+import db from '../database/models';
 
 
 export const validateCarId = [

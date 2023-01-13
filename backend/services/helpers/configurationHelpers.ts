@@ -1,6 +1,6 @@
 import { Transaction } from 'sequelize';
-import Logger from '../../../logger';
-import db from '../../../database/models';
+import Logger from '../../logger';
+import db from '../../database/models';
 
 const getAllConfigurations = async ({
   limit = Number.MAX_SAFE_INTEGER,

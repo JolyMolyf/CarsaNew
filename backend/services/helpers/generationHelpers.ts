@@ -1,4 +1,4 @@
-import db from '../../../database/models';
+import db from '../../database/models';
 
 const getGenerationById = async (generationId: string) => {
   const generation = await db.CarGeneration.findByPk(generationId);

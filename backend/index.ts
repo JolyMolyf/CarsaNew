@@ -1,9 +1,9 @@
 import express, { Application } from 'express';
-import session from './api/middleware/session';
+import session from './middleware/session';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import corsMiddleware from './api/middleware/cors';
-import router from './api/routes';
+import corsMiddleware from './middleware/cors';
+import router from './routes';
 import db from './database/models';
 // var cors = require('cors');
 require('dotenv').config();

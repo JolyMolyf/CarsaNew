@@ -1,4 +1,4 @@
-import db from '../../../database/models';
+import db from '../../database/models';
 
 const getAllBrands = async ({ limit = Number.MAX_SAFE_INTEGER, offset = 0 }: { limit?: number; offset?: number }) => {
   const brands = await db.CarBrand.findAll({

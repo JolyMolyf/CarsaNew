@@ -11,12 +11,12 @@ export function signJWT(payload: TokenPayload, expiresIn: string | number): stri
   return jwt.sign(payload, privateKey, { algorithm: 'RS512', expiresIn });
 }
 
-export function verifyJWT(token: string): { payload: JwtPayload | null; expired: boolean } {
+export function verifyJWT(token: string): { payload: JwtPayload | string; expired: boolean } {
   try {
     const decoded = jwt.verify(token, publicKey);
     return { payload: decoded, expired: false };
   } catch (error: any) {
-    return { payload: null, expired: error.message.includes('jwt expired') };
+    return { payload: '', expired: error.message.includes('jwt expired') };
   }
 }
 

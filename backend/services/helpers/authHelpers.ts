@@ -1,7 +1,7 @@
 import { promisify } from 'util';
 import { signJWT } from '../utils/authUtils';
 import { sessionStore } from '../../middleware/session';
-import Logger from '../../../logger';
+import Logger from '../../logger';
 
 const store = {
   set: promisify(sessionStore.set).bind(sessionStore),

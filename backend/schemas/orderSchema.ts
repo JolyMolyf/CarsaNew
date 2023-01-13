@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { param, body, matchedData } from 'express-validator';
-import db from '../../database/models';
+import db from '../database/models';
 
 export const validateOrderId = [
   param('orderId')

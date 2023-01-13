@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, param, matchedData } from 'express-validator';
-import db from '../../database/models';
+import db from '../database/models';
 
 export const validateConfigurationId = [
   param('configurationId').trim().isUUID(4).bail().withMessage('Configuration id should be a valid UUID v4')
