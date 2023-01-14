@@ -67,6 +67,5 @@
     "jest": "^27.5.1",
     "prettier": "^2.7.1",
     "ts-jest": "^27.1.4"
-  },
-  "proxy": "http://localhost:3000"
+  }
 }

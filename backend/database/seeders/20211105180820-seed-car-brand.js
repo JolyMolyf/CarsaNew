@@ -1,4 +1,4 @@
-const data = require('../../scraper/parsed_data.json');
+const data = require('./brand_model_generation.json');
 
 const brands = data.map((brand) => {
   return {

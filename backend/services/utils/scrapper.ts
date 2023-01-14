@@ -7,6 +7,7 @@ const puppeteer = require('puppeteer');
 export const scrapOtoCar = async (link: string) => {
   const result: any = {};
   const browser = await puppeteer.launch({
+    executablePath: '/usr/bin/google-chrome',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();

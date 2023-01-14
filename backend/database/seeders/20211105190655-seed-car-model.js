@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const data = require('../../scraper/parsed_data.json');
+const data = require('./brand_model_generation.json');
 
 const models = _.flattenDeep(
   data.map((brand) =>
