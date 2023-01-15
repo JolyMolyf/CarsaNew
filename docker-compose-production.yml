@@ -5,16 +5,14 @@ services:
     image: volex/carsa-server
     container_name: carsa-server
     restart: on-failure
-    ports:
-      - '3000:80'
-    networks:
-      - default
+    # ports:
+    #   - '3000:8080'
     volumes:
       - logs:/app/logs
       - ./backend:/app
       - /app/node_modules
     environment:
-      - PORT=80
+      - PORT=8080
       - JWT_SECRET=a75a6db20c1281d0184f2e2c5857e05e5bc5fe2822407d8b9eacf4a7156865bce68c91685df9aa0f2e8ae6f6083c9cd1e22e859a51c9683e67ab8faa123c8f46
       - JWT_EXPIRES_IN=1h
       - JWT_REFRESH_EXPIRES_IN=30d
@@ -32,16 +30,15 @@ services:
   frontend:
     image: volex/carsa-client
     container_name: carsa-client
+    command: "serve -p 80 -s -n"
     ports:
-      - '3001:80'
-    networks:
-      - default
+      - '80:80'
     volumes:
       - ./frontend/src:/app/src
       - /app/node_modules
     environment:
       - SKIP_PREFLIGHT_CHECK=true
-      - REACT_APP_API_URL=http://localhost:3000/api
+      - REACT_APP_API_URL=http://localhost:8080/api
     stdin_open: true
     tty: true
     depends_on:
@@ -50,12 +47,8 @@ services:
   postgres:
     image: postgres:alpine
     container_name: carsa-postgres
-    networks:
-      - default
     volumes:
       - db_data:/var/lib/postgresql/data
-    env_file:
-      - ./frontend/.env
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
@@ -68,16 +61,10 @@ services:
     container_name: carsa-redis
     command: redis-server --save 60 1 --maxmemory 512mb --maxmemory-policy allkeys-lru --loglevel warning
     restart: always
-    ports:
-      - '6379:6379'
-    networks:
-      - default
+    # ports:
+    #   - '6379:6379'
     volumes:
       - cache:/data
-
-networks:
-  default:
-    driver: host
 
 volumes:
   db_data:

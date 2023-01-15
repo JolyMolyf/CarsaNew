@@ -38,8 +38,6 @@ services:
       - backend
 
   postgres:
-    ports:
-      - "6434: 5432"
     image: postgres:alpine
     container_name: carsa-postgres
     volumes:

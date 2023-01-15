@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN npm install -g serve
+
 WORKDIR /app
 
 COPY package.json .
@@ -7,6 +9,8 @@ COPY package.json .
 RUN npm install --quiet
 
 COPY . .
+
+RUN npm run build
 
 EXPOSE 80
 
