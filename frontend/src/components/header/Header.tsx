@@ -2,14 +2,14 @@ import { Link, useLocation } from 'react-router-dom';
 import './Header.scss'
 import logo from '../../images/Common/carsa_logo.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../../redux/store';
+import { AppState, useAppDispatch } from '../../redux/store';
 import { setOpenedLink } from '../../redux/actions/AppActions';
 import { useEffect, useState } from 'react';
 import { logoutUserThunk } from '../../redux/thunks/userThunks';
 
 const Header = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const user = useSelector((state:AppState) => state.user);
     const selectedLink = useSelector((appState:AppState) => appState.app.openedLink)
     const { pathname } = useLocation();

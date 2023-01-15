@@ -5,7 +5,7 @@ import FaceBookIcon from '../../images/HomePage/facebook_icon.png';
 import { useNavigate } from 'react-router-dom';
 import { registerUserThunk } from '../../redux/thunks/userThunks'
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../redux/store';
+import { AppState, useAppDispatch } from '../../redux/store';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 
@@ -25,7 +25,7 @@ export interface FormState {
 
 const RegisterPage = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useSelector((state: AppState) => state.user)
   const isAuthenticated = useSelector((state: AppState) => state.user.isAuthenticated);

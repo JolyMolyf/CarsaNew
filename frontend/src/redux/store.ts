@@ -4,6 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from "./reducers/rootReducer";
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 
 const persistConfig = {
@@ -34,3 +35,7 @@ export const store = configureStore()
 export const persistor = persistStore(store);
 
 export type AppState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector

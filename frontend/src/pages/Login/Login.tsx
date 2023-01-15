@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUserThunk } from '../../redux/thunks/userThunks';
 import { checkUserCredentials } from '../../utils/apis/UserApi';
 import Cookies from "js-cookie"
-import { AppState } from '../../redux/store';
+import { AppState, useAppDispatch } from '../../redux/store';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
 export interface FormError {
@@ -25,7 +25,7 @@ export interface FormState {
 
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector((state: AppState) => state.user)
   const userState = useSelector((state: AppState) => state.user);
   const navigate = useNavigate();

@@ -38,6 +38,8 @@ services:
       - backend
 
   postgres:
+    ports:
+      - "6434: 5432"
     image: postgres:alpine
     container_name: carsa-postgres
     volumes:
@@ -50,6 +52,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
       PG_HOST: 127.0.0.1
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:alpine
