@@ -4,7 +4,7 @@ const people = require('./20211106084607-seed-person');
 
 const employees = [];
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 12; i++) {
   employees.push({
     person_id: people.people[10 + i].id,
     email: faker.internet.email(),

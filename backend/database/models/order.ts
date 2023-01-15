@@ -19,11 +19,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
 
       Order.hasOne(models.Configuration, {
-        foreignKey: 'order_id'
+        foreignKey: 'order_id',
+         onDelete: 'CACSADE'
       });
 
       Order.hasMany(models.Payment, {
-        foreignKey: 'order_id'
+        foreignKey: 'order_id',
+        onDelete: 'CASCADE'
       });
 
       Order.belongsTo(models.Client, {

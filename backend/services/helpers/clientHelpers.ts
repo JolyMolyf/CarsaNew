@@ -71,8 +71,21 @@ const createClient = async ({ first_name, last_name, email, phone, password }): 
   });
 };
 
+const getAllClients = async () => {
+  return await db.Client.findAll({ 
+    attributes: [
+      [sequelize.col('Person.id'), 'id'],
+      [sequelize.col('Person.first_name'), 'first_name'],
+      [sequelize.col('Person.last_name'), 'last_name'],
+      'email',
+    ], 
+    include: [db.Person]
+  })
+}
+
 export default {
   getClientByEmail,
   isClientExist,
-  createClient
+  createClient,
+  getAllClients
 };

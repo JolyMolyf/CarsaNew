@@ -44,7 +44,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       Configuration.belongsTo(models.Order, {
-        foreignKey: 'order_id'
+        foreignKey: 'order_id', 
+        onDelete: 'CASCADE'
       });
 
       Configuration.belongsTo(models.Location, {

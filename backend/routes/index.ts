@@ -9,6 +9,8 @@ import ordersRouter from './orders';
 import carsRouter from './cars';
 import paymentsRouter from './payments';
 import reportsRouter from './reports';
+import userRouter from './users';
+import locationRouter from './locations'
 
 
 // const swaggerUI = require('swagger-ui-express');
@@ -17,6 +19,7 @@ import reportsRouter from './reports';
 const router = express.Router();
 
 router.use('/api/auth', authRouter);
+router.use('/api/users', userRouter);
 router.use('/api/orders', ordersRouter);
 
 router.use('/api/brands', carBrandsRouter);
@@ -26,6 +29,7 @@ router.use('/api/configurations', configurationsRouter);
 
 router.use('/api/cars', carsRouter);
 router.use('/api/payments', paymentsRouter);
-router.use('/api/reports', reportsRouter)
+router.use('/api/reports', reportsRouter);
+ router.use('/api/locations', locationRouter);
 
 export default router;
