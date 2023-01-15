@@ -23,33 +23,49 @@ import ClientOrder from './pages/ClientPage/Orders/ClientOrders';
 import ClientPayments from './pages/ClientPage/Payments/ClientPayments';
 import CarSelectorAddCar from './pages/CarSelector/CarSelectorAddCar';
 
+enum Roles {
+  CLIENT = 'Client',
+  MANAGER = 'manager',
+  TECHNICIAN =  'technician',
+  CARSELECTOR = 'carselector'
+}
+
 function App() {
   return (
     <Router>
       <Routes>
+
+        {/* Public Routes */}
         <Route path='/home' element={<HomePage/>}/>
         <Route path='/offers' element={<OffersPage/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         
-        <Route path='/carselector/dashboard'  element={<CarSelectorDashboard/>}/>
-        <Route path='/carselector/car/add/:configurationId' element={<CarSelectorAddCar/>} />
+        {/* Protected Routes  */}
 
-        <Route path='/order/details/:id' element={<OrderWithConfigurationDetails/>}/>
-        <Route path='/order/add/configuration/:id' element={<AddCarConfiguration showHeader={true}/>}/>
+        <Route  element={<ProtectedRoute allowedRoles={ [ Roles.CARSELECTOR ] }/>}>
+          <Route path='/carselector/dashboard'  element={<CarSelectorDashboard/>}/>
+          <Route path='/carselector/car/add/:configurationId' element={<CarSelectorAddCar/>} />
+        </Route>
         
-        <Route path='/technician/dashboard' element={<TechnicianDashboard/>}/>
-        <Route path='/technician/report/add/:id/:carId' element={<CreateReport/>}/>
+        <Route  element={<ProtectedRoute allowedRoles={ [ Roles.TECHNICIAN ] }/>}>
+          <Route path='/technician/dashboard' element={<TechnicianDashboard/>}/>
+          <Route path='/technician/report/add/:id/:carId' element={<CreateReport/>}/>
+        </Route>
         
         <Route path='/car/edit/:id' element={<EditCar/>} />
 
-
-        <Route element={<ProtectedRoute/>}>
+        <Route element={<ProtectedRoute allowedRoles={ [ Roles.CLIENT ] }/>}>
           <Route path='/client/dashboard' element={<ClientDashboard/>} />
           <Route path='/client/orders' element={<ClientOrder/>} />
           <Route path='client/payments' element={<ClientPayments/>} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={ [ Roles.CLIENT, Roles.TECHNICIAN, Roles.CARSELECTOR ] } />}>
           <Route path='/order/create' element={<CreateOrder/>}/>
+          <Route path='/order/details/:id' element={<OrderWithConfigurationDetails/>}/>
+          <Route path='/order/add/configuration/:id' element={<AddCarConfiguration showHeader={true}/>}/>
         </Route>
         
         <Route path="*" element={<Navigate to="/home"/>} />
