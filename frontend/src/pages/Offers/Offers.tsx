@@ -61,8 +61,8 @@ const OffersPage = () =>  {
       <div className='offers-wrapper'>
         <div className='offers-wrapper-filter'>
           <div className='offers-wrapper-filter-form'>
-              <DropDown placeholder='brand' options={brands} setOuterOptions={handleFilterEditing}></DropDown>
-              <DropDown placeholder='model' options={models} setOuterOptions={handleFilterEditing}></DropDown>
+              <DropDown placeholder='brand' options={brands} onChange={handleFilterEditing}></DropDown>
+              <DropDown placeholder='model' options={models} onChange={handleFilterEditing}></DropDown>
               <Button type={true} name="Filter" onClick={handleFilter}></Button>
           </div>
           <div className='offers-wrapper-filter-image'>

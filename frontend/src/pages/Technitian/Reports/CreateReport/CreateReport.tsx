@@ -87,7 +87,7 @@ const CreateReport = () => {
         <div  className='createReport-wrapper'>
           <div className='createReport-wrapper-blotter'>
             <div className='createReport-wrapper-blotter-section'>
-                <DropDown placeholder='Report type' setOuterOptions={handleDropDownChange} outerOption={{ key: 0, label: pendingReport.type}} options={Object.keys(IReportType).map((option, index:number) => {
+                <DropDown placeholder='Report type' onChange={handleDropDownChange} outerOption={{ key: 0, label: pendingReport.type}} options={Object.keys(IReportType).map((option, index:number) => {
                 return { id: index, label: option }
                })}/>
               <TextInput name='condition' onChange={handleChange} className='createReport-wrapper-blotter-section-input' placeholder='condition' value={pendingReport.condition} ></TextInput>

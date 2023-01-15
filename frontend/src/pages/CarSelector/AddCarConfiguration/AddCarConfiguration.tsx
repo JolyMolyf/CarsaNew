@@ -115,14 +115,14 @@ const AddCarConfiguration = (props:IAddCarConfigurationProps) => {
                 Add Manually 
               </div>
               <div className='carSelector-add-body-manual-body'>
-                <DropDown placeholder='Body type' options={bodyTypes} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Brand' options={brands} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Model' options={models} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Generation' options={genrations} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Fuel type' options={fuelTypes} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Gearbox' options={gearboxTypes} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Drive' options={driveTypes} setOuterOptions={handleDropdownChange}/>
-                <DropDown placeholder='Doors' options={doorsTypes}  setOuterOptions={handleDropdownChange}/>
+                <DropDown placeholder='Body type' options={bodyTypes} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Brand' options={brands} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Model' options={models} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Generation' options={genrations} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Fuel type' options={fuelTypes} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Gearbox' options={gearboxTypes} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Drive' options={driveTypes} onChange={handleDropdownChange}/>
+                <DropDown placeholder='Doors' options={doorsTypes}  onChange={handleDropdownChange}/>
                 <TextInput className='carSelector-add-body-manual-body-input' name='price_from' onChange={handleManualConfigurationChange} value={manualConfiguration?.price_from} placeholder='Price from'/>
                 <TextInput className='carSelector-add-body-manual-body-input' name='price_until' onChange={handleManualConfigurationChange} value={manualConfiguration?.price_until} placeholder='Price until'/>
                 <TextInput className='carSelector-add-body-manual-body-input' name='year_from' onChange={handleManualConfigurationChange} value={manualConfiguration?.year_from} placeholder='Year from'/>
