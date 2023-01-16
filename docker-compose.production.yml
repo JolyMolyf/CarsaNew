@@ -2,7 +2,10 @@ version: '3.9'
 
 services:
   backend:
-    image: volex/carsa-server
+    # image: volex/carsa-server
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: carsa-server
     restart: on-failure
     ports:
@@ -18,7 +21,10 @@ services:
       - redis
 
   frontend:
-    image: volex/carsa-client
+    # image: volex/carsa-client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     command: "serve -s build -n -p 3001"
     container_name: carsa-client
     ports:
@@ -36,18 +42,15 @@ services:
   postgres:
     image: postgres:alpine
     container_name: carsa-postgres
+    ports:
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    env_file:
-      - ./frontend/.env
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-      PG_HOST: 127.0.0.1
-    ports:
-      - "5432:5432"
 
   redis:
     image: redis:alpine

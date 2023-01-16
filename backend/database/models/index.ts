@@ -8,20 +8,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/db.js')[env];
 const db: any = {};
 
-let sequelize: any;
-
-if (process.env.NODE_ENV === 'production') {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
-  });
-} else {
-  sequelize = new Sequelize(config);
-}
+let sequelize: any = new Sequelize(config);
 
 fs.readdirSync(__dirname)
   .filter((file: string) => {
