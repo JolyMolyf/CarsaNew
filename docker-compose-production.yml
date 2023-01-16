@@ -30,9 +30,9 @@ services:
   frontend:
     image: volex/carsa-client
     container_name: carsa-client
-    command: "serve -p 80 -s -n"
+    command: "serve -p 3000 -s -n"
     ports:
-      - '80:80'
+      - '3000:80'
     volumes:
       - ./frontend/src:/app/src
       - /app/node_modules
