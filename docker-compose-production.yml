@@ -5,40 +5,29 @@ services:
     image: volex/carsa-server
     container_name: carsa-server
     restart: on-failure
-    # ports:
-    #   - '3000:8080'
+    ports:
+      - '3000:8080'
     volumes:
       - logs:/app/logs
       - ./backend:/app
       - /app/node_modules
-    environment:
-      - PORT=8080
-      - JWT_SECRET=a75a6db20c1281d0184f2e2c5857e05e5bc5fe2822407d8b9eacf4a7156865bce68c91685df9aa0f2e8ae6f6083c9cd1e22e859a51c9683e67ab8faa123c8f46
-      - JWT_EXPIRES_IN=1h
-      - JWT_REFRESH_EXPIRES_IN=30d
-      - STRIPE_SECRET_TEST="sk_test_51KDrBrGxy8KyVn0kyGnecJnv0kq05FS1PKHZdDiAs0kc19t6HJlGMZYTlqzN0K5ENs5rI9VEJ4UBx12mqu4L3p5s004t6LjMPj"
-      - PG_USERNAME=postgres
-      - PG_PASSWORD=postgres
-      - PG_DB=postgres
-      - PG_HOST=postgres
-      - PG_DIALECT=postgres
-      - SKIP_PREFLIGHT_CHECK=true
+    env_file:
+      - ./backend/.env
     depends_on:
       - postgres
       - redis
 
   frontend:
     image: volex/carsa-client
+    command: "serve -s build -n -p 3001"
     container_name: carsa-client
-    command: "serve -p 3000 -s -n"
     ports:
-      - '3000:80'
+      - '3001:3001'
     volumes:
       - ./frontend/src:/app/src
       - /app/node_modules
-    environment:
-      - SKIP_PREFLIGHT_CHECK=true
-      - REACT_APP_API_URL=http://localhost:8080/api
+    env_file:
+      - ./frontend/.env
     stdin_open: true
     tty: true
     depends_on:
@@ -49,20 +38,24 @@ services:
     container_name: carsa-postgres
     volumes:
       - db_data:/var/lib/postgresql/data
+    env_file:
+      - ./frontend/.env
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
       PG_HOST: 127.0.0.1
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:alpine
     container_name: carsa-redis
     command: redis-server --save 60 1 --maxmemory 512mb --maxmemory-policy allkeys-lru --loglevel warning
     restart: always
-    # ports:
-    #   - '6379:6379'
+    ports:
+      - '6379:6379'
     volumes:
       - cache:/data
 

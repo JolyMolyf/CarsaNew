@@ -5,11 +5,12 @@ const whitelist = new Set(['*', 'http://localhost:3001', 'https://localhost:3001
 const corsOptions: CorsOptions = {
   methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   origin: function (origin, callback) {
-    if (origin && whitelist.has(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    callback(null, true);
+    // if (origin && whitelist.has(origin)) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error('Not allowed by CORS'));
+    // }
   },
   credentials: true,
   optionsSuccessStatus: 200

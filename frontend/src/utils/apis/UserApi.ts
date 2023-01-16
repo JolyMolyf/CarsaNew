@@ -41,7 +41,7 @@ export const register = async (fields:RegisterFormFields) => {
 }
 
 export const checkUserCredentials = async () => {
-  const response = await axios.get('http://localhost:3000/api/auth/protected', {withCredentials: true});
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/protected`, {withCredentials: true});
   return response;
 }
 
