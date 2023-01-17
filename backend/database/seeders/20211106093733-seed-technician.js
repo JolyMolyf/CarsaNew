@@ -3,7 +3,7 @@ const employees = require('./20211106091456-seed-employee');
 
 const technicians = [];
 
-for (let i = 0; i < 5; i++) {
+for (let i = 6; i < 11; i++) {
   technicians.push({
     person_id: employees.employees[i].person_id,
     location_id: locations.locations[randomInteger(0, locations.locations.length - 1)].id,

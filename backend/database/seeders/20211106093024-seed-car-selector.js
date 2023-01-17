@@ -1,7 +1,7 @@
 const employees = require('./20211106091456-seed-employee');
 const selectors = [];
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 6; i++) {
   selectors.push({
     person_id: employees.employees[i].person_id,
     creationDate: new Date()
