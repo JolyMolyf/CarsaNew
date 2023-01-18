@@ -27,11 +27,9 @@ const OffersPage = () =>  {
   }
 
   const handleFilter = () => {
-    console.log(filters);  
     const filteredCars  = cars.filter((car) => {
       let flag = true;
       const entries = Object.entries(filters);
-      console.log(Object.entries(car).flat(2), Object.entries(filters));
     })
   }
 

@@ -15,9 +15,8 @@ import CarCard, { CarCardModes } from '../../components/Cards/CarCard/CarCard';
 
 
 const CreateOrder = () => {
-
-  const navigate = useNavigate();
-  const userId = useSelector((appState:any) => appState.user.user.Person.id)
+  const navigate = useNavigate()
+  const userId = useSelector((appState:any) => appState.user.user?.Person?.id || appState.user?.user?.person_id)
   const [ carLink, setCarLink ] = useState<string>('');
   const [car, setCar] = useState<CarType>();
   const [loading, setLoading] = useState<boolean>(false)
@@ -83,12 +82,12 @@ const CreateOrder = () => {
         )} 
         {
           order.sum === 200 && car && (
-            <SimpleCard>
+            <SimpleCard width='60%'>
               <CarCard mode={CarCardModes.NOACTION} car={car}></CarCard>
               <Button onClick={() => {
                   if(car) {
                     createOrder({ order, car, userId, sum: 200 }).then((res) => {
-                      navigate('/client/dashboard')
+                      // navigate('/client/dashboard')
                      })
                   }
               }} type={false} name='Submit'></Button>

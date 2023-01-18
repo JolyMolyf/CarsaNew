@@ -42,7 +42,7 @@ const CarCard = (props:ICarCardProps) => {
   const navigate = useNavigate();
   const user = useSelector((state:AppState) => state.user.user)
  
-  const { car, defaultExpended } = props
+  const { car, defaultExpended, mode } = props
   const [ reports, setReports ] = useState<Array<IReport>>([]);
   const [ avg, setAvg ] = useState<number>(0);
   const [ isExtended, setIsExtended ] = useState<boolean>(defaultExpended || false);
@@ -54,14 +54,17 @@ const CarCard = (props:ICarCardProps) => {
   }
 
   useEffect(() => {
-    getExistingReportsForCar(car.id || '').then((res) => {
-      setReports(res.data.reports)
-      const percents:Array<number> = res.data.reports.map((report:IReport) => report.condition);
-      const avg = percents.reduce((acc, number) => {
-        return acc + number;
-      }, 0) / res.data.reports.length;
-      setAvg(avg)
-    });
+    if ( mode !== CarCardModes.NOACTION ) {
+      getExistingReportsForCar(car.id || '').then((res) => {
+        setReports(res.data.reports)
+        const percents:Array<number> = res.data.reports.map((report:IReport) => report.condition);
+        const avg = percents.reduce((acc, number) => {
+          return acc + number;
+        }, 0) / res.data.reports.length;
+        setAvg(avg)
+      });
+    }
+   
   }, [])
 
   return(

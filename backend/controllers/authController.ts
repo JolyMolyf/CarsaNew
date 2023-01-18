@@ -39,7 +39,7 @@ const register = async (req: Request, res: Response) => {
     maxAge: 1000 * 60 * 60 * 24 * 30,
     httpOnly: true
   });
-
+  createdClient.role = 'Client'
   return res.status(StatusCodes.CREATED).json(createdClient);
 };
 
@@ -106,7 +106,6 @@ const getProtected = async (req: Request, res: Response) => {
 
 const getAllUsers = async (req:Request, res:Response) => {
   const users = await userHelpers.getAllUsers()
-  console.log('USERS::::', users);
   res.json({ status: 'OK', users})
 }
 

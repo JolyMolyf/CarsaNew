@@ -10,8 +10,8 @@ export const getLocationById = async (id: string) => {
 };
 
 export const getLocationByState = async (location: string) => {
-  const [street, powiat, state] = location.split(',');
-  const trimmedState: string = state?.replace('(Polska)', '');
+  const locationArray = location.split(',');
+  const trimmedState: string = locationArray[locationArray.length -1 ]?.replace('(Polska)', '');
   const locationFound = await db.Location.findAll({
     where: {
       state: trimmedState || 'Polska'
@@ -19,11 +19,18 @@ export const getLocationByState = async (location: string) => {
   });
 
   if (locationFound.length === 0) {
-    return await db.Location.findAll({
+    const polskaLocation = await db.Location.findAll({
       where: {
         country: 'Polska'
       }
     });
+
+    if ( polskaLocation.length === 0 ) {
+      const createdLoaction = await createLocation(location);
+      return createdLoaction;
+    } else {
+       return polskaLocation[0]
+    }
   }
 
   return locationFound;
@@ -33,3 +40,9 @@ export const updateLocation = async (location: LocationType) => {
   const locationToUpdate = await getLocationById(location.id);
   return await locationToUpdate.update(location);
 };
+
+export const createLocation = async (location:any) => {
+  const splitedLocation = location.split(',')
+  const createdLocation = await db.Location.create({country: splitedLocation[location.length - 1] || 'Polska', street: 'street', state: splitedLocation[location.length - 2] || 'Mazowia', postal_code: '00000', city: 'Warszawa',   })
+  return createdLocation;
+}

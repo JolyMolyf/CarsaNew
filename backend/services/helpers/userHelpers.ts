@@ -48,7 +48,6 @@ const getAllUsers = async () => {
 const updateUserRole = async (user:any) => {
   if ( ['Technician', 'Selector'].includes(user.role) ) {
     const client = await getClientDataById(user.id);
-    console.log('Client:  : : ', client);
     await db.Client.destroy({ where: { person_id: client.person_id }});
 
     const employee =  await employeeHelper.createEmployee({...user, person_id: client.person_id, password: client.password}, user.role || 'Selector');

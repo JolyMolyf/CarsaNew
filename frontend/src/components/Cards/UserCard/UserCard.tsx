@@ -44,7 +44,6 @@ const UserCard = (props:UserCardProps) => {
     const [ selectedLocation, setSelectedLocation ] = useState<any>();
     const [ locations, setLocations ] = useState<Array<any>>([])
     
-    console.log(selectedLocation);
 
     const handleEditing = () => {
         if ( editing ) {

@@ -154,10 +154,10 @@ const createOrderWithCar = async (orderBody: any) => {
     const foundCar = await carHelpers.getCarByDetails(carBody);
     if (foundCar.length === 0) {
       const addedCar = await carHelpers.createCar(carBody);
-      const car_order_link = car_OrderHelper.createCarOrderLink(addedCar!?.car!?.id, newOrderId);
+      const car_order_link = await car_OrderHelper.createCarOrderLink(addedCar!?.car!?.id, newOrderId);
       return { success: true, order, addedPayemnt, addedCar, car_order_link };
     } else {
-      const car_order_link = car_OrderHelper.createCarOrderLink(foundCar[0]!?.id, newOrderId);
+      const car_order_link = await car_OrderHelper.createCarOrderLink(foundCar[0]!?.id, newOrderId);
       return { success: true, order, addedPayemnt, foundCar, car_order_link };
     }
   } catch (err) {

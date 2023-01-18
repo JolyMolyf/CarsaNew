@@ -5,7 +5,7 @@ import styled from "styled-components";
 const SimpleCardStyled = styled.div<{ width?: string }>`
     background-color: #D8B669;
     width: ${props => props.width ?? '45%'};
-    min-heght: 200px;
+    min-hieght: 200px;
     height: auto;
     min-height:200px;
     margin: 10px;

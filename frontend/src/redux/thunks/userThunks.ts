@@ -9,10 +9,12 @@ export const registerUserThunk = (formFields:RegisterForm) => async (dispatch:an
   const user:any = await register(formFields);
   if(typeof user !== 'string' ){
     const userToSave:User = {
+      person_id: user.data.client_id,
       first_name: user.data.first_name, 
       last_name: user.data.last_name, 
       email: user.data.email, 
       password: user.data.password,
+      role: user.data.role || 'Client'
     }
     dispatch(setUser(userToSave))
   } else {

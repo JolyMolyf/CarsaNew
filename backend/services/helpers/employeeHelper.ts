@@ -49,16 +49,12 @@ const getTechnicianById = async (technicianId: string) => {
 
 const createEmployee = async (user: any, role: string) => {
   const employee = await db.Employee.create(user)
-  console.log('User location', user.location, 'User: : :: : ', user);
-  console.log('ROLE:', role, 'Technicain?? ', role === 'Technician', 'Seleectoe: ', role === 'Selector');
   if (role === 'Technician') {
-      console.log('Created technician.....');
       const technican = await db.Technician.create({ person_id: employee.person_id, location_id: user.location})
       return technican;
     }
 
   if ( role === 'Selector' ) {
-    console.log('Created selctor.....');
     const carSelctor = await db.CarSelector.create({ person_id: employee.person_id });
     return carSelctor;
   }

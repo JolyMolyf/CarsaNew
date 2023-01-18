@@ -61,17 +61,49 @@ const createCar = async (carBody: any) => {
     if (!carBody.id || carBody.id === '') {
       carBody.id = uuid();
     }
-
+    console.log('Car Body', carBody);
     const location = await getLocationByState(carBody.location);
-    const newCarId = (await db.Car.create({ ...carBody, location_id: location?.[0]?.id })).id;
+    const existedCarId = await checkIfCarAlreadyExistsByParams(carBody);
+    if ( existedCarId ) {
+      const car = (await getCarById(existedCarId)).car;
+      return { success: true, car };
+    }
+    const newCarId = (await db.Car.create({ ...carBody, location_id: location?.[0]?.id || location?.id })).id;
     const car = (await getCarById(newCarId)).car;
-
     return { success: true, car };
   } catch (err) {
     Logger.warn(err);
     return { success: false, message: 'Something went wrong' };
   }
 };
+
+const checkIfCarAlreadyExistsByParams = async (carBody:any): Promise<string | null> => {
+  const engine = carBody?.Engine; 
+  const brand = carBody?.CarBrand?.name;
+  const model = carBody.CarModel.name; 
+  const generation = carBody?.CarGeneration?.name;
+  const fuel_type = carBody?.fuel_type; 
+  const year = carBody?.year;
+  const type = carBody?.type;
+  const transmission = carBody?.transmission;
+
+  const brand_id = await getBrandByName(brand);
+  const model_id = await getModelByName(model);
+  const generation_id = await getGenerationByName(generation);
+  
+  const cars = db.Car.findAll({
+    where: {
+      brand_id,
+      model_id,
+      generation_id,
+      fuel_type,
+      year,
+      transmission
+    }
+  })
+
+  return cars?.[0]?.id ?? null;
+}
 
 const updateCarById = async (carId: string, carBody: any) => {
   try {
@@ -335,7 +367,6 @@ const rejectCar = async (car_id: string) => {
 const getRejectedCars = async () => {
   const car_order = await db.Car_Order.findAll();
   const car_order_ids = car_order.map((car_order) => car_order.car_id);
-  console.log(car_order_ids);
 
   const rejectedCars = await db.Car.findAll({
     where: {

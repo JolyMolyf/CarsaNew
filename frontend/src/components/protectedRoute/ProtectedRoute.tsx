@@ -8,11 +8,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ allowedRoles } : ProtectedRouteProps) => {
   const isAuthenticated:boolean = useSelector((state:AppState) => state?.user?.isAuthenticated);
-  const userRole:boolean = useSelector((state:AppState) => state?.user?.user?.role);
+  const userRole:string = useSelector((state:AppState) => state?.user?.user?.role);
 
-  const isCorrespondingRole:boolean =  allowedRoles.includes(userRole);
+  const isCorrespondingRole:boolean =  allowedRoles.map((role) => role.toLowerCase()).includes(userRole?.toLowerCase());
 
-  console.log( userRole, 'result: ', isAuthenticated && isCorrespondingRole )
   
   if ( isAuthenticated && isCorrespondingRole ) {
     return ( <Outlet/> )

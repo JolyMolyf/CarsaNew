@@ -58,9 +58,8 @@ const CreateReport = () => {
       alert('You have not added reports')
     }
 
-    console.log(reports);
     createReports({ carId: params.carId, technicianId: user.person_id, reports }).then((res) => {
-      console.log(res);
+
     }).catch((e) => { alert(e) })
   }
 
