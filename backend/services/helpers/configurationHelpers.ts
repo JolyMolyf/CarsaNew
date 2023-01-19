@@ -50,6 +50,7 @@ const getConfigurationById = async (configurationId: string) => {
 };
 
 const createConfiguration = async (configurationBody: unknown) => {
+  console.log('Configuration: ', configurationBody);
   try {
     const newConfigurationId = (await db.Configuration.create(configurationBody)).id;
     const configuration = (await getConfigurationById(newConfigurationId)).configuration;

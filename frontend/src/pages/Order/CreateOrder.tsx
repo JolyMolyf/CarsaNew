@@ -28,9 +28,17 @@ const CreateOrder = () => {
   });
 
   const handleConfigurationSubmit = (configuration: any) => {
+<<<<<<< HEAD
     setOrder({ ...order, sum: 800, type: PackageType.Configuration });
     createOrder({ configuration: { ...configuration }, order, sum: 800, type: PackageType.Configuration, userId });
   };
+=======
+    setOrder({...order, sum: 800, type: PackageType.Configuration})
+    createOrder({configuration:{...configuration}, order, sum: 800, type: PackageType.Configuration, userId}).then(() => {
+      navigate('/client/dashboard')
+    })
+  }
+>>>>>>> 0e57f4d ([FullStack]: bug fix)
 
   return (
     <div>
@@ -95,6 +103,7 @@ const CreateOrder = () => {
               )}
             </div>
           </SimpleCard>
+<<<<<<< HEAD
         )}
         {order.sum === 200 && car && (
           <SimpleCard width="60%">
@@ -112,9 +121,28 @@ const CreateOrder = () => {
             ></Button>
           </SimpleCard>
         )}
+=======
+        )} 
+        {
+          order.sum === 200 && car && (
+            <SimpleCard width='60%'>
+              <CarCard mode={CarCardModes.NOACTION} car={car}></CarCard>
+              <Button onClick={() => {
+                  if(car) {
+                    console.log(userId);
+                    createOrder({ order, car, userId, sum: 200 }).then((res) => {
+                      navigate('/client/dashboard');
+                     })
+                  }
+              }} type={false} name='Submit'></Button>
+            </SimpleCard>
+          ) 
+        }
+>>>>>>> 0e57f4d ([FullStack]: bug fix)
 
         {order.sum === 800 && (
           <SimpleCard>
+<<<<<<< HEAD
             <div className="header">Enter your coniguration</div>
             <div className="actions">
               <Button
@@ -126,6 +154,17 @@ const CreateOrder = () => {
               ></Button>
               <Button onClick={() => {}} type={false} name={'Submit'}></Button>
             </div>
+=======
+             <div className='header'>Enter your coniguration</div>
+             <div className='actions'>
+              <Button onClick={() => {
+                setOrder({sum: 0, type: '', status: 'Initial', car: null, configuration: null})
+              }} type={false} name={'Back'}></Button>  
+              <Button onClick={() => {
+                
+              }} type={false} name={'Submit'}></Button>  
+          </div>
+>>>>>>> 0e57f4d ([FullStack]: bug fix)
           </SimpleCard>
         )}
       </div>

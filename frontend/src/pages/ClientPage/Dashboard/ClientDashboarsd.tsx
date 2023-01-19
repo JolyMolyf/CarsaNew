@@ -21,9 +21,9 @@ const ClientDashboard = () => {
   const [payments, setPayments] = useState<Array<IPayment>>([]);
   const [cars, setCars] = useState<Array<CarType>>([]);
 
-  const client_id = useSelector((state: AppState) => state.user.user.client_id);
+  const client_id = useSelector((appState:any) => appState.user.user?.Person?.id || appState.user?.user?.person_id)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     getLastOrders(client_id).then((res) => {

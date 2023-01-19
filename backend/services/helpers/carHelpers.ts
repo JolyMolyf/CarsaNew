@@ -287,7 +287,17 @@ const findGenerationByModelId = async (model_id: string, start_year: string, end
   }
   return generation[0];
 };
-const getGenerationByName = async (generationName: string) => {
+const getGenerationByName = async (generationName: string, model?:any) => {
+  if ( model ) {
+    const generation = await db.CarGeneration.findAll({
+      where: { 
+        name: generationName,
+        model_id: model?.[0]?.id 
+      },
+      include: [{ model: db.CarModel, include: [{ model: db.CarBrand }] }]
+    });
+    return generation[0];
+  }
   const generation = await db.CarGeneration.findAll({
     where: { name: generationName },
     include: [{ model: db.CarModel, include: [{ model: db.CarBrand }] }]
@@ -327,7 +337,16 @@ const getAllModels = async (brand_id: string) => {
   });
 };
 
-const getModelByName = async (modelName: string) => {
+const getModelByName = async (modelName: string, brand?:any) => {
+  if ( brand ) {
+    console.log(brand);
+    return await db.CarModel.findAll({
+      where: {
+        name: modelName,
+        brand_id: brand?.[0]?.id
+      }
+    })
+  }
   return await db.CarModel.findAll({
     where: {
       name: modelName

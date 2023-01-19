@@ -33,8 +33,12 @@ const getOrdersForClientId = async (req: Request, res: Response) => {
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body;
+<<<<<<< HEAD
 
   let result: any;
+=======
+  let result:any; 
+>>>>>>> 0e57f4d ([FullStack]: bug fix)
   if (orderBody.type === 'Configuration') {
     result = await orderHelpers.createOrderWithConfiguration(orderBody);
   } else {

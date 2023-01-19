@@ -115,6 +115,9 @@ const getOrderById = async (orderId: string) => {
         model: db.Car,
         as: 'car_order',
         include: [db.CarBrand, db.CarModel, db.CarGeneration, { model: db.ReportOverview, include: [db.Report] }]
+      },
+      {
+        model: db.Configuration
       }
     ]
   });
@@ -187,11 +190,11 @@ const createOrderWithConfiguration = async (orderBody: any) => {
     brand = await carHelpers.getBrandByName(orderBody.configuration?.Brand);
   }
   if (orderBody.configuration?.Model) {
-    model = await carHelpers.getModelByName(orderBody.configuration?.Model);
+    model = await carHelpers.getModelByName(orderBody.configuration?.Model, brand);
   }
 
   if (orderBody.configuration?.Generation) {
-    generation = await carHelpers.getModelByName(orderBody.configuration?.Generation);
+    generation = await carHelpers.getGenerationByName(orderBody.configuration?.Generation, model);
   }
 
   const configuration = await configurationHelpers.createConfiguration({
@@ -203,6 +206,8 @@ const createOrderWithConfiguration = async (orderBody: any) => {
     model_id: model?.[0]?.id,
     brand_id: brand?.[0]?.id
   });
+
+
 
   return { success: true, order: newOrder, payment: addedPayemnt, configuration };
 };
