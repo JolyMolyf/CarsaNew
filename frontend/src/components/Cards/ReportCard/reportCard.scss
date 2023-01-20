@@ -1,6 +1,6 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
-.reportCard{
+.reportCard {
   min-width: 350px;
   max-width: 1400px;
   height: 150px;
@@ -8,27 +8,27 @@
   margin: 10px;
   border-radius: 20px;
   padding: 10px;
-  &-header{
+  &-header {
     display: flex;
     flex-direction: row;
-    align-items: center;    
-    &-type{
+    align-items: center;
+    &-type {
       font-family: 'Roboto';
       font-style: normal;
       font-weight: 700;
       font-size: 24px;
       line-height: 28px;
-      color: #FFFFFF;
+      color: #ffffff;
       margin-right: 10px;
-    }  
+    }
 
-    &-actions{
+    &-actions {
       display: flex;
       flex-direction: row;
     }
   }
 
-  &-body{
+  &-body {
     display: flex !important;
     flex-direction: row;
     justify-content: space-evenly;
@@ -40,15 +40,15 @@
     line-height: 16px;
     letter-spacing: -0.015em;
     padding-top: 2px;
-    color: #FFFFFF;
-    &-section{
+    color: #ffffff;
+    &-section {
       text-overflow: ellipsis;
       min-width: 15%;
-      p{
+      p {
         min-height: 50px;
       }
 
-      textarea{
+      textarea {
         resize: none;
         border: 0;
         border-radius: 20px;
@@ -58,10 +58,10 @@
       }
     }
 
-    &-section:nth-child(1){
+    &-section:nth-child(1) {
       width: 85%;
     }
-    &-divider{
+    &-divider {
       background-color: #fff;
       width: 5px;
       height: 100px;
@@ -71,13 +71,12 @@
   }
 }
 
-.reportCard-input{
+.reportCard-input {
   text-align: center;
-  input{
+  input {
     text-align: center;
     width: 60px;
     height: 60px;
     border-radius: 35px;
-
   }
 }

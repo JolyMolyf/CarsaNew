@@ -1,3 +1,1 @@
-export interface ITechnician {
-
-}
+export interface ITechnician {}

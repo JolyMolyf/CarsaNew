@@ -1,3 +1,1 @@
-export interface ManagerType {
-
-}
+export interface ManagerType {}

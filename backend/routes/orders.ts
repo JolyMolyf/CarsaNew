@@ -11,7 +11,7 @@ router.get('/client/:clientId', ordersController.getOrdersForClientId);
 
 router.get('/:orderId', validateOrderId, validateRequestSchema, ordersController.getOrderById);
 
-router.post('/',  ordersController.createOrder);
+router.post('/', ordersController.createOrder);
 
 router.post('/car', ordersController.addCarToOrder);
 

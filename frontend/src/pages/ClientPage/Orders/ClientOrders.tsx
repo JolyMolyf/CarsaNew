@@ -9,37 +9,39 @@ import { retrieveAllClientOrders } from '../../../utils/apis/OrderApi';
 import { CarType, dummyCar } from '../../../utils/models/Car';
 import { OrderType } from '../../../utils/models/Order';
 import { IConfiguration } from '../../../utils/models/OrderWithConfiguration';
-import './ClientOrders.scss'
+import './ClientOrders.scss';
 
 const ClientOrder = () => {
-  const clientId = useSelector((state:AppState) => state.user.user.client_id) || 'test';
-  const [ orders, setOrders ] = useState<any>();
+  const clientId = useSelector((state: AppState) => state.user.user.client_id) || 'test';
+  const [orders, setOrders] = useState<any>();
 
   useEffect(() => {
-    if(clientId){
-      retrieveAllClientOrders(clientId).then((res:any) => {
+    if (clientId) {
+      retrieveAllClientOrders(clientId).then((res: any) => {
         setOrders(res.data);
       });
     }
-    
   }, []);
 
-  return(
+  return (
     <div>
-      <Header/>
-      <SideMenu/>
-      <div className='clientOrders'>
-        { orders?.map((order:any, index: number) => {
-          return(
-            <div key={index} className=''>
-            { order.type === OrderType.Package ? <ConfigurationCard configuration={order as IConfiguration}/> : <CarCard car={order?.car_order?.[0] as CarType}/>} 
+      <Header />
+      <SideMenu />
+      <div className="clientOrders">
+        {orders?.map((order: any, index: number) => {
+          return (
+            <div key={index} className="">
+              {order.type === OrderType.Package ? (
+                <ConfigurationCard configuration={order as IConfiguration} />
+              ) : (
+                <CarCard car={order?.car_order?.[0] as CarType} />
+              )}
             </div>
-          )
-        }) }
+          );
+        })}
       </div>
-    
     </div>
-  )
-}
+  );
+};
 
-export default ClientOrder; 
+export default ClientOrder;

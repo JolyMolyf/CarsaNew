@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .configurationCard {
   min-width: 900px;
@@ -15,22 +15,20 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  
-  &-part {
 
+  &-part {
     margin-right: 10px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     flex-wrap: wrap;
-    
 
     &:first-child {
       flex-grow: 5;
       flex-basis: 10%;
     }
 
-    &-specs{
+    &-specs {
       overflow-x: scroll;
       width: 60%;
       min-width: 250px;
@@ -47,7 +45,7 @@
     line-height: 53px;
     text-transform: capitalize;
   }
- 
+
   &-client {
     font-family: $base-font-family;
     font-style: normal;
@@ -71,7 +69,7 @@
     border-radius: 5px;
   }
 
-  &-specs{
+  &-specs {
     font-family: $base-font-family;
     font-style: normal;
     font-weight: 400;
@@ -84,5 +82,4 @@
     border-radius: 8px;
     text-align: center;
   }
-
 }

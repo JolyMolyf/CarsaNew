@@ -1,21 +1,21 @@
-.button{
+.button {
   margin: 5px;
   width: 125px;
   height: 30px;
   border-radius: 20px;
-  background-color: #D8B669;
+  background-color: #d8b669;
   cursor: pointer;
   text-align: center;
   line-height: 30px;
   color: #fff;
   transition: 0.3s ease-in-out;
   text-transform: capitalize;
-  &:hover{
-    background-color:  rgb(209, 175, 133);
+  &:hover {
+    background-color: rgb(209, 175, 133);
   }
 }
 
-.light_button{
+.light_button {
   margin: 5px;
   width: 150px;
   height: 35px;
@@ -24,9 +24,9 @@
   cursor: pointer;
   text-align: center;
   line-height: 35px;
-  color: #D8B669;
+  color: #d8b669;
   text-transform: capitalize;
-  &:hover{
+  &:hover {
     background-color: rgb(206, 206, 206);
   }
 }

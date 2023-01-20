@@ -1,25 +1,25 @@
-.about{
+.about {
   height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
-  &-header{
+  &-header {
     padding-top: 8vh;
     font-size: 64px;
-    color: #FFD77F;
+    color: #ffd77f;
     font-weight: 700;
     text-transform: uppercase;
   }
-  &-body{
+  &-body {
     padding-top: 20px;
     max-width: 900px;
     font-size: 24px;
     line-height: 34px;
-    p{
+    p {
       margin: 15px 0;
     }
   }
 
-  &-image{
+  &-image {
     position: absolute;
     right: 0;
   }

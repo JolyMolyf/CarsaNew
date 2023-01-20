@@ -5,23 +5,10 @@ import { validateRequestSchema } from '../middleware/validateRequestSchema';
 
 const router = Router();
 
-router.get(
-    '/list',
-    brandsController.getAllBrands
-);
+router.get('/list', brandsController.getAllBrands);
 
-router.get(
-    '/:brandId',
-    validateBrandId,
-    validateRequestSchema,
-    brandsController.getBrandById
-);
+router.get('/:brandId', validateBrandId, validateRequestSchema, brandsController.getBrandById);
 
-router.get(
-    '/:brandId/models',
-    validateBrandId,
-    validateRequestSchema,
-    brandsController.getBrandModels
-);
+router.get('/:brandId/models', validateBrandId, validateRequestSchema, brandsController.getBrandModels);
 
 export default router;

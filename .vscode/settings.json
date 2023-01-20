@@ -1,6 +1,5 @@
 {
-  "cSpell.words": [
-    "carselector"
-    "wiuretywywyeuqweq"
-  ]
+  "cSpell.words": ["carselector"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

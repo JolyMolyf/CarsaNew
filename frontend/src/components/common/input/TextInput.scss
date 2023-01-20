@@ -1,9 +1,9 @@
-.textInput{
+.textInput {
   margin: 10px;
   width: 90%;
   max-width: 500px;
   min-width: 150px;
-  input{
+  input {
     padding: 8px;
     text-transform: capitalize;
     border: 0;
@@ -13,11 +13,11 @@
   }
 }
 
-.input-error{
-  input{
+.input-error {
+  input {
     border: 3px solid tomato;
   }
-  &-message{
+  &-message {
     margin-left: 10px;
     font-weight: 500;
     color: tomato;

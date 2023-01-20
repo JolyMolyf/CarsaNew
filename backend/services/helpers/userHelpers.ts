@@ -39,22 +39,24 @@ const getClientDataById = async (clientId: string) => {
 };
 
 const getAllUsers = async () => {
-  const clients:Array<any> = await clientHelpers.getAllClients();
-  const selectors:Array<any> = await employeeHelper.getAllCarSelectors();
-  const technicians:Array<any> = await employeeHelper.getAllTechnicians();
-  return {clients, technicians, selectors};
-}
+  const clients: Array<any> = await clientHelpers.getAllClients();
+  const selectors: Array<any> = await employeeHelper.getAllCarSelectors();
+  const technicians: Array<any> = await employeeHelper.getAllTechnicians();
+  return { clients, technicians, selectors };
+};
 
-const updateUserRole = async (user:any) => {
-  if ( ['Technician', 'Selector'].includes(user.role) ) {
+const updateUserRole = async (user: any) => {
+  if (['Technician', 'Selector'].includes(user.role)) {
     const client = await getClientDataById(user.id);
-    await db.Client.destroy({ where: { person_id: client.person_id }});
+    await db.Client.destroy({ where: { person_id: client.person_id } });
 
-    const employee =  await employeeHelper.createEmployee({...user, person_id: client.person_id, password: client.password}, user.role || 'Selector');
-    return(employee);
-  } 
-}
-
+    const employee = await employeeHelper.createEmployee(
+      { ...user, person_id: client.person_id, password: client.password },
+      user.role || 'Selector'
+    );
+    return employee;
+  }
+};
 
 export default {
   getSelectorDataById,

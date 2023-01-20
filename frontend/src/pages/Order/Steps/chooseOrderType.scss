@@ -1,21 +1,21 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .chooseOrderTypeStep {
   display: flex;
   justify-content: row;
-  &-button{
+  &-button {
     width: 150px;
     margin: 15px auto;
   }
-} 
+}
 
 .paymentStep {
   width: 100%;
   display: flex;
   &-decoration {
-    width: 50%;  
+    width: 50%;
   }
-  &-content{
+  &-content {
     width: 50%;
     height: 80vh;
     background-color: $base-card-color;
@@ -35,12 +35,10 @@
       -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
       -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
       box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
-
     }
-
   }
 
-  &-submit { 
+  &-submit {
     width: 100px;
     margin: 0 auto;
   }

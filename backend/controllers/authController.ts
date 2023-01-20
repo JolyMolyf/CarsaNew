@@ -39,7 +39,7 @@ const register = async (req: Request, res: Response) => {
     maxAge: 1000 * 60 * 60 * 24 * 30,
     httpOnly: true
   });
-  createdClient.role = 'Client'
+  createdClient.role = 'Client';
   return res.status(StatusCodes.CREATED).json(createdClient);
 };
 
@@ -104,26 +104,23 @@ const getProtected = async (req: Request, res: Response) => {
   res.json({ sensetiveData: 'User private data' });
 };
 
-const getAllUsers = async (req:Request, res:Response) => {
-  const users = await userHelpers.getAllUsers()
-  res.json({ status: 'OK', users})
-}
+const getAllUsers = async (req: Request, res: Response) => {
+  const users = await userHelpers.getAllUsers();
+  res.json({ status: 'OK', users });
+};
 
-const getAllClients = async (req:Request, res:Response) => {
+const getAllClients = async (req: Request, res: Response) => {
+  res.json({});
+};
 
-  res.json({})
-}
-
-const getAllEmployees = async () => {
-
-}
+const getAllEmployees = async () => {};
 
 export default {
   register,
   login,
   logout,
-  getProtected, 
+  getProtected,
   getAllUsers,
   getAllClients,
-  getAllEmployees,
+  getAllEmployees
 };

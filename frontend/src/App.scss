@@ -1,6 +1,6 @@
-@import "./variables.scss";
+@import './variables.scss';
 
-body{
+body {
   margin: 0;
   padding: 0;
 }
@@ -21,9 +21,7 @@ body{
   font-weight: 500;
 }
 
-
-.keyValuePair{
-
+.keyValuePair {
   display: flex;
   margin: 5px;
   text-transform: capitalize;
@@ -33,5 +31,5 @@ body{
   border-radius: 8px;
   padding: 2px;
   min-width: 150px;
-  background-color: #D8B669;
+  background-color: #d8b669;
 }

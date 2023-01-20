@@ -6,14 +6,12 @@
   right: 0;
   margin: 8vh auto;
 
-  
-
-  &-header{
+  &-header {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    &-label{
+    &-label {
       font-family: 'M plus 1p';
       font-style: normal;
       font-weight: 800;
@@ -21,28 +19,27 @@
       letter-spacing: -0.015em;
       color: #000000;
     }
-    
-    &-double{
+
+    &-double {
       margin-left: 10px;
       font-size: 12px;
-
     }
 
-    &-info{
+    &-info {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-      &-section{
+      &-section {
         max-width: 40%;
         display: flex;
         flex-direction: column;
-        &-subSection{
+        &-subSection {
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-start;
-          &-info{
+          &-info {
             margin: 2px;
             font-family: 'M plus 1p';
             font-style: normal;
@@ -53,7 +50,7 @@
             letter-spacing: -0.015em;
           }
 
-          &-smallinfo{
+          &-smallinfo {
             margin: 2px;
             font-family: 'M plus 1p';
             font-style: normal;
@@ -63,7 +60,7 @@
             text-align: center;
             letter-spacing: -0.015em;
           }
-        } 
+        }
       }
     }
   }
@@ -78,7 +75,7 @@
       position: relative;
       margin-bottom: 10px;
 
-      &-header{
+      &-header {
         font-size: 36px;
         font-family: 'M plus 1p';
         font-style: normal;
@@ -89,19 +86,18 @@
         margin-top: 10px;
       }
 
-      &-halfwidth{
+      &-halfwidth {
         width: 50%;
       }
 
-      &-center{
+      &-center {
         margin: 0 auto;
-
       }
     }
   }
 }
 
-.editCar-header-info-main{
+.editCar-header-info-main {
   font-family: 'M plus 1p';
   font-style: normal;
   font-weight: 800;
@@ -114,18 +110,14 @@
   justify-content: flex-start;
 }
 
-
 .edit-body-section-center {
   position: absolute;
   left: 50%;
   right: -50%;
-
-
 }
 
-.editCar-inputPair{
+.editCar-inputPair {
   display: flex;
   flex-direction: row;
-  align-items: center; 
- 
+  align-items: center;
 }

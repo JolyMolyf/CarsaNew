@@ -1,6 +1,6 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
-.carCard{
+.carCard {
   align-self: flex-end;
   padding: 5px;
   margin: 5px;
@@ -19,16 +19,16 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  &-info{
+  &-info {
     width: 50%;
-    &-brand{
+    &-brand {
       font-family: 'M plus 1p';
       font-style: normal;
       font-weight: 800;
       font-size: 36px;
       margin: 0;
     }
-    &-naming{
+    &-naming {
       display: inline-block;
       margin: 2px;
       text-transform: capitalize;
@@ -37,7 +37,7 @@
       font-weight: 800;
       font-size: 20px;
       line-height: 36px;
-      &-details{
+      &-details {
         font-family: 'M plus 1p';
         font-style: normal;
         font-weight: 500;
@@ -50,7 +50,7 @@
     }
   }
 
-  &-separator{
+  &-separator {
     width: 5px;
     min-height: 120px;
     height: 100%;
@@ -64,10 +64,9 @@
     justify-content: center;
     width: 45%;
   }
-
 }
 
-.carCard-expanded{
+.carCard-expanded {
   overflow: scroll;
   padding: 5px;
   margin: 5px;
@@ -86,8 +85,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  
-  &-info{
+
+  &-info {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -95,15 +94,14 @@
     justify-content: space-between;
     align-items: center;
 
-
-    &-brand{
+    &-brand {
       font-family: 'M plus 1p';
       font-style: normal;
       font-weight: 800;
       font-size: 36px;
       margin: 0;
     }
-    &-naming{
+    &-naming {
       display: inline-block;
       margin: 2px;
       text-transform: capitalize;
@@ -112,12 +110,12 @@
       font-weight: 800;
       font-size: 22px;
       line-height: 36px;
-      &-buttons{
+      &-buttons {
         width: 100%;
         display: flex;
         justify-content: space-between;
       }
-      &-details{
+      &-details {
         font-family: 'M plus 1p';
         font-style: normal;
         font-weight: 500;
@@ -128,7 +126,7 @@
     }
   }
 
-  &-separator{
+  &-separator {
     width: 5px;
     min-height: 120px;
     height: 100%;
@@ -137,12 +135,12 @@
     border-radius: 20px;
   }
 
-  &-gallery{
+  &-gallery {
     height: 150px;
     width: 100%;
-    &-image{
+    &-image {
       border-radius: 5px;
-      img{
+      img {
         max-height: 150px;
         border-radius: 10px;
         width: 200px;
@@ -156,8 +154,8 @@
     width: 100%;
   }
 
-  &-specs{
-    &-header{
+  &-specs {
+    &-header {
       font-family: 'M plus 1p';
       font-style: normal;
       font-weight: 800;
@@ -180,19 +178,16 @@
         margin: 2px;
         width: 49%;
         white-space: nowrap;
-        &-key{
+        &-key {
           white-space: nowrap;
           overflow: hidden;
           font-weight: bold;
-         }
+        }
       }
     }
   }
-
-  
-
 }
 
-#carCard-expanded-state-overall{
+#carCard-expanded-state-overall {
   transform: scale(1.5);
 }

@@ -2,17 +2,16 @@ import './paper.scss';
 
 interface IPaperProps {
   key?: any;
-  className?: string,
-  children?:any;
+  className?: string;
+  children?: any;
 }
 
-const Paper = (props:IPaperProps) => {
-
-  return(
+const Paper = (props: IPaperProps) => {
+  return (
     <div key={props.key} className={`paper ${props.className}`}>
-      { props.children }
+      {props.children}
     </div>
-  )
-}
+  );
+};
 
 export default Paper;

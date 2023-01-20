@@ -6,32 +6,15 @@ import { validateRequestSchema } from '../middleware/validateRequestSchema';
 
 const router = express.Router();
 
-router.post(
-    '/register',
-    useRegistrationSchema,
-    validateRequestSchema,
-    authController.register
-);
+router.post('/register', useRegistrationSchema, validateRequestSchema, authController.register);
 
-router.post(
-    '/login',
-    useLoginSchema,
-    validateRequestSchema,
-    authController.login
-);
+router.post('/login', useLoginSchema, validateRequestSchema, authController.login);
 
-router.get(
-    '/logout',
-    authController.logout
-);
+router.get('/logout', authController.logout);
 
-router.get(
-    '/protected',
-    requireAuthentication,
-    authController.getProtected
-);
+router.get('/protected', requireAuthentication, authController.getProtected);
 
-router.get('/clients', authController.getAllClients)
- router.get('/users', authController.getAllUsers)
+router.get('/clients', authController.getAllClients);
+router.get('/users', authController.getAllUsers);
 
 export default router;

@@ -1,12 +1,10 @@
-
-
-.home{
+.home {
   right: 0;
   left: 0;
   position: absolute;
   background-color: #fff;
   min-height: 100vh;
-  &-decorations{
+  &-decorations {
     width: 22px;
     position: absolute;
     left: 40px;
@@ -14,71 +12,68 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    &-item{
-      &:nth-child(1){
+    &-item {
+      &:nth-child(1) {
         margin-top: 100px;
       }
 
       width: 2px;
       height: 30vh;
       background-color: #000;
-
     }
 
-    &-horizontal{
+    &-horizontal {
       transform: rotate(90deg);
       height: 5%;
-      top: 0; 
+      top: 0;
       left: 90%;
 
-      &:nth-child(2){
+      &:nth-child(2) {
         top: 75vh !important;
         left: 30% !important;
       }
     }
 
-    &:nth-child(2){
+    &:nth-child(2) {
       top: 10vh;
       left: 96%;
-
     }
   }
 
-
-  &-section{
+  &-section {
     min-height: 80vh;
     width: 100%;
     position: relative;
-    &-first{
+    &-first {
       margin-top: 100px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      &-fadingText{
+      &-fadingText {
         font-family: Montserrat;
         font-style: normal;
         font-weight: 900;
         font-size: 255px;
         line-height: 351px;
-        color: #FFB100;
-        background: -webkit-linear-gradient(top,#ffb300a8 0%, #fff);
+        color: #ffb100;
+        background: -webkit-linear-gradient(top, #ffb300a8 0%, #fff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      img{
+      img {
         margin-top: -220px;
       }
     }
 
-    &-marketing{
+    &-marketing {
       display: flex;
       width: 50%;
       margin: 0 auto;
       justify-content: space-evenly;
       align-items: center;
       font-family: 'PT Sans Narrow', sans-serif;
-     
-      p{
+
+      p {
         font-style: normal;
         font-weight: normal;
         font-size: 36px;
@@ -87,31 +82,29 @@
         text-transform: uppercase;
       }
 
-      img{ 
+      img {
         width: 178px;
         height: 30px;
         transform: scale(0.5);
-       }
-       &-btn{
-         width: 150px;
-         height: 150px;
-         text-align: center;
-         line-height: 150px;
-         cursor: pointer;
-         text-transform: uppercase;
-         background:radial-gradient(50% 50% at 50% 50%, rgba(255, 220, 142, 0.84) 0%, rgba(219, 163, 35, 0) 100%);
-       }
+      }
+      &-btn {
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        line-height: 150px;
+        cursor: pointer;
+        text-transform: uppercase;
+        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 220, 142, 0.84) 0%, rgba(219, 163, 35, 0) 100%);
+      }
     }
-
-    
   }
-  &-second{
+  &-second {
     height: 80vh;
     background-color: #ffedc454;
     position: relative;
     overflow: hidden;
 
-    &-main{
+    &-main {
       display: flex;
       justify-content: space-between;
       flex-direction: row;
@@ -122,29 +115,29 @@
       width: 100%;
       height: 60vh;
       padding-left: 10%;
-      &-body{
+      &-body {
         font-family: 'PT Sans Narrow', sans-serif;
         font-family: 'Space Mono', monospace;
-        &-pre{
-          color: #FFD77F;
+        &-pre {
+          color: #ffd77f;
           font-style: normal;
           font-weight: 700;
           font-size: 24px;
           line-height: 35px;
         }
 
-        &-header{
+        &-header {
           font-style: normal;
           font-weight: normal;
           font-size: 36px;
           line-height: 52px;
         }
-        &-section{
+        &-section {
           margin-top: 20px;
           margin-bottom: 20px;
           font-family: 'PT Sans Narrow', sans-serif;
           font-family: 'Space Mono', monospace;
-          &-header{
+          &-header {
             font-style: normal;
             font-weight: normal;
             font-size: 21px;
@@ -154,15 +147,13 @@
             letter-spacing: 0.205em;
           }
 
-          &-body{
-
+          &-body {
             font-style: normal;
             font-weight: normal;
             font-size: 13px;
-            line-height: 19px;  
+            line-height: 19px;
           }
         }
-
       }
       // &-image{
       //   img{
@@ -172,31 +163,30 @@
     }
   }
 
-  &-third{
+  &-third {
     width: 100%;
     text-align: center;
     font-family: 'PT Sans Narrow', sans-serif;
     font-family: 'Space Mono', monospace;
-    &-header{
-      color: #FFD77F;
+    &-header {
+      color: #ffd77f;
       font-style: normal;
       font-weight: 700;
       font-size: 48px;
       line-height: 70px;
-    }  
+    }
 
-    &-body{
-      &-reviews{
-        display: flex;  
+    &-body {
+      &-reviews {
+        display: flex;
         flex-direction: row;
         justify-content: space-between;
         margin: 0 auto;
         max-width: 1150px;
 
-        &-item{
+        &-item {
           width: 350px;
         }
-
       }
     }
   }

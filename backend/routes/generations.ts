@@ -5,11 +5,6 @@ import { validateRequestSchema } from '../middleware/validateRequestSchema';
 
 const router = Router();
 
-router.get(
-    '/:generationId',
-    validateGenerationId,
-    validateRequestSchema,
-    generationsController.getGenerationById
-);
+router.get('/:generationId', validateGenerationId, validateRequestSchema, generationsController.getGenerationById);
 
 export default router;

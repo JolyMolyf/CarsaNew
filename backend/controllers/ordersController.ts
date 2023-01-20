@@ -27,24 +27,22 @@ const getOrderById = async (req: Request, res: Response) => {
 
 const getOrdersForClientId = async (req: Request, res: Response) => {
   const clientId = req.params.clientId;
-  const orders = await orderHelpers.getAllOrdersForClient(clientId)
+  const orders = await orderHelpers.getAllOrdersForClient(clientId);
   res.json(orders);
-} 
+};
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body;
 
-  let result:any; 
+  let result: any;
   if (orderBody.type === 'Configuration') {
     result = await orderHelpers.createOrderWithConfiguration(orderBody);
   } else {
     result = await orderHelpers.createOrderWithCar(orderBody);
   }
 
-  
-
   return result?.success
-    ? res.json({order: result.order, message: StatusCodes.CREATED})
+    ? res.json({ order: result.order, message: StatusCodes.CREATED })
     : res.status(StatusCodes.BAD_REQUEST).json({ message: result?.message });
 };
 
@@ -69,13 +67,13 @@ const deleteOrderById = async (req: Request, res: Response) => {
     : res.status(StatusCodes.BAD_REQUEST).json({ message: result.message });
 };
 
-const addCarToOrder = async (req:Request, res:Response) => {
+const addCarToOrder = async (req: Request, res: Response) => {
   const body = req.body;
-  const configuration = await configurationHelpers.getConfigurationById(body.configuration_id)
-  const car = await carHelpers.createCar(body?.car)
+  const configuration = await configurationHelpers.getConfigurationById(body.configuration_id);
+  const car = await carHelpers.createCar(body?.car);
   const carOrderLink = await car_orderHelpers.createCarOrderLink(car?.car.id, configuration?.configuration?.order_id);
-  res.json({configuration, car, carOrderLink})
-}
+  res.json({ configuration, car, carOrderLink });
+};
 
 export default {
   getAllOrders,

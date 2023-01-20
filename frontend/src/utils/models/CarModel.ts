@@ -1,4 +1,4 @@
-export interface CarModelType{
-  id: string, 
-  name: string,
+export interface CarModelType {
+  id: string;
+  name: string;
 }

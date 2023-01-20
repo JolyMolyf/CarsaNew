@@ -10,32 +10,29 @@ import { AppState } from '../../../redux/store';
 import Button from '../../../components/common/button/Button';
 
 const TechnicianDashboard = () => {
- 
-  const technician = useSelector((state:AppState) => state.user.user)
-  const [ cars, setCars ] = useState<Array<CarType>>([]); 
+  const technician = useSelector((state: AppState) => state.user.user);
+  const [cars, setCars] = useState<Array<CarType>>([]);
 
   const [allCars, setAllCars] = useState<Array<CarType>>([]);
 
   useEffect(() => {
-      getCarsByTechnicianId(technician?.person_id).then((res) => {
-        setCars(res)
-      })
-  }, [])
+    getCarsByTechnicianId(technician?.person_id).then((res) => {
+      setCars(res);
+    });
+  }, []);
 
-  return(
+  return (
     <div>
-      <Header/>
-      <div className='technicianDashboard'>
+      <Header />
+      <div className="technicianDashboard">
         <h1>Cars to check</h1>
-        <div className='technicianDashboard-content'>
-            { [...cars || []]?.map((car) => {
-              return(
-                <CarCard mode={CarCardModes.TECHNICIAN} car={car}/>
-              )
-            }) }
+        <div className="technicianDashboard-content">
+          {[...(cars || [])]?.map((car) => {
+            return <CarCard mode={CarCardModes.TECHNICIAN} car={car} />;
+          })}
         </div>
       </div>
     </div>
-  )
-}
-export default TechnicianDashboard
+  );
+};
+export default TechnicianDashboard;

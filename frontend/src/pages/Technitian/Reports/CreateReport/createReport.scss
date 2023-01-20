@@ -1,5 +1,5 @@
-@import "../../../../variables.scss";
-.createReport{
+@import '../../../../variables.scss';
+.createReport {
   position: absolute;
   max-width: 1440px;
   margin: 5vh auto;
@@ -7,17 +7,17 @@
   left: 0;
   width: 95%;
 
-  &-header{
-    display: flex; 
+  &-header {
+    display: flex;
     flex-direction: row;
     align-items: center;
   }
-  &-wrapper{
+  &-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    &-blotter{
+    &-blotter {
       background-color: $base-card-color;
       width: 40%;
       height: 355px;
@@ -25,16 +25,16 @@
       display: flex;
       flex-wrap: wrap;
 
-      &-label{
+      &-label {
         font-family: 'M plus 1p';
         font-style: normal;
         font-weight: 800;
         font-size: 24px;
         line-height: 36px;
         letter-spacing: -0.015em;
-        color: #FFFFFF;
+        color: #ffffff;
       }
-      &-section{
+      &-section {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -56,12 +56,11 @@
         &-input {
           width: 10%;
         }
-      } 
+      }
     }
-  
-    &-list{
+
+    &-list {
       width: 50%;
     }
   }
-
 }

@@ -1,4 +1,4 @@
-.dropdown{
+.dropdown {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: center;
   width: 250px;
   margin: 10px 10px;
-  &-input{
+  &-input {
     color: #fff;
     text-transform: capitalize;
     cursor: pointer;
@@ -14,22 +14,21 @@
     width: 250px;
     height: 35px;
     border-radius: 20px;
-    background-color: #D8B669;
+    background-color: #d8b669;
     position: relative;
     display: flex;
     align-items: center;
     padding: 5px;
-    p{
+    p {
       padding-left: 10px;
     }
-    &-arrow{
+    &-arrow {
       position: absolute;
       right: 5px;
-
     }
   }
 
-  &-menu{
+  &-menu {
     position: absolute;
     top: 45px;
     z-index: 2;
@@ -40,7 +39,7 @@
     margin-top: 5px;
     border-radius: 20px;
     background-color: rgb(216, 213, 213);
-    &-item{
+    &-item {
       cursor: pointer;
       margin: 10px;
       text-align: center;
@@ -49,10 +48,10 @@
   }
 }
 
-.dropdown-menu-hidden{
+.dropdown-menu-hidden {
   display: none;
 }
 
-.inactive-dropdown{
+.inactive-dropdown {
   opacity: 50%;
 }

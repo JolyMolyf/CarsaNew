@@ -1,5 +1,5 @@
-import './carousel.scss'
-import Slider from "react-slick";
+import './carousel.scss';
+import Slider from 'react-slick';
 
 const settings = {
   dots: false,
@@ -11,25 +11,26 @@ const settings = {
 };
 
 interface ICarouselProps {
-  images: Array<string>,
-  infinite?:boolean,
-  slidesToShow?: number,
+  images: Array<string>;
+  infinite?: boolean;
+  slidesToShow?: number;
 }
 
-const Carousel = (props:ICarouselProps) => {
-  const  { images } = props;
-  
-  return(
+const Carousel = (props: ICarouselProps) => {
+  const { images } = props;
+
+  return (
     <div>
       <Slider {...settings}>
-          { images.map((image:string, index: number) => {
-            return (
-              <div className='editCar-carousel' style={{ width: 400, height: 400 }} key={index} >
-                <img style={{ height: '25vh', width: 'auto', borderRadius: 20 }} src={image} alt="car image" />
-              </div>
-              )})}
+        {images.map((image: string, index: number) => {
+          return (
+            <div className="editCar-carousel" style={{ width: 400, height: 400 }} key={index}>
+              <img style={{ height: '25vh', width: 'auto', borderRadius: 20 }} src={image} alt="car image" />
+            </div>
+          );
+        })}
       </Slider>
     </div>
-  )
-}
+  );
+};
 export default Carousel;

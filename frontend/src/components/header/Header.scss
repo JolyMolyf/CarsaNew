@@ -10,15 +10,14 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  &-logo{
-    img{
+  &-logo {
+    img {
       width: 200px;
-
     }
   }
 
-  &-wrapper{
-    a{
+  &-wrapper {
+    a {
       text-decoration: none;
       color: #000;
       font-style: normal;
@@ -29,6 +28,6 @@
   }
 }
 
-.selectedLink{
+.selectedLink {
   border-bottom: 2px solid #000;
 }

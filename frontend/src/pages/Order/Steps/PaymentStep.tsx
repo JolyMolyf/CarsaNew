@@ -8,38 +8,35 @@ import './chooseOrderType.scss';
 
 interface IConfigurePaymentStepProps {
   sum: number;
-  submit: (formFields: paymentFormFields) => void
+  submit: (formFields: paymentFormFields) => void;
 }
 
 export interface paymentFormFields {
-  name: string, 
-  surname: string,
-  cardNumber: string, 
-  validDate: string, 
-  cvc: string,
+  name: string;
+  surname: string;
+  cardNumber: string;
+  validDate: string;
+  cvc: string;
 }
 
-
-const ConfigurePaymentStep = ({ sum , submit}: IConfigurePaymentStepProps) => {
-
+const ConfigurePaymentStep = ({ sum, submit }: IConfigurePaymentStepProps) => {
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: ''
     },
-    onSubmit: values => {
-     alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    }
   });
 
   return (
-    <div className='paymentStep'>
-      <div className='paymentStep-decoration'></div>
-      <div className='paymentStep-content'>
-        <p className='main-info-text'>Sum { sum }</p>
-
+    <div className="paymentStep">
+      <div className="paymentStep-decoration"></div>
+      <div className="paymentStep-content">
+        <p className="main-info-text">Sum {sum}</p>
       </div>
     </div>
-  )
+  );
 };
 
 export default ConfigurePaymentStep;

@@ -1,4 +1,4 @@
-.clientDashboard{
+.clientDashboard {
   position: absolute;
   max-width: 1440px;
   width: 90%;
@@ -6,7 +6,7 @@
   right: 0;
   margin: 10vh auto;
 
-  &-header{
+  &-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,7 +18,7 @@
     flex-direction: column;
   }
 
-  &-mainInfo{
+  &-mainInfo {
     font-family: 'M plus 1p';
     font-style: bold;
     font-weight: 700;
@@ -37,16 +37,16 @@
   }
 }
 
-#clientDashboard-payment{
+#clientDashboard-payment {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-#clientDashboard-car{
+#clientDashboard-car {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }

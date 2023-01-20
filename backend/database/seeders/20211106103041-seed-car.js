@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const {faker} = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker');
 const generations = require('./20211105192344-seed-car-generation');
 const engines = require('./20211106100215-seed-engine');
 const locations = require('./20211105194523-seed-location');

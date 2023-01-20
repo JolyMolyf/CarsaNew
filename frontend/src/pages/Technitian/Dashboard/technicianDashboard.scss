@@ -1,13 +1,13 @@
-.technicianDashboard{
+.technicianDashboard {
   position: absolute;
-  max-width:  1400px;
+  max-width: 1400px;
   width: 90%;
-  left: 0; 
+  left: 0;
   right: 0;
   margin: 100px auto;
-  
-  &-content{
+
+  &-content {
     display: grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }

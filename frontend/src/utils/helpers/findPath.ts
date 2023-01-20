@@ -1,14 +1,12 @@
-export const findPath = (ob:any, key:any) => {
-  const path:any = [];
-  const keyExists:any = (obj:any) => {
-    if (!obj || (typeof obj !== "object" && !Array.isArray(obj))) {
+export const findPath = (ob: any, key: any) => {
+  const path: any = [];
+  const keyExists: any = (obj: any) => {
+    if (!obj || (typeof obj !== 'object' && !Array.isArray(obj))) {
       return false;
-    }
-    else if (obj.hasOwnProperty(key)) {
+    } else if (obj.hasOwnProperty(key)) {
       return true;
-    }
-    else if (Array.isArray(obj)) {
-      let parentKey = path.length ? path.pop() : "";
+    } else if (Array.isArray(obj)) {
+      let parentKey = path.length ? path.pop() : '';
 
       for (let i = 0; i < obj.length; i++) {
         path.push(`${parentKey}[${i}]`);
@@ -18,8 +16,7 @@ export const findPath = (ob:any, key:any) => {
         }
         path.pop();
       }
-    }
-    else {
+    } else {
       for (const k in obj) {
         path.push(k);
         const result = keyExists(obj[k], key);
@@ -34,5 +31,5 @@ export const findPath = (ob:any, key:any) => {
 
   keyExists(ob);
 
-  return path.join(".");
-}
+  return path.join('.');
+};

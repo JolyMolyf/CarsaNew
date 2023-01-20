@@ -1,4 +1,4 @@
 export interface TokenPayload {
-    sessionId: string;
-    [key: string]: any;
+  sessionId: string;
+  [key: string]: any;
 }

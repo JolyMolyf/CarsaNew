@@ -64,7 +64,7 @@ const createCar = async (carBody: any) => {
     console.log('Car Body', carBody);
     const location = await getLocationByState(carBody.location);
     const existedCarId = await checkIfCarAlreadyExistsByParams(carBody);
-    if ( existedCarId ) {
+    if (existedCarId) {
       const car = (await getCarById(existedCarId)).car;
       return { success: true, car };
     }
@@ -77,12 +77,12 @@ const createCar = async (carBody: any) => {
   }
 };
 
-const checkIfCarAlreadyExistsByParams = async (carBody:any): Promise<string | null> => {
-  const engine = carBody?.Engine; 
+const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | null> => {
+  const engine = carBody?.Engine;
   const brand = carBody?.CarBrand?.name;
-  const model = carBody.CarModel.name; 
+  const model = carBody.CarModel.name;
   const generation = carBody?.CarGeneration?.name;
-  const fuel_type = carBody?.fuel_type; 
+  const fuel_type = carBody?.fuel_type;
   const year = carBody?.year;
   const type = carBody?.type;
   const transmission = carBody?.transmission;
@@ -90,7 +90,7 @@ const checkIfCarAlreadyExistsByParams = async (carBody:any): Promise<string | nu
   const brand_id = await getBrandByName(brand);
   const model_id = await getModelByName(model);
   const generation_id = await getGenerationByName(generation);
-  
+
   const cars = db.Car.findAll({
     where: {
       brand_id,
@@ -100,10 +100,10 @@ const checkIfCarAlreadyExistsByParams = async (carBody:any): Promise<string | nu
       year,
       transmission
     }
-  })
+  });
 
   return cars?.[0]?.id ?? null;
-}
+};
 
 const updateCarById = async (carId: string, carBody: any) => {
   try {
