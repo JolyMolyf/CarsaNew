@@ -8,5 +8,6 @@ export interface PersonType {
 export enum PersonRoles {
   CLIENT,
   SELECTOR,
-  TECHNICIAN
+  TECHNICIAN,
+  MANAGER
 }

@@ -2,10 +2,7 @@ version: '3.9'
 
 services:
   backend:
-    # image: volex/carsa-server
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: volex/carsa-server
     container_name: carsa-server
     restart: on-failure
     ports:
@@ -21,10 +18,7 @@ services:
       - redis
 
   frontend:
-    # image: volex/carsa-client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: volex/carsa-client
     command: "serve -s build -n -p 3001"
     container_name: carsa-client
     ports:

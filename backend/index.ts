@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import session from './middleware/session';
 import path from 'path';
+import fs from 'fs';
 import cookieParser from 'cookie-parser';
 import corsMiddleware from './middleware/cors';
 import router from './routes';
@@ -27,14 +28,20 @@ app.use(session);
 // Connecting routes
 app.use(router);
 
-app.get("*", (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, './client_app/build/index.html'));
+app.get('*', (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, './client_app/build/index.html'));
 });
 
 db.sequelize.sync().then(() => {
-    app.listen(PORT || 8080, () => {
-        console.log('Server is listening on port', process.env.PORT || 8080)
-    });
+  app.listen(PORT || 8080, () => {
+    console.log('Server is listening on port', process.env.PORT || 8080);
+  });
+
+  const triggersDirName = path.resolve(__dirname, 'database', 'triggers');
+  fs.readdirSync(triggersDirName).forEach((fileName) => {
+    const sqlData = fs.readFileSync(path.join(triggersDirName, fileName), 'utf8');
+    db.sequelize.query(sqlData);
+  });
 });
 
 export default app;
