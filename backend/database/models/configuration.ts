@@ -44,7 +44,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       Configuration.belongsTo(models.Order, {
-        foreignKey: 'order_id', 
+        foreignKey: 'order_id',
         onDelete: 'CASCADE'
       });
 
@@ -204,9 +204,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       paranoid: true,
       modelName: 'Configuration',
       freezeTableName: true,
-      timestamps: true,
-      createdAt: false,
-      updatedAt: false
+      timestamps: false
     }
   );
 

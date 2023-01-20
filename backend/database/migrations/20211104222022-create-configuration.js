@@ -64,14 +64,14 @@ module.exports = {
         }
       },
       engine_volume_from: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DECIMAL(4),
         allowNull: true,
         validate: {
           min: 0
         }
       },
       engine_volume_until: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DECIMAL(4),
         allowNull: true,
         validate: {
           customValidator(value) {
@@ -82,14 +82,14 @@ module.exports = {
         }
       },
       price_from: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
         allowNull: true,
         validate: {
           min: 0
         }
       },
       price_until: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
         allowNull: true,
         validate: {
           customValidator(value) {
@@ -108,10 +108,22 @@ module.exports = {
         allowNull: true
       },
       mileage_from: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
       },
       mileage_until: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          customValidator(value) {
+            if (value && value < Configuration.mileage_from) {
+              throw new Error('The upper bound of mileage must be bigger than lower');
+            }
+          }
+        }
       },
       location_id: {
         type: DataTypes.UUID,

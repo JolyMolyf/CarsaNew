@@ -23,6 +23,7 @@ module.exports = {
       },
       start_reservation: {
         type: DataTypes.DATE,
+        defaultValue: sequelize.fn('NOW'),
         allowNull: false,
         comment: 'Timestamp when car reserved for this order only'
       },

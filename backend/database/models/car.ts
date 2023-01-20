@@ -77,7 +77,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       vin: {
         type: DataTypes.STRING(17),
-        allowNull: true,
+        allowNull: true
       },
       registrationNumber: {
         type: DataTypes.STRING(15),

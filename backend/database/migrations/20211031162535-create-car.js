@@ -15,7 +15,7 @@ module.exports = {
       },
       vin: {
         type: DataTypes.STRING(17),
-        allowNull: true,
+        allowNull: true
       },
       registrationNumber: {
         type: DataTypes.STRING(15),
@@ -42,7 +42,7 @@ module.exports = {
         allowNull: false
       },
       market_name: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(60),
         allowNull: true
       },
       marketplace_link: {

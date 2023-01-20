@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.createTable('Engine', {
-      d: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -18,7 +18,7 @@ module.exports = {
         allowNull: true,
         validate: {
           min: 0.5,
-          max: 10
+          max: 10000
         }
       },
       power: {

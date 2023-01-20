@@ -20,7 +20,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
       Order.hasOne(models.Configuration, {
         foreignKey: 'order_id',
-         onDelete: 'CACSADE'
+        onDelete: 'CASCADE'
       });
 
       Order.hasMany(models.Payment, {
@@ -85,9 +85,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       paranoid: true,
       modelName: 'Order',
       freezeTableName: true,
-      timestamps: true,
-      createdAt: false,
-      updatedAt: false
+      timestamps: false
     }
   );
 
