@@ -6,7 +6,7 @@ export const createReports = async (reports:any) => {
 }
 
 export const getExistingReportsForCar = async (car_id: string) => {
-  return await axios.get(`${process.env.REACT_APP_API_URL}/reports/${car_id}`)
+  return await axios.get(`${process.env.REACT_APP_API_URL}/reports/car/${car_id}`)
 }
 
 export const updateReport = async (report:IReport) => {

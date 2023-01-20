@@ -22,15 +22,13 @@ app.use(cookieParser());
 app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
+
 // Setup session middleware with Redis storage
 app.use(session);
 
 // Connecting routes
 app.use(router);
-
-app.get('*', (req: any, res: any) => {
-  res.sendFile(path.join(__dirname, './client_app/build/index.html'));
-});
 
 db.sequelize.sync().then(() => {
   app.listen(PORT || 8080, () => {

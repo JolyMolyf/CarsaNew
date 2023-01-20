@@ -57,6 +57,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
           model: 'ReportType',
           key: 'id'
         }
+      },
+      images: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true
       }
     },
     {

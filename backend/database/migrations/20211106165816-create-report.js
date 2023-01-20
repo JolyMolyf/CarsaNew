@@ -42,6 +42,10 @@ module.exports = {
       date: {
         type: DataTypes.DATE,
         allowNull: false
+      },
+      images: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true
       }
     });
   },
