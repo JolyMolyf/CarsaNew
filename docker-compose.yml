@@ -25,13 +25,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: carsa-client
+    command: "npm start"
     ports:
       - '3001:3001'
     volumes:
       - ./frontend/src:/app/src
       - /app/node_modules
     env_file:
-      - ./frontend/.env
+      - ./frontend/local.env
     stdin_open: true
     tty: true
     depends_on:
