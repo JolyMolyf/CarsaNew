@@ -19,7 +19,7 @@ import ClientPayments from './pages/ClientPage/Payments/ClientPayments';
 import CarSelectorAddCar from './pages/CarSelector/CarSelectorAddCar';
 import ManagerDashboard from './pages/Manager/ManagerDashboard';
 
-enum Roles {
+export enum Roles {
   CLIENT = 'Client',
   MANAGER = 'manager',
   TECHNICIAN = 'technician',

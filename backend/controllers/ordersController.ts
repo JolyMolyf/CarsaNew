@@ -33,12 +33,7 @@ const getOrdersForClientId = async (req: Request, res: Response) => {
 
 const createOrder = async (req: Request, res: Response) => {
   const orderBody = req.body;
-<<<<<<< HEAD
-
   let result: any;
-=======
-  let result:any; 
->>>>>>> 0e57f4d ([FullStack]: bug fix)
   if (orderBody.type === 'Configuration') {
     result = await orderHelpers.createOrderWithConfiguration(orderBody);
   } else {
@@ -74,9 +69,12 @@ const deleteOrderById = async (req: Request, res: Response) => {
 const addCarToOrder = async (req: Request, res: Response) => {
   const body = req.body;
   const configuration = await configurationHelpers.getConfigurationById(body.configuration_id);
+  console.log('Configuration found: ', configuration);
   const car = await carHelpers.createCar(body?.car);
-  const carOrderLink = await car_orderHelpers.createCarOrderLink(car?.car.id, configuration?.configuration?.order_id);
-  res.json({ configuration, car, carOrderLink });
+  // console.log('Car created: ', car);
+  // const carOrderLink = await car_orderHelpers.createCarOrderLink(car?.car.id, configuration?.configuration?.order_id);
+  // console.log('Car order link: ', carOrderLink);
+  res.json({ configuration });
 };
 
 export default {

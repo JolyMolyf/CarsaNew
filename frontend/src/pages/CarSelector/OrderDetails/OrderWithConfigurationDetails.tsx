@@ -13,7 +13,7 @@ import { AppState } from '../../../redux/store';
 import { ISpecification } from '../../../utils/models/Specification';
 
 const OrderWithConfigurationDetails =  (props:any) => {
-  
+
   const params = useParams();
   const user = useSelector((state:AppState) => state.user.user );
   const [orderConfiguration, setOrderConfiguration] = useState<IConfiguration>();

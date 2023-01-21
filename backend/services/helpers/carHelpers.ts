@@ -61,10 +61,11 @@ const createCar = async (carBody: any) => {
     if (!carBody.id || carBody.id === '') {
       carBody.id = uuid();
     }
-    console.log('Car Body', carBody);
+    console.log('Creating car');
     const location = await getLocationByState(carBody.location);
     const existedCarId = await checkIfCarAlreadyExistsByParams(carBody);
     if (existedCarId) {
+      console.log('Car Aready Exists ___ __ --- __ --- __ ');
       const car = (await getCarById(existedCarId)).car;
       return { success: true, car };
     }
@@ -78,9 +79,10 @@ const createCar = async (carBody: any) => {
 };
 
 const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | null> => {
+  console.log('HERERERER');
   const engine = carBody?.Engine;
   const brand = carBody?.CarBrand?.name;
-  const model = carBody.CarModel.name;
+  const model = carBody?.CarModel.name;
   const generation = carBody?.CarGeneration?.name;
   const fuel_type = carBody?.fuel_type;
   const year = carBody?.year;
@@ -90,7 +92,7 @@ const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | n
   const brand_id = await getBrandByName(brand);
   const model_id = await getModelByName(model);
   const generation_id = await getGenerationByName(generation);
-
+  console.log('Before car fetch');
   const cars = db.Car.findAll({
     where: {
       brand_id,
@@ -101,7 +103,7 @@ const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | n
       transmission
     }
   });
-
+  console.log('After car found: ', cars);
   return cars?.[0]?.id ?? null;
 };
 
@@ -287,12 +289,12 @@ const findGenerationByModelId = async (model_id: string, start_year: string, end
   }
   return generation[0];
 };
-const getGenerationByName = async (generationName: string, model?:any) => {
-  if ( model ) {
+const getGenerationByName = async (generationName: string, model?: any) => {
+  if (model) {
     const generation = await db.CarGeneration.findAll({
-      where: { 
+      where: {
         name: generationName,
-        model_id: model?.[0]?.id 
+        model_id: model?.[0]?.id
       },
       include: [{ model: db.CarModel, include: [{ model: db.CarBrand }] }]
     });
@@ -337,15 +339,14 @@ const getAllModels = async (brand_id: string) => {
   });
 };
 
-const getModelByName = async (modelName: string, brand?:any) => {
-  if ( brand ) {
-    console.log(brand);
+const getModelByName = async (modelName: string, brand?: any) => {
+  if (brand) {
     return await db.CarModel.findAll({
       where: {
         name: modelName,
         brand_id: brand?.[0]?.id
       }
-    })
+    });
   }
   return await db.CarModel.findAll({
     where: {

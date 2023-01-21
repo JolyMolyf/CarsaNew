@@ -15,12 +15,11 @@ const CarSelectorAddCar = () => {
   const userId = useSelector((appState: any) => appState.user.user.Person.id);
 
   const [carLink, setCarLink] = useState<string>('');
-
   return (
     <div>
       <Header />
-      <div style={{ marginTop: '10vh', position: 'absolute' }}>
-        <SimpleCard width="500px">
+      <div style={{ marginTop: '10vh', position: 'absolute', left: 0, right: 0 }}>
+        <SimpleCard width="500px" style={{ margin: '0 auto' }}>
           <div className="createOrder-header">Fetch Car By link</div>
           <div className="createOrder-body">
             <input
@@ -29,22 +28,21 @@ const CarSelectorAddCar = () => {
               value={carLink}
               onChange={(e) => {
                 setCarLink(e.target.value);
-              }}
-            ></input>
+              }}></input>
           </div>
           <div className="createOrder-actions">
             <Button
               onClick={() => {
                 fetchCarByLink(carLink).then((car) => {
                   const configuration_id = params.configurationId;
+                  console.log('Cliecked');
                   addCarToOrder({ car, configuration_id }).then((res) => {
-                    navigate('/carSelector/dashboard');
+                    // navigate('/carSelector/dashboard');
                   });
                 });
               }}
               type={false}
-              name={'Submit'}
-            ></Button>
+              name={'Submit'}></Button>
           </div>
         </SimpleCard>
       </div>

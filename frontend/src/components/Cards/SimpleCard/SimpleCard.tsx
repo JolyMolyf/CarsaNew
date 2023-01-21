@@ -25,10 +25,15 @@ const SimpleCardStyled = styled.div<{ width?: string }>`
 interface SimpleCardProps {
   width?: string;
   children?: any;
+  style?: any;
 }
 
 const SimpleCard = (props: SimpleCardProps) => {
-  return <SimpleCardStyled width={props.width}>{props.children}</SimpleCardStyled>;
+  return (
+    <SimpleCardStyled style={props.style} width={props.width}>
+      {props.children}
+    </SimpleCardStyled>
+  );
 };
 
 export default SimpleCard;

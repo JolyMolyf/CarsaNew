@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { findPath } from '../../utils/helpers/findPath';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../redux/store';
+import { Roles } from '../../App';
 
 const StyledSpecs = styled.div`
   input {
@@ -118,7 +119,7 @@ const EditCar = (props: IEditCarProps) => {
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.registrationNumber}</div>
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.vin}</div>
 
-              {isInEditMode() ? (
+              {isInEditMode() && userRole === Roles.CLIENT? (
                 ''
               ) : (
                 <Button size={ButtonSize.SMALL} onClick={handleBuy} type={true} name={'Buy'}></Button>
@@ -135,8 +136,7 @@ const EditCar = (props: IEditCarProps) => {
                     setMode(CarPageModes.EDIT);
                   }}
                   type={true}
-                  name={'Edit'}
-                ></Button>
+                  name={'Edit'}></Button>
               ) : (
                 ''
               )}
@@ -147,8 +147,7 @@ const EditCar = (props: IEditCarProps) => {
                   value={pendingVin}
                   onChange={(e: any) => {
                     setPendingVin(e.target.value);
-                  }}
-                ></input>
+                  }}></input>
               )}
               {isInEditMode() && !car?.vin && (
                 <Button
@@ -178,6 +177,7 @@ const EditCar = (props: IEditCarProps) => {
         <div className="editCar-body">
           <Carousel images={car?.images || []} />
           <div className="editCar-header-info-main">Reports</div>
+          {reports?.length === 0 && <p>No reports found yet</p>}
           <div className="editCar-body-section">
             {reports?.map((report) => {
               return (
@@ -227,8 +227,7 @@ const EditCar = (props: IEditCarProps) => {
                 onClick={handleCarSave}
                 type={true}
                 name={'Save changes'}
-                className="edit-body-section-center"
-              ></Button>
+                className="edit-body-section-center"></Button>
             )}
           </div>
         </div>

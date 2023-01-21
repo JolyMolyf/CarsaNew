@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import path from 'path';
 import { v4 as uuid } from 'uuid';
-import multer from 'multer';
 import { validateReportId } from '../schemas/reportSchema';
 import { validateRequestSchema } from '../middleware/validateRequestSchema';
 import reportsController from '../controllers/reportController';
 
+const multer = require('multer');
 const router = Router();
 
 const storage = multer.diskStorage({

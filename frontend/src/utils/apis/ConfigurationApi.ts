@@ -6,6 +6,6 @@ export const getConfigurationsForSelector = async () => {
   });
 };
 
-export const addCarToOrder = async (car: any) => {
-  return axios.post(`${process.env.REACT_APP_API_URL}/orders/car`, { ...car }).then((res) => res.data);
+export const addCarToOrder = async (params: any) => {
+  return axios.post(`${process.env.REACT_APP_API_URL}/orders/car`, { ...params }).then((res) => res.data);
 };
