@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const { faker } = require('@faker-js/faker');
-const generations = require('./20211105192344-seed-car-generation');
+const allBrands = require('./brand_model_generation.json');
 const engines = require('./20211106100215-seed-engine');
 const locations = require('./20211105194523-seed-location');
 
@@ -9,6 +9,12 @@ const transmissionTypes = ['Manual', 'Automatic', 'CVT', 'DCT'];
 const cars = [];
 
 for (let i = 0; i < 20; i++) {
+  const randomBrand = allBrands[randomInteger(0, allBrands.length)];
+  const randomModel = randomBrand.models[randomInteger(0, randomBrand.models.length)];
+  const randomGeneration = randomBrand.generations
+    ? randomBrand.generations[randomInteger(0, randomBrand.generations.length)]
+    : null;
+
   cars.push({
     id: uuid.v4(),
     type: faker.vehicle.type(),
@@ -23,9 +29,9 @@ for (let i = 0; i < 20; i++) {
     market_name: faker.company.name(),
     marketplace_link: faker.internet.url(),
     price: randomInteger(0, 500) * 100,
-    brand_id: '165b6aa3-889e-4f7e-a343-166b1d0fecf1',
-    model_id: '7ccff0cc-e76a-4098-b5ca-456e08dea0c4',
-    generation_id: 'c4fabc94-f208-49fa-a261-a761dfc8e9ee',
+    brand_id: randomBrand.brand_id,
+    model_id: randomModel.model_id,
+    generation_id: randomGeneration.generation_id,
     engine_id: engines.engines[randomInteger(0, engines.engines.length - 1)].id,
     location_id: locations.locations[randomInteger(0, locations.locations.length - 1)].id,
     mainImage: 'https://picsum.photos/600/400',
