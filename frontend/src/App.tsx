@@ -21,9 +21,9 @@ import ManagerDashboard from './pages/Manager/ManagerDashboard';
 
 export enum Roles {
   CLIENT = 'Client',
-  MANAGER = 'manager',
-  TECHNICIAN = 'technician',
-  CARSELECTOR = 'carselector'
+  MANAGER = 'Manager',
+  TECHNICIAN = 'Technician',
+  CARSELECTOR = 'Carselector'
 }
 
 function App() {

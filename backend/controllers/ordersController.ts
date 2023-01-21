@@ -71,9 +71,9 @@ const addCarToOrder = async (req: Request, res: Response) => {
   const configuration = await configurationHelpers.getConfigurationById(body.configuration_id);
   console.log('Configuration found: ', configuration);
   const car = await carHelpers.createCar(body?.car);
-  // console.log('Car created: ', car);
-  // const carOrderLink = await car_orderHelpers.createCarOrderLink(car?.car.id, configuration?.configuration?.order_id);
-  // console.log('Car order link: ', carOrderLink);
+  console.log('Car created: ', car);
+  const carOrderLink = await car_orderHelpers.createCarOrderLink(car?.car.id, configuration?.configuration?.order_id);
+  console.log('Car order link: ', carOrderLink);
   res.json({ configuration });
 };
 

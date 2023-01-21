@@ -78,17 +78,16 @@ const CreateReport = () => {
           <Button
             onClick={() => {
               handleReportsSave();
+              navigate(`/${user?.role}/dashboard`);
             }}
             type={true}
-            name={'Save'}
-          ></Button>
+            name={'Save'}></Button>
           <Button
             onClick={() => {
               navigate(`/${user?.role}/dashboard`);
             }}
             type={true}
-            name={'Back'}
-          ></Button>
+            name={'Back'}></Button>
         </div>
         <div className="createReport-wrapper">
           <div className="createReport-wrapper-blotter">
@@ -102,12 +101,12 @@ const CreateReport = () => {
                 })}
               />
               <TextInput
+                type='number'
                 name="condition"
                 onChange={handleChange}
                 className="createReport-wrapper-blotter-section-input"
                 placeholder="condition"
-                value={pendingReport.condition}
-              ></TextInput>
+                value={pendingReport.condition}></TextInput>
             </div>
             <div className="createReport-wrapper-blotter-section createReport-wrapper-blotter-label">
               <h3>Details</h3>

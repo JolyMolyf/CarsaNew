@@ -1,7 +1,7 @@
 export enum IReportType {
   None = 'None',
   Engine = 'Engine',
-  Gearbox = 'GearBox',
+  Transmission = 'Transmission',
   Interior = 'Inside',
   Exterior = 'Exterior',
   Suspension = 'Suspension'

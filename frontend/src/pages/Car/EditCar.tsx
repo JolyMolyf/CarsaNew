@@ -99,6 +99,8 @@ const EditCar = (props: IEditCarProps) => {
     rejectCar(car?.id || '');
   };
 
+  console.log(!(isInEditMode() && userRole === Roles.CLIENT));
+
   return (
     <div>
       <Header />
@@ -119,17 +121,17 @@ const EditCar = (props: IEditCarProps) => {
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.registrationNumber}</div>
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.vin}</div>
 
-              {isInEditMode() && userRole === Roles.CLIENT? (
+              {!(!isInEditMode() && userRole === Roles.CLIENT) ? (
                 ''
               ) : (
                 <Button size={ButtonSize.SMALL} onClick={handleBuy} type={true} name={'Buy'}></Button>
               )}
-              {isInEditMode() ? (
+              {!(!isInEditMode() && userRole === Roles.CLIENT) ? (
                 ''
               ) : (
                 <Button size={ButtonSize.SMALL} onClick={handleReject} type={true} name={'Reject'}></Button>
               )}
-              {userRole !== 'Client' && isInEditMode() ? (
+              {(userRole === Roles.TECHNICIAN || userRole === Roles.CARSELECTOR) && !isInEditMode() ? (
                 <Button
                   size={ButtonSize.SMALL}
                   onClick={() => {

@@ -61,11 +61,9 @@ const createCar = async (carBody: any) => {
     if (!carBody.id || carBody.id === '') {
       carBody.id = uuid();
     }
-    console.log('Creating car');
     const location = await getLocationByState(carBody.location);
     const existedCarId = await checkIfCarAlreadyExistsByParams(carBody);
     if (existedCarId) {
-      console.log('Car Aready Exists ___ __ --- __ --- __ ');
       const car = (await getCarById(existedCarId)).car;
       return { success: true, car };
     }
@@ -79,32 +77,38 @@ const createCar = async (carBody: any) => {
 };
 
 const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | null> => {
-  console.log('HERERERER');
   const engine = carBody?.Engine;
   const brand = carBody?.CarBrand?.name;
-  const model = carBody?.CarModel.name;
+  const model = carBody?.CarModel?.name;
   const generation = carBody?.CarGeneration?.name;
   const fuel_type = carBody?.fuel_type;
   const year = carBody?.year;
   const type = carBody?.type;
   const transmission = carBody?.transmission;
 
-  const brand_id = await getBrandByName(brand);
-  const model_id = await getModelByName(model);
-  const generation_id = await getGenerationByName(generation);
-  console.log('Before car fetch');
-  const cars = db.Car.findAll({
-    where: {
-      brand_id,
-      model_id,
-      generation_id,
-      fuel_type,
-      year,
-      transmission
-    }
-  });
-  console.log('After car found: ', cars);
-  return cars?.[0]?.id ?? null;
+  const fetchedBrand = await getBrandByName(brand);
+  const brand_id = fetchedBrand[0]?.id;
+  const fetchedModel = await getModelByName(model);
+  const model_id = fetchedModel[0]?.id;
+  const fetchedGeneration = await getGenerationByName(generation);
+  const generation_id = fetchedGeneration[0]?.id;
+
+  if (brand_id && model_id && generation_id) {
+    const cars = await db.Car.findAll({
+      where: {
+        brand_id,
+        model_id,
+        generation_id,
+        fuel_type,
+        year,
+        transmission
+      }
+    });
+    console.log('After car found: ', cars?.[0]?.id);
+    return cars?.[0]?.id;
+  } else {
+    return null;
+  }
 };
 
 const updateCarById = async (carId: string, carBody: any) => {
