@@ -14,6 +14,14 @@ for (let i = 0; i < 10; i++) {
   });
 }
 
+clients.push({
+  person_id: '6076dae1-73be-4c93-be95-a536584ded40',
+  email: 'client@test.com',
+  password: bcrypt.hashSync('qwerty123', 10),
+  phone: faker.phone.number('+(48) ### ### ###'),
+  creationDate: new Date()
+});
+
 module.exports = {
   clients: clients,
 

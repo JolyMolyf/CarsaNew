@@ -12,6 +12,27 @@ for (let i = 0; i < 12; i++) {
   });
 }
 
+// CarSelector
+employees.push({
+  person_id: '632fb1d9-2ee6-4eea-aefb-24dbe3468c42',
+  email: 'selector@test.com',
+  password: bcrypt.hashSync('qwerty123', 10)
+});
+
+// Technician
+employees.push({
+  person_id: 'c060b776-0d38-421b-98b0-420c14186826',
+  email: 'technician@test.com',
+  password: bcrypt.hashSync('qwerty123', 10)
+});
+
+// Manager
+employees.push({
+  person_id: '007231fb-c687-4c38-9cbd-cb3158c3ace7',
+  email: 'manager@test.com',
+  password: bcrypt.hashSync('qwerty123', 10)
+});
+
 module.exports = {
   employees: employees,
 

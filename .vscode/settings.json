@@ -1,5 +1,6 @@
 {
   "cSpell.words": ["carselector"],
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "findUnusedExports.detectCircularImports": true
 }

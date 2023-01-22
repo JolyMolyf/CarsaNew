@@ -14,6 +14,15 @@ for (let i = 0; i < 20; i++) {
   });
 }
 
+locations.push({
+  id: '26096f88-10e3-4196-a9e7-10c50ddf129b',
+  country: 'Poland',
+  state: 'Masovian',
+  city: 'Warsaw',
+  postal_code: '02-008',
+  street: 'Koszykowa'
+});
+
 module.exports = {
   locations: locations,
 

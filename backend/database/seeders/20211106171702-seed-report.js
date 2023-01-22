@@ -5,7 +5,7 @@ const types = require('./20211106165728-seed-report-type');
 
 const reports = [];
 
-for (let i = 0; i < overviews.overviews.length; i++) {
+for (let i = 0; i < overviews.overviews.length - 1; i++) {
   for (let j = 0; j < types.reportTypes.length; j++) {
     reports.push({
       id: uuid.v4(),

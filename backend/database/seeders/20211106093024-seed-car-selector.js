@@ -8,6 +8,11 @@ for (let i = 0; i < 6; i++) {
   });
 }
 
+selectors.push({
+  person_id: '632fb1d9-2ee6-4eea-aefb-24dbe3468c42',
+  creationDate: new Date()
+});
+
 module.exports = {
   selectors: selectors,
 

@@ -16,6 +16,13 @@ while (overviews.length < 5) {
   i++;
 }
 
+overviews.push({
+  id: 'f1b4c1ad-87a8-4887-8d9d-217e447c576e',
+  date: new Date(),
+  car_id: 'caf09ebc-418e-4272-a2f9-4ad1121dca0e',
+  technician_id: 'c060b776-0d38-421b-98b0-420c14186826'
+});
+
 module.exports = {
   overviews: overviews,
 

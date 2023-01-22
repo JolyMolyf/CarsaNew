@@ -13,8 +13,8 @@ while (i < 20) {
     type: Math.random() > 0.5 ? 'Configuration' : 'Single_Car',
     status: statuses[randomInteger(0, statuses.length - 1)],
     date: faker.date.recent(),
-    client_id: clients.clients[randomInteger(0, clients.clients.length - 1)].person_id,
-    selector_id: selectors.selectors[randomInteger(0, selectors.selectors.length - 1)].person_id,
+    client_id: clients.clients[randomInteger(0, clients.clients.length - 2)].person_id,
+    selector_id: selectors.selectors[randomInteger(0, selectors.selectors.length - 2)].person_id,
     sum: randomInteger(300, 2000)
   });
   i++;
