@@ -82,7 +82,7 @@ export const scrapOtoCar = async (link: string) => {
       result['Rodzaj paliwa'],
       result['Wersja']
     );
-    const carGeneration = await findCarName(
+    const brandModelGeneration = await findCarName(
       result['Marka pojazdu'],
       result['Model pojazdu'],
       result['Generacja'],
@@ -91,12 +91,12 @@ export const scrapOtoCar = async (link: string) => {
     );
     const locationToFind = await getLocationByState(car.location);
     car!['Engine'] = engine;
-    car!['CarGeneration'] = carGeneration;
-    car!['CarModel'] = carGeneration?.CarModel;
-    car!['CarBrand'] = carGeneration?.CarModel?.CarBrand;
-    car.brand_id = carGeneration?.CarModel?.brand_id;
-    car.model_id = carGeneration?.CarModel?.id;
-    car.generation_id = carGeneration?.id;
+    car!['CarGeneration'] = brandModelGeneration.generation;
+    car!['CarModel'] = brandModelGeneration.model;
+    car!['CarBrand'] = brandModelGeneration.brand;
+    car.brand_id = brandModelGeneration.brand?.brand_id;
+    car.model_id = brandModelGeneration.model.id;
+    car.generation_id = brandModelGeneration.generation?.id;
     car.engine_id = engine?.id;
     car.location_id = locationToFind?.id;
     car.price = car.price.replaceAll('PLN', '');

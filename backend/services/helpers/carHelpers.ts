@@ -57,17 +57,25 @@ const getAllCarsByLocationState = async (location) => {
 };
 
 const createCar = async (carBody: any) => {
+  console.log(carBody);
+
+  const preparedBody = {
+    ...carBody,
+    id: carBody.id || uuid(),
+    brand_id: carBody.CarBrand?.id,
+    model_id: carBody.CarModel?.id,
+    generation_id: carBody.CarGeneration?.id,
+    engine_id: carBody.Engine?.id
+  };
+
   try {
-    if (!carBody.id || carBody.id === '') {
-      carBody.id = uuid();
-    }
     const location = await getLocationByState(carBody.location);
     const existedCarId = await checkIfCarAlreadyExistsByParams(carBody);
     if (existedCarId) {
       const car = (await getCarById(existedCarId)).car;
       return { success: true, car };
     }
-    const newCarId = (await db.Car.create({ ...carBody, location_id: location?.[0]?.id || location?.id })).id;
+    const newCarId = (await db.Car.create({ ...preparedBody, location_id: location?.[0]?.id || location?.id })).id;
     const car = (await getCarById(newCarId)).car;
     return { success: true, car };
   } catch (err) {
@@ -218,7 +226,12 @@ export const findCarName = async (
   const foundBrand = await findBrandByName(brand);
   const foundModel: any = await findModelByNameAndBrandId(foundBrand.id, model);
   const foundGeneration: any = await findGenerationByModelId(foundModel.id, generationStart, generationEnd, generation);
-  return foundGeneration;
+
+  return {
+    brand: foundBrand,
+    model: foundModel,
+    generation: foundGeneration
+  };
 };
 
 const findBrandByName = async (name: string) => {
@@ -257,15 +270,13 @@ const findGenerationByModelId = async (model_id: string, start_year: string, end
       where: {
         model_id,
         start_year
-      },
-      include: [{ model: db.CarModel, include: [{ model: db.CarBrand }] }]
+      }
     });
   } else {
     generation = await db.CarGeneration.findAll({
       where: {
         model_id
-      },
-      include: [{ model: db.CarModel, include: [{ model: db.CarBrand }] }]
+      }
     });
   }
 
@@ -275,7 +286,7 @@ const findGenerationByModelId = async (model_id: string, start_year: string, end
       const currentYear = new Date().getFullYear().toString();
       generationToCreate = await db.CarGeneration.create({
         name: name?.split('(')[0] ?? '',
-        start_year: start_year ?? moment().toISOString(),
+        start_year: start_year ?? moment().year(),
         end_year: currentYear,
         model_id: model_id
       });
@@ -283,7 +294,7 @@ const findGenerationByModelId = async (model_id: string, start_year: string, end
       const currentYear = new Date().getFullYear().toString();
       generationToCreate = await db.CarGeneration.create({
         name: name?.split('(')[0] ?? '',
-        start_year: start_year ?? moment().toISOString(),
+        start_year: start_year ?? moment().year(),
         end_year: currentYear,
         model_id: model_id
       });
@@ -312,7 +323,7 @@ const getGenerationByName = async (generationName: string, model?: any) => {
 };
 
 const getCarByDetails = async (car: any) => {
-  return await db.Car.findAll({
+  return await db.Car.findOne({
     where: {
       registrationNumber: car?.registrationNumber || '',
       color: car?.color || '',

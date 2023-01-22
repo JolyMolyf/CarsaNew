@@ -147,6 +147,7 @@ const getAllOrdersByClientId = async (clientId: string) => {
 
 const createOrderWithCar = async (orderBody: any) => {
   try {
+    // console.log(orderBody);
     const newOrderId = (await db.Order.create(orderBody.order)).id;
     const order = (await getOrderById(newOrderId)).order;
     const paymentBody = { amount: orderBody.order.sum, order_id: newOrderId };
@@ -154,13 +155,15 @@ const createOrderWithCar = async (orderBody: any) => {
 
     const addedPayemnt = await addPayment({ ...paymentBody });
 
-    const foundCar = await carHelpers.getCarByDetails(carBody);
-    if (foundCar.length === 0) {
+    let foundCar = await carHelpers.getCarByDetails(carBody);
+
+    if (!foundCar) {
       const addedCar = await carHelpers.createCar(carBody);
+      // console.log('____________' + JSON.stringify(carBody, null, 2));
       const car_order_link = await car_OrderHelper.createCarOrderLink(addedCar!?.car!?.id, newOrderId);
       return { success: true, order, addedPayemnt, addedCar, car_order_link };
     } else {
-      const car_order_link = await car_OrderHelper.createCarOrderLink(foundCar[0]!?.id, newOrderId);
+      const car_order_link = await car_OrderHelper.createCarOrderLink(foundCar.id, newOrderId);
       return { success: true, order, addedPayemnt, foundCar, car_order_link };
     }
   } catch (err) {
@@ -206,8 +209,6 @@ const createOrderWithConfiguration = async (orderBody: any) => {
     model_id: model?.[0]?.id,
     brand_id: brand?.[0]?.id
   });
-
-
 
   return { success: true, order: newOrder, payment: addedPayemnt, configuration };
 };

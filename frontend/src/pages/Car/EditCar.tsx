@@ -114,7 +114,7 @@ const EditCar = (props: IEditCarProps) => {
             <div className="editCar-header-info-section-subSection">
               <div className="editCar-header-info-main">{car?.CarBrand.name}</div>
               <div className="editCar-header-info-section-subSection-info">{car?.CarModel.name}</div>
-              <div className="editCar-header-info-section-subSection-info">{car?.CarGeneration.name}</div>
+              <div className="editCar-header-info-section-subSection-info">{car?.CarGeneration?.name}</div>
               <div className="editCar-header-info-section-subSection-info">{car?.year}</div>
             </div>
             <div className="editCar-header-info-section-subSection">
