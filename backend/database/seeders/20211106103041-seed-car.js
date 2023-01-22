@@ -9,8 +9,8 @@ const transmissionTypes = ['Manual', 'Automatic', 'CVT', 'DCT'];
 const cars = [];
 
 for (let i = 0; i < 20; i++) {
-  const randomBrand = allBrands[randomInteger(0, allBrands.length)];
-  const randomModel = randomBrand.models[randomInteger(0, randomBrand.models.length)];
+  const randomBrand = allBrands[randomInteger(0, allBrands.length - 1)];
+  const randomModel = randomBrand.models[randomInteger(0, randomBrand.models.length - 1)];
   const randomGeneration = randomBrand.generations
     ? randomBrand.generations[randomInteger(0, randomBrand.generations.length)]
     : null;
@@ -31,7 +31,7 @@ for (let i = 0; i < 20; i++) {
     price: randomInteger(0, 500) * 100,
     brand_id: randomBrand.brand_id,
     model_id: randomModel.model_id,
-    generation_id: randomGeneration.generation_id,
+    generation_id: randomGeneration?.generation_id,
     engine_id: engines.engines[randomInteger(0, engines.engines.length - 1)].id,
     location_id: locations.locations[randomInteger(0, locations.locations.length - 1)].id,
     mainImage: 'https://picsum.photos/600/400',
