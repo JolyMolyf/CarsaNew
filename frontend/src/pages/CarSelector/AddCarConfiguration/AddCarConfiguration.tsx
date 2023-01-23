@@ -52,7 +52,6 @@ const AddCarConfiguration = (props: IAddCarConfigurationProps) => {
   const handleManualConfigurationChange = (e: any) => {
     setManualConfiguration({ ...manualConfiguration, [e.target.name]: e.target.value });
   };
-  console.log('Manula kesys: ', Object.keys(manualConfiguration || {}));
   const handleSubmit = () => {
     if (
       (manualConfiguration?.Brand && manualConfiguration?.Model) ||

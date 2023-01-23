@@ -81,14 +81,20 @@ const CreateOrder = () => {
                 name={'Back'}></Button>
               {!car && (
                 <Button
+                  disabled={loading}
                   onClick={() => {
-                    setLoading(true);
-                    fetchCarByLink(carLink).then((car) => {
-                      setCar(car);
-                      if (car) {
-                        setLoading(false);
-                      }
-                    });
+                    if (!carLink) {
+                      alert('Please add car link to OTOMOTO');
+                    }
+                    if (!loading && carLink) {
+                      setLoading(true);
+                      fetchCarByLink(carLink).then((car) => {
+                        setCar(car);
+                        if (car) {
+                          setLoading(false);
+                        }
+                      });
+                    }
                   }}
                   type={false}
                   name={loading ? 'Loading' : 'Fetch'}></Button>

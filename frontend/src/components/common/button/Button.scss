@@ -30,3 +30,11 @@
     background-color: rgb(206, 206, 206);
   }
 }
+
+.disabled-button {
+  background-color: grey;
+  &:hover {
+    background-color: grey;
+    cursor: default;
+  }
+}

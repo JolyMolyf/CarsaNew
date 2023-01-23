@@ -147,7 +147,6 @@ const getAllOrdersByClientId = async (clientId: string) => {
 
 const createOrderWithCar = async (orderBody: any) => {
   try {
-    // console.log(orderBody);
     const newOrderId = (await db.Order.create(orderBody.order)).id;
     const order = (await getOrderById(newOrderId)).order;
     const paymentBody = { amount: orderBody.order.sum, order_id: newOrderId };
@@ -159,7 +158,6 @@ const createOrderWithCar = async (orderBody: any) => {
 
     if (!foundCar) {
       const addedCar = await carHelpers.createCar(carBody);
-      // console.log('____________' + JSON.stringify(carBody, null, 2));
       const car_order_link = await car_OrderHelper.createCarOrderLink(addedCar!?.car!?.id, newOrderId);
       return { success: true, order, addedPayemnt, addedCar, car_order_link };
     } else {
