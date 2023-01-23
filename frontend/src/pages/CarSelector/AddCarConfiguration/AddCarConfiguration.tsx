@@ -52,9 +52,16 @@ const AddCarConfiguration = (props: IAddCarConfigurationProps) => {
   const handleManualConfigurationChange = (e: any) => {
     setManualConfiguration({ ...manualConfiguration, [e.target.name]: e.target.value });
   };
-
+  console.log('Manula kesys: ', Object.keys(manualConfiguration || {}));
   const handleSubmit = () => {
-    onSubmit?.(manualConfiguration);
+    if (
+      (manualConfiguration?.Brand && manualConfiguration?.Model) ||
+      Object.keys(manualConfiguration || {}).length > 3
+    ) {
+      onSubmit?.(manualConfiguration);
+    } else {
+      alert('Please add some params so we can choose car for You');
+    }
   };
 
   useEffect(() => {
