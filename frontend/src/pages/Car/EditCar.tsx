@@ -99,8 +99,6 @@ const EditCar = (props: IEditCarProps) => {
     rejectCar(car?.id || '');
   };
 
-  console.log(!(isInEditMode() && userRole === Roles.CLIENT));
-
   return (
     <div>
       <Header />

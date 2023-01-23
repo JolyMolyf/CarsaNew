@@ -35,9 +35,8 @@ const CarSelectorAddCar = () => {
               onClick={() => {
                 fetchCarByLink(carLink).then((car) => {
                   const configuration_id = params.configurationId;
-                  console.log('Cliecked');
                   addCarToOrder({ car, configuration_id }).then((res) => {
-                    // navigate('/carSelector/dashboard');
+                    navigate('/carSelector/dashboard');
                   });
                 });
               }}

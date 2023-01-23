@@ -1,4 +1,4 @@
-import { Transaction } from 'sequelize';
+import { Transaction, Op } from 'sequelize';
 import Logger from '../../logger';
 import db from '../../database/models';
 import reportHelpers from './reportHelpers';
@@ -57,8 +57,6 @@ const getAllCarsByLocationState = async (location) => {
 };
 
 const createCar = async (carBody: any) => {
-  console.log(carBody);
-
   const preparedBody = {
     ...carBody,
     id: carBody.id || uuid(),
@@ -102,7 +100,7 @@ const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | n
   const generation_id = fetchedGeneration[0]?.id;
 
   if (brand_id && model_id && generation_id) {
-    const cars = await db.Car.findAll({
+    const car = await db.Car.findOne({
       where: {
         brand_id,
         model_id,
@@ -112,8 +110,7 @@ const checkIfCarAlreadyExistsByParams = async (carBody: any): Promise<string | n
         transmission
       }
     });
-    console.log('After car found: ', cars?.[0]?.id);
-    return cars?.[0]?.id;
+    return car?.id;
   } else {
     return null;
   }
@@ -400,7 +397,11 @@ const rejectCar = async (car_id: string) => {
 };
 
 const getRejectedCars = async () => {
-  const car_order = await db.Car_Order.findAll();
+  const car_order = await db.Car_Order.findAll({
+    where: {
+      [Op.or]: [{ status: 'Rejected' }, { status: 'Declined' }]
+    }
+  });
   const car_order_ids = car_order.map((car_order) => car_order.car_id);
 
   const rejectedCars = await db.Car.findAll({
