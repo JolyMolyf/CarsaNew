@@ -81,8 +81,7 @@ const CarCard = (props: ICarCardProps) => {
             isExtended
               ? 'carCard-expanded-info-naming carCard-expanded-info-naming-details'
               : ' carCard-info-naming carCard-info-naming-details'
-          }`}
-        >
+          }`}>
           {car?.registrationNumber || 'No registration plates'}
         </p>
         <p
@@ -90,9 +89,8 @@ const CarCard = (props: ICarCardProps) => {
             isExtended
               ? 'carCard-expanded-info-naming carCard-expanded-info-naming-details'
               : ' carCard-info-naming carCard-info-naming-details'
-          }`}
-        >
-          {car?.vin?.substring(0, 30) + '...' || 'No vin'}
+          }`}>
+          {car?.vin || 'Brak numeru VIN'}
         </p>
         <div className="carCard-expanded-info-naming-buttons">
           {user?.role !== 'Client' && isExtended && (
@@ -150,8 +148,7 @@ const CarCard = (props: ICarCardProps) => {
                 key={report?.id || Date.now()}
                 percentage={report.condition}
                 color={'white'}
-                label={report.type}
-              ></Pie>
+                label={report.type}></Pie>
             );
           })}
       </div>

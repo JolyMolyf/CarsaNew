@@ -101,6 +101,7 @@ export const scrapOtoCar = async (link: string) => {
     car.location_id = locationToFind?.id;
     car.price = car.price.replaceAll('PLN', '');
     car.mileage = car.mileage.replaceAll('km', '');
+    car.vin = 'Brak numeru VIN';
 
     return car;
   } else {
