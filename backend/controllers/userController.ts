@@ -2,6 +2,16 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import userHelpers from '../services/helpers/userHelpers';
 
+const getUserRoles = async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+
+  const result = await userHelpers.getUserRoles(userId);
+
+  return result.success
+    ? res.status(StatusCodes.OK).json(result.roles)
+    : res.status(StatusCodes.BAD_REQUEST).json({ message: result.message });
+};
+
 const updateUserRole = async (req: Request, res: Response) => {
   const user = req.body;
   if (user.role) {
@@ -23,6 +33,7 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 export default {
+  getUserRoles,
   updateUserRole,
   deleteUser
 };

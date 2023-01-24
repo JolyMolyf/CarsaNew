@@ -9,4 +9,6 @@ router.put('', userController.updateUserRole);
 
 router.delete('/:userId', validateUserId, validateRequestSchema, userController.deleteUser);
 
+router.get('/:userId/roles', validateUserId, validateRequestSchema, userController.getUserRoles);
+
 export default router;

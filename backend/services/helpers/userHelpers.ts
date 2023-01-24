@@ -47,6 +47,16 @@ const getAllUsers = async () => {
   return { clients, technicians, selectors };
 };
 
+const getUserRoles = async (userId: any) => {
+  const user = await db.Person.findByPk(userId, { attributes: ['roles'], raw: true });
+
+  if (!user) {
+    return { success: false, message: "User with provided id doesn't exist" };
+  }
+
+  return { success: true, roles: user.roles };
+};
+
 const updateUserRole = async (user: any) => {
   if (['Technician', 'Selector'].includes(user.role)) {
     const client = await getClientDataById(user.id);
@@ -145,6 +155,7 @@ export default {
   getSelectorDataById,
   getClientDataById,
   getAllUsers,
+  getUserRoles,
   updateUserRole,
   deleteUserById
 };
