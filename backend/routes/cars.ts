@@ -23,9 +23,9 @@ router.get('/techniciancars/:id', carsController.getCarsForTechnician);
 
 router.get('/:carId', validateCarId, validateRequestSchema, carsController.getCarById);
 
-router.get('/buy/:carId', carsController.buyCar);
-
 router.post('/', validateCreateCar, validateRequestSchema, carsController.createCar);
+
+router.put('/buy/:carId', carsController.buyCar);
 
 router.put('/reject/:carId', carsController.rejectCar);
 

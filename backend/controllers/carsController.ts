@@ -94,19 +94,27 @@ const scrapCar = async (req: Request, res: Response) => {
 };
 
 const buyCar = async (req: Request, res: Response) => {
-  const car_id = req.params.carId;
-  await carHelpers.buyCar(car_id);
+  const body = req.body;
+  const orders = await orderHelpers.getAllOrdersForClient(body.user_id);
+  const order_ids = orders.map((order) => order.id);
+  const car_orders = await car_orderHelpers.getCarOrderByOrderIdAndCarId(order_ids, req.body.carid);
+  car_orders.forEach((link) => {
+    car_orderHelpers.updateCarOrderLink({
+      car_id: link.car_id,
+      order_id: link.order_id,
+      start_reservarion: link.start_reservarion,
+      status: 'Bought'
+    });
+  });
   res.json({ success: true });
 };
 
 const rejectCar = async (req: Request, res: Response) => {
   const body = req.body;
-  // console.log('REq body: ', req.body);
   const orders = await orderHelpers.getAllOrdersForClient(body.user_id);
   const order_ids = orders.map((order) => order.id);
   const car_orders = await car_orderHelpers.getCarOrderByOrderIdAndCarId(order_ids, req.body.carid);
   car_orders.forEach((link) => {
-    console.log('Link:', link.car_id);
     car_orderHelpers.updateCarOrderLink({
       car_id: link.car_id,
       order_id: link.order_id,

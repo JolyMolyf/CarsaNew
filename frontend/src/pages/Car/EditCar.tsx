@@ -94,7 +94,7 @@ const EditCar = (props: IEditCarProps) => {
   };
 
   const handleBuy = () => {
-    buyCar(car?.id || '').then((res) => {
+    buyCar(car?.id || '', userId).then((res) => {
       if (res) {
         navigate('/client/dashboard');
       }
