@@ -55,7 +55,6 @@ const OffersPage = () => {
     }
 
     if (filters?.fuel) {
-      console.log('HERE');
       filteredCars = filteredCars.filter((car) => {
         return car.Engine.fuel_type === filters.fuel;
       });
@@ -67,9 +66,9 @@ const OffersPage = () => {
       });
     }
 
-    if (filters?.gearbox) {
+    if (filters?.transmission) {
       filteredCars = filteredCars.filter((car) => {
-        return car.transmission === filters.gearbox;
+        return car.transmission === filters.transmission;
       });
     }
 
@@ -162,7 +161,7 @@ const OffersPage = () => {
               ]}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
-              placeholder="gearbox"
+              placeholder="transmission"
               options={[
                 { id: 0, name: 'Auto' },
                 { id: 1, name: 'Manual' }
@@ -218,6 +217,7 @@ const OffersPage = () => {
           </div>
         </div>
         <div className="offers-wrapper-cars">
+          {filteredCars.length === 0 ? 'No cars found that satisfy your filter' : ''}
           {[...(filteredCars || [])].map((car: CarType, index: number) => {
             return (
               <div key={index}>

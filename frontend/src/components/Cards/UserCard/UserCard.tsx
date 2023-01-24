@@ -32,6 +32,7 @@ const EditWrapper = styled.div`
 
 interface UserCardProps {
   user: any;
+  onDelete: (user_id: string, role: string) => void;
   role?: string;
 }
 
@@ -42,7 +43,7 @@ const userRoles = [
 ];
 
 const UserCard = (props: UserCardProps) => {
-  const { user, role } = props;
+  const { user, role, onDelete } = props;
   const [editing, setEditing] = useState<boolean>(false);
   const [selectedRole, setSelectedRole] = useState<string>();
   const [selectedLocation, setSelectedLocation] = useState<any>();
@@ -85,8 +86,7 @@ const UserCard = (props: UserCardProps) => {
           placeholder="Role"
           options={userRoles}
           initialValue={role}
-          onChange={handleOptionChoose}
-        ></DropDown>
+          onChange={handleOptionChoose}></DropDown>
         {selectedRole === 'Technician' && (
           <DropDown placeholder="Location" options={locations} onChange={handleLocationSelection}></DropDown>
         )}
@@ -95,17 +95,16 @@ const UserCard = (props: UserCardProps) => {
           size={ButtonSize.SMALL}
           name={editing ? 'Save' : 'Edit'}
           onClick={handleEditing}
-          type={false}
-        ></Button>
+          type={false}></Button>
       </EditWrapper>
       <Button
         style={{ margin: '0 auto', backgroundColor: 'rgba(255,99,71, .7)', color: '#fff' }}
         type={false}
         name="Delete"
         onClick={() => {
-          deleteUser(user);
-        }}
-      ></Button>
+          onDelete(user.id, role || 'Client');
+          deleteUser(user.id);
+        }}></Button>
     </UserCardContainer>
   );
 };

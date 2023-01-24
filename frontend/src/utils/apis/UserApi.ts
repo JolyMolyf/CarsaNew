@@ -63,7 +63,7 @@ export const updateUser = async (user: any) => {
   return response;
 };
 
-export const deleteUser = async (user: any) => {
-  const response = await axios.delete(`${process.env.REACT_APP_API_URL}/users`, { data: { ...user } });
+export const deleteUser = async (user_id: string) => {
+  const response = await axios.delete(`${process.env.REACT_APP_API_URL}/users/${user_id}`);
   return response;
 };

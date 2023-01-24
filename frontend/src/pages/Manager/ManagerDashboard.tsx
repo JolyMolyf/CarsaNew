@@ -24,12 +24,29 @@ const Label = styled.div`
 `;
 const ManagerDashboard = () => {
   const [users, setUsers] = useState<any>({});
-
+  console.log(users);
   useEffect(() => {
     getAllUsers().then((res) => {
       setUsers({ ...(res?.data.users || {}) });
     });
   }, []);
+
+  const onDelete = (user_id: string, role: string) => {
+    if (role === 'Technician') {
+      console.log('HERE deleting tech');
+      setUsers({ ...users, technicians: [...users.technicians.filter((user: any) => user.id !== user_id)] });
+    }
+
+    if (role === 'Selector') {
+      console.log('HERE deleting select');
+      setUsers({ ...users, selectors: [...users.selectors.filter((user: any) => user.id !== user_id)] });
+    }
+
+    if (role === 'Client') {
+      console.log('HERE deleting clients');
+      setUsers({ ...users, clients: [...users.clients.filter((user: any) => user.id !== user_id)] });
+    }
+  };
 
   return (
     <div>
@@ -37,22 +54,34 @@ const ManagerDashboard = () => {
       <UsersContainer>
         <Label>Clients</Label>
         <Container>
-          {users?.clients?.map((user: any) => {
-            return <UserCard user={user} role="Client" />;
+          {users?.clients?.map((user: any, index: number) => {
+            return (
+              <div key={index}>
+                <UserCard onDelete={onDelete} user={user} role="Client" />
+              </div>
+            );
           })}
         </Container>
 
         <Label>Selectors</Label>
         <Container>
-          {users?.selectors?.map((user: any) => {
-            return <UserCard user={user} role="Technician" />;
+          {users?.selectors?.map((user: any, index: number) => {
+            return (
+              <div key={index}>
+                <UserCard onDelete={onDelete} user={user} role="Technician" />
+              </div>
+            );
           })}
         </Container>
 
         <Label>Technicians</Label>
         <Container>
-          {users?.technicians?.map((user: any) => {
-            return <UserCard user={user} role="Selector" />;
+          {users?.technicians?.map((user: any, index: number) => {
+            return (
+              <div key={index}>
+                <UserCard user={user} role="Selector" onDelete={onDelete} />
+              </div>
+            );
           })}
         </Container>
       </UsersContainer>
