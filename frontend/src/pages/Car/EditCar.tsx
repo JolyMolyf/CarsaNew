@@ -174,9 +174,6 @@ const EditCar = (props: IEditCarProps) => {
                   name={isAddingSpec ? 'Save Vin' : 'Add Vin'}
                 />
               )}
-              {isInEditMode() && !car?.registrationNumber && (
-                <Button size={ButtonSize.SMALL} onClick={undefined} type={true} name={'Add Number plates'} />
-              )}
             </div>
           </div>
 

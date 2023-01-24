@@ -48,27 +48,28 @@ const OffersPage = () => {
       });
     }
 
-    if (filters?.generations) {
+    if (filters?.generation) {
       filteredCars = filteredCars.filter((car) => {
-        return (car.CarGeneration.name = filters.generation);
+        return car.CarGeneration.name === filters.generation;
       });
     }
 
-    if (filters.fuel) {
+    if (filters?.fuel) {
+      console.log('HERE');
       filteredCars = filteredCars.filter((car) => {
-        return (car.Engine.fuel_type = filters.fuel);
+        return car.Engine.fuel_type === filters.fuel;
       });
     }
 
-    if (filters.drive) {
+    if (filters?.drive) {
       filteredCars = filteredCars.filter((car) => {
-        return (car.drive = filters.drive);
+        return car.drive === filters.drive;
       });
     }
 
-    if (filters.gearbox) {
+    if (filters?.gearbox) {
       filteredCars = filteredCars.filter((car) => {
-        return (car.transmission = filters.gearbox);
+        return car.transmission === filters.gearbox;
       });
     }
 
@@ -80,7 +81,7 @@ const OffersPage = () => {
 
     if (filters?.minPrice && filters?.minPrice !== '') {
       filteredCars = filteredCars.filter((car) => {
-        return car.minPrice >= filters.minPrice;
+        return car.price >= filters.minPrice;
       });
     }
 
@@ -151,8 +152,7 @@ const OffersPage = () => {
                 { id: 1, name: 'Benzyna' },
                 { id: 2, name: 'Diesel' }
               ]}
-              onChange={handleFilterEditing}
-            ></DropDown>
+              onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="drive"
               options={[
@@ -160,16 +160,14 @@ const OffersPage = () => {
                 { id: 1, name: 'Front' },
                 { id: 2, name: 'Rear' }
               ]}
-              onChange={handleFilterEditing}
-            ></DropDown>
+              onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="gearbox"
               options={[
                 { id: 0, name: 'Auto' },
                 { id: 1, name: 'Manual' }
               ]}
-              onChange={handleFilterEditing}
-            ></DropDown>
+              onChange={handleFilterEditing}></DropDown>
             <TextInput
               name="minPrice"
               style={{ width: '40%' }}
