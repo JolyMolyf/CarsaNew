@@ -150,7 +150,7 @@ const OffersPage = () => {
               options={[
                 { id: 1, name: 'Benzyna' },
                 { id: 2, name: 'Diesel' },
-                { id: 3, name: 'Hybryda' },
+                { id: 3, name: 'Hybrid' },
                 { id: 4, name: 'Electric' }
               ]}
               onChange={handleFilterEditing}></DropDown>
