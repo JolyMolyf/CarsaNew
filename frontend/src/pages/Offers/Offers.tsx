@@ -149,7 +149,9 @@ const OffersPage = () => {
               placeholder="fuel"
               options={[
                 { id: 1, name: 'Benzyna' },
-                { id: 2, name: 'Diesel' }
+                { id: 2, name: 'Diesel' },
+                { id: 3, name: 'Hybryda' },
+                { id: 4, name: 'Electric' }
               ]}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
