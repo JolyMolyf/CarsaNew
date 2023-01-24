@@ -94,10 +94,55 @@ const deleteTechnicianById = async (personId: any) => {
 
 const deleteUserById = async (userId: any) => {
   try {
-    let result;
-
     await db.sequelize.transaction(async (transaction: Transaction) => {
-      // const userRoles = (await db.Person.findByPk(userId, { attributes: ['roles'], raw: true })).roles;
+      const person = await db.Person.findByPk(userId, { attributes: ['roles'], raw: true });
+
+      if (!person) {
+        return { success: true };
+      }
+
+      person.roles.forEach(async (role: any) => {
+        switch (role) {
+          case 'CLIENT':
+            await db.Client.destroy(
+              {
+                where: {
+                  person_id: userId
+                }
+              },
+              { transaction }
+            );
+          case 'SELECTOR':
+            await db.CarSelector.destroy(
+              {
+                where: {
+                  person_id: userId
+                }
+              },
+              { transaction }
+            );
+          case 'TECHNICIAN':
+            await db.Technician.destroy(
+              {
+                where: {
+                  person_id: userId
+                }
+              },
+              { transaction }
+            );
+        }
+      });
+
+      if (person.roles.some((role) => ['SELECTOR', 'TECHNICIAN'].includes(role))) {
+        await db.Employee.destroy(
+          {
+            where: {
+              person_id: userId
+            }
+          },
+          { transaction }
+        );
+      }
 
       await db.Person.destroy(
         {
@@ -107,41 +152,6 @@ const deleteUserById = async (userId: any) => {
         },
         { transaction }
       );
-      // userRoles.forEach(async (role: any) => {
-      //   switch (role) {
-      //     case 'CLIENT':
-      //       await db.Client.destroy(
-      //         {
-      //           where: {
-      //             person_id: userId
-      //           }
-      //         },
-      //         { transaction }
-      //       );
-      //     case 'SELECTOR':
-      //       await db.CarSelector.destroy(
-      //         {
-      //           where: {
-      //             person_id: userId
-      //           }
-      //         },
-      //         { transaction }
-      //       );
-      //     case 'TECHNICIAN':
-      //       await deleteTechnicianById(userId);
-      //   }
-      // });
-
-      // if (userRoles.some((role) => ['SELECTOR', 'TECHNICIAN'].includes(role))) {
-      //   await db.Employee.destroy(
-      //     {
-      //       where: {
-      //         person_id: userId
-      //       }
-      //     },
-      //     { transaction }
-      //   );
-      // }
     });
 
     return { success: true };

@@ -12,13 +12,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
 
       Technician.belongsTo(models.Employee, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
 
       Technician.hasMany(models.ReportOverview, {
-        foreignKey: 'technician_id',
-        onDelete: 'CASCADE',
-        hooks: true
+        foreignKey: 'technician_id'
       });
     }
   }

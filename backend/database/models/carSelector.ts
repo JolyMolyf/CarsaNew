@@ -7,7 +7,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       CarSelector.belongsTo(models.Employee, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
 
       CarSelector.hasMany(models.Order, {

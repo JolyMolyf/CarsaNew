@@ -66,8 +66,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      paranoid: true,
-      timestamps: true,
       modelName: 'Report',
       freezeTableName: true,
       createdAt: 'date',

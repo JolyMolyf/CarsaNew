@@ -15,7 +15,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
       Client.hasMany(models.Order, {
         foreignKey: 'client_id',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        hooks: true
       });
     }
   }

@@ -24,7 +24,7 @@ const Label = styled.div`
 `;
 const ManagerDashboard = () => {
   const [users, setUsers] = useState<any>({});
-  console.log(users);
+
   useEffect(() => {
     getAllUsers().then((res) => {
       setUsers({ ...(res?.data.users || {}) });
@@ -33,17 +33,14 @@ const ManagerDashboard = () => {
 
   const onDelete = (user_id: string, role: string) => {
     if (role === 'Technician') {
-      console.log('HERE deleting tech');
       setUsers({ ...users, technicians: [...users.technicians.filter((user: any) => user.id !== user_id)] });
     }
 
     if (role === 'Selector') {
-      console.log('HERE deleting select');
       setUsers({ ...users, selectors: [...users.selectors.filter((user: any) => user.id !== user_id)] });
     }
 
     if (role === 'Client') {
-      console.log('HERE deleting clients');
       setUsers({ ...users, clients: [...users.clients.filter((user: any) => user.id !== user_id)] });
     }
   };
@@ -68,7 +65,7 @@ const ManagerDashboard = () => {
           {users?.selectors?.map((user: any, index: number) => {
             return (
               <div key={index}>
-                <UserCard onDelete={onDelete} user={user} role="Technician" />
+                <UserCard onDelete={onDelete} user={user} role="Selector" />
               </div>
             );
           })}
@@ -79,7 +76,7 @@ const ManagerDashboard = () => {
           {users?.technicians?.map((user: any, index: number) => {
             return (
               <div key={index}>
-                <UserCard user={user} role="Selector" onDelete={onDelete} />
+                <UserCard user={user} role="Technician" onDelete={onDelete} />
               </div>
             );
           })}

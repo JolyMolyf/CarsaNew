@@ -67,6 +67,10 @@ const LoginPage = () => {
     if (user.isAuthenticated && user.user.role === 'CarSelector') {
       navigate('/car/dashboard');
     }
+
+    if (user.isAuthenticated && user.user.role === 'Manager') {
+      navigate('/Manager/dashboard');
+    }
   }, [user.isAuthenticated]);
 
   return (
@@ -76,7 +80,7 @@ const LoginPage = () => {
         <div className="login-wrapper-left">
           <div className="home-section-first-fadingText login-wrapper-left-fadingText">CARSA</div>
           <div className="login-wrapper-left-image">
-            <img src={brandCar}></img>
+            <img alt="" src={brandCar}></img>
           </div>
         </div>
         <div className="login-wrapper-right">
@@ -120,8 +124,7 @@ const LoginPage = () => {
               className="login-wrapper-right-form-link"
               onClick={() => {
                 navigate('/register');
-              }}
-            >
+              }}>
               Have no account?
             </div>
             <div className="login-wrapper-right-form-error">{userState.error}</div>
