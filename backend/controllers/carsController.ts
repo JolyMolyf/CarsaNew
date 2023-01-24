@@ -1,6 +1,7 @@
 import e, { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import carHelpers from '../services/helpers/carHelpers';
+import car_orderHelpers from '../services/helpers/car_orderHelpers';
 import employeeHelper from '../services/helpers/employeeHelper';
 import orderHelpers from '../services/helpers/orderHelpers';
 import { scrapOtoCar } from '../services/utils/scrapper';
@@ -99,8 +100,20 @@ const buyCar = async (req: Request, res: Response) => {
 };
 
 const rejectCar = async (req: Request, res: Response) => {
-  const car_id = req.params.carId;
-
+  const body = req.body;
+  // console.log('REq body: ', req.body);
+  const orders = await orderHelpers.getAllOrdersForClient(body.user_id);
+  const order_ids = orders.map((order) => order.id);
+  const car_orders = await car_orderHelpers.getCarOrderByOrderIdAndCarId(order_ids, req.body.carid);
+  car_orders.forEach((link) => {
+    console.log('Link:', link.car_id);
+    car_orderHelpers.updateCarOrderLink({
+      car_id: link.car_id,
+      order_id: link.order_id,
+      start_reservarion: link.start_reservarion,
+      status: 'Rejected'
+    });
+  });
   res.json({ success: true });
 };
 

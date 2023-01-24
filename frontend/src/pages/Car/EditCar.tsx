@@ -4,7 +4,7 @@ import Carousel from '../../components/carousel/Carousel';
 import { CarType } from '../../utils/models/Car';
 import { useEffect, useState } from 'react';
 import { buyCar, getCarById, getReportsByCarId, rejectCar, updateCar } from '../../utils/apis/CarsApi';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import Button, { ButtonSize } from '../../components/common/button/Button';
 import { IReport } from '../../utils/models/Report';
 import ReportCard from '../../components/Cards/ReportCard/ReportCard';
@@ -51,7 +51,9 @@ const bannedKeys = [
 
 const EditCar = (props: IEditCarProps) => {
   const params = useParams();
+  const navigate = useNavigate();
   const userRole = useSelector((state: AppState) => state.user.user.role);
+  const userId = useSelector((appState: any) => appState.user.user?.Person?.id || appState.user?.user?.person_id);
 
   const [car, setCar] = useState<CarType>();
   const [reports, setReports] = useState<Array<IReport>>();
@@ -92,11 +94,19 @@ const EditCar = (props: IEditCarProps) => {
   };
 
   const handleBuy = () => {
-    buyCar(car?.id || '');
+    buyCar(car?.id || '').then((res) => {
+      if (res) {
+        navigate('/client/dashboard');
+      }
+    });
   };
 
   const handleReject = () => {
-    rejectCar(car?.id || '');
+    rejectCar(car?.id || '', userId || '').then((res) => {
+      if (res) {
+        navigate('/client/dashboard');
+      }
+    });
   };
 
   return (

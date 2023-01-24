@@ -73,8 +73,8 @@ export const buyCar = async (carid: string) => {
   return await axios.get(`${process.env.REACT_APP_API_URL}/cars/buy/${carid}`);
 };
 
-export const rejectCar = async (carid: string) => {
-  return await axios.get(`${process.env.REACT_APP_API_URL}/cars/reject/${carid}`);
+export const rejectCar = async (carid: string, user_id: string) => {
+  return await axios.put(`${process.env.REACT_APP_API_URL}/cars/reject/${carid}`, { carid, user_id });
 };
 
 export const updateCar = async (car: CarType) => {

@@ -25,9 +25,9 @@ router.get('/:carId', validateCarId, validateRequestSchema, carsController.getCa
 
 router.get('/buy/:carId', carsController.buyCar);
 
-router.get('/reject/:carId', carsController.rejectCar);
-
 router.post('/', validateCreateCar, validateRequestSchema, carsController.createCar);
+
+router.put('/reject/:carId', carsController.rejectCar);
 
 router.put('/:carId', validateCarId, carsController.updateCarById);
 
