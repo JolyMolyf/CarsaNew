@@ -25,6 +25,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       person_id: {
         type: DataTypes.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         primaryKey: true,
         references: {
           model: 'Person',
@@ -53,6 +54,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      paranoid: true,
       modelName: 'Client',
       freezeTableName: true,
       createdAt: 'creationDate',

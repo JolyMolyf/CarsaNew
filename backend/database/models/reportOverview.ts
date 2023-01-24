@@ -41,6 +41,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       technician_id: {
         type: DataTypes.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: 'Technician',
           key: 'person_id'
@@ -49,6 +50,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      paranoid: true,
       modelName: 'ReportOverview',
       freezeTableName: true,
       createdAt: 'date',

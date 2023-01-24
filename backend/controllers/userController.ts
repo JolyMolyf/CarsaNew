@@ -12,7 +12,15 @@ const updateUserRole = async (req: Request, res: Response) => {
   }
 };
 
-const deleteUser = () => {};
+const deleteUser = async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+
+  const result = await userHelpers.deleteUserById(userId);
+
+  return result.success
+    ? res.sendStatus(StatusCodes.OK)
+    : res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: result.message });
+};
 
 export default {
   updateUserRole,

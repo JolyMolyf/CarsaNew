@@ -13,11 +13,15 @@ module.exports = (sequelize: unknown, DataTypes: any) => {
       });
 
       Employee.hasOne(models.CarSelector, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
 
       Employee.hasOne(models.Technician, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
     }
   }
@@ -27,6 +31,7 @@ module.exports = (sequelize: unknown, DataTypes: any) => {
       person_id: {
         type: DataTypes.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         primaryKey: true,
         references: {
           model: 'Person',
@@ -50,9 +55,12 @@ module.exports = (sequelize: unknown, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      paranoid: true,
       modelName: 'Employee',
       freezeTableName: true,
-      timestamps: false
+      createdAt: false,
+      updatedAt: false
     }
   );
 

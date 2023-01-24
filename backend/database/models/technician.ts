@@ -16,7 +16,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
 
       Technician.hasMany(models.ReportOverview, {
-        foreignKey: 'technician_id'
+        foreignKey: 'technician_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
     }
   }
@@ -26,6 +28,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       person_id: {
         type: DataTypes.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         primaryKey: true,
         references: {
           model: 'Employee',
@@ -43,6 +46,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      paranoid: true,
       modelName: 'Technician',
       freezeTableName: true,
       createdAt: 'creationDate',

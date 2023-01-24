@@ -42,6 +42,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       overview_id: {
         type: DataTypes.UUID,
+        onDelete: 'CASCADE',
         allowNull: false,
         unique: 'compositeIndex',
         references: {
@@ -65,6 +66,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      paranoid: true,
+      timestamps: true,
       modelName: 'Report',
       freezeTableName: true,
       createdAt: 'date',

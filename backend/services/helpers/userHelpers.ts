@@ -1,4 +1,6 @@
+import { Transaction } from 'sequelize';
 import db from '../../database/models';
+import Logger from '../../logger';
 import clientHelpers from './clientHelpers';
 import employeeHelper from './employeeHelper';
 
@@ -58,9 +60,91 @@ const updateUserRole = async (user: any) => {
   }
 };
 
+const deleteTechnicianById = async (personId: any) => {
+  await db.sequelize.transaction(async (transaction: Transaction) => {
+    await db.ReportOverview.destroy(
+      {
+        where: {
+          technician_id: personId
+        }
+      },
+      { transaction, force: true }
+    );
+
+    await db.Technician.destroy(
+      {
+        where: {
+          person_id: personId
+        }
+      },
+      { transaction }
+    );
+  });
+};
+
+const deleteUserById = async (userId: any) => {
+  try {
+    let result;
+
+    await db.sequelize.transaction(async (transaction: Transaction) => {
+      // const userRoles = (await db.Person.findByPk(userId, { attributes: ['roles'], raw: true })).roles;
+
+      await db.Person.destroy(
+        {
+          where: {
+            id: userId
+          }
+        },
+        { transaction }
+      );
+      // userRoles.forEach(async (role: any) => {
+      //   switch (role) {
+      //     case 'CLIENT':
+      //       await db.Client.destroy(
+      //         {
+      //           where: {
+      //             person_id: userId
+      //           }
+      //         },
+      //         { transaction }
+      //       );
+      //     case 'SELECTOR':
+      //       await db.CarSelector.destroy(
+      //         {
+      //           where: {
+      //             person_id: userId
+      //           }
+      //         },
+      //         { transaction }
+      //       );
+      //     case 'TECHNICIAN':
+      //       await deleteTechnicianById(userId);
+      //   }
+      // });
+
+      // if (userRoles.some((role) => ['SELECTOR', 'TECHNICIAN'].includes(role))) {
+      //   await db.Employee.destroy(
+      //     {
+      //       where: {
+      //         person_id: userId
+      //       }
+      //     },
+      //     { transaction }
+      //   );
+      // }
+    });
+
+    return { success: true };
+  } catch (err: any) {
+    Logger.warn(err);
+    return { success: false, message: err.message };
+  }
+};
+
 export default {
   getSelectorDataById,
   getClientDataById,
   getAllUsers,
-  updateUserRole
+  updateUserRole,
+  deleteUserById
 };

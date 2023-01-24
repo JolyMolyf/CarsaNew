@@ -10,11 +10,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       Person.hasOne(models.Client, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE'
       });
 
       Person.hasOne(models.Employee, {
-        foreignKey: 'person_id'
+        foreignKey: 'person_id',
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -65,9 +67,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      createdAt: false,
+      updatedAt: false,
+      paranoid: true,
       modelName: 'Person',
-      freezeTableName: true,
-      timestamps: false
+      freezeTableName: true
     }
   );
 
