@@ -19,6 +19,9 @@ router.get('/scrap', carsController.scrapCar);
 
 router.get('/getclientcars/:clientId', carsController.getClientCars);
 
+router.get('/getclientcars/bought/:clientId', carsController.getBoughtCarsByClientId);
+router.get('/getclientcars/rejected/:clientId', carsController.getRejectedCarsByClientId);
+
 router.get('/techniciancars/:id', carsController.getCarsForTechnician);
 
 router.get('/:carId', validateCarId, validateRequestSchema, carsController.getCarById);

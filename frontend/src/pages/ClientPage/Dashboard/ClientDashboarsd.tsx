@@ -4,7 +4,7 @@ import Header from '../../../components/header/Header';
 import { IPayment } from '../../../utils/models/Payments';
 import { CarType } from '../../../utils/models/Car';
 import { getLastOrders } from '../../../utils/apis/OrderApi';
-import { getLastCars } from '../../../utils/apis/CarsApi';
+import { getClientBoughtCars, getClientRejectedCars, getLastCars } from '../../../utils/apis/CarsApi';
 import { getLastPayments } from '../../../utils/apis/PaymentApi';
 import ConfigurationCard from '../../../components/Cards/ConfigurationCard/ConfigurationCard';
 import { IConfiguration } from '../../../utils/models/OrderWithConfiguration';
@@ -20,10 +20,12 @@ const ClientDashboard = () => {
   const [orders, setOrders] = useState<Array<IConfiguration>>([]);
   const [payments, setPayments] = useState<Array<IPayment>>([]);
   const [cars, setCars] = useState<Array<CarType>>([]);
+  const [boughtCars, setBoughtCars] = useState<Array<CarType>>();
+  const [rejectedCars, setRejectedCars] = useState<Array<CarType>>();
 
-  const client_id = useSelector((appState:any) => appState.user.user?.Person?.id || appState.user?.user?.person_id)
+  const client_id = useSelector((appState: any) => appState.user.user?.Person?.id || appState.user?.user?.person_id);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     getLastOrders(client_id).then((res) => {
@@ -36,6 +38,14 @@ const ClientDashboard = () => {
 
     getLastPayments(client_id).then((res) => {
       setPayments(Object.values(res).flat() as any);
+    });
+
+    getClientBoughtCars(client_id).then((res) => {
+      setBoughtCars(res);
+    });
+
+    getClientRejectedCars(client_id).then((res) => {
+      setRejectedCars(res);
     });
   }, []);
 
@@ -59,6 +69,26 @@ const ClientDashboard = () => {
             return (
               <div key={index}>
                 <ConfigurationCard configuration={order} />
+              </div>
+            );
+          })}
+        </div>
+        <div className="clientDashboard-subInfo">Bought Cars</div>
+        <div id="clientDashboard-car" className="clientDashboard-section">
+          {boughtCars?.map((car) => {
+            return (
+              <div key={car.id}>
+                <CarCard car={car} />
+              </div>
+            );
+          })}
+        </div>
+        <div className="clientDashboard-subInfo">Rejected Cars</div>
+        <div id="clientDashboard-car" className="clientDashboard-section">
+          {rejectedCars?.map((car) => {
+            return (
+              <div key={car.id}>
+                <CarCard car={car} />
               </div>
             );
           })}

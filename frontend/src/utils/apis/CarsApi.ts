@@ -87,3 +87,25 @@ export const updateCar = async (car: CarType) => {
       console.error('Something went wrong', e);
     });
 };
+
+export const getClientBoughtCars = async (client_id: string) => {
+  return await axios
+    .get(`${process.env.REACT_APP_API_URL}/cars/getclientcars/bought/${client_id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getClientRejectedCars = async (client_id: string) => {
+  return await axios
+    .get(`${process.env.REACT_APP_API_URL}/cars/getclientcars/rejected/${client_id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};

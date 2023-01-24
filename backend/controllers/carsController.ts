@@ -45,6 +45,7 @@ const getCarsForTechnician = async (req: Request, res: Response) => {
 const getClientCars = async (req: Request, res: Response) => {
   const client_id = req.params.clientId;
   const orders = await orderHelpers.getAllOrdersForClient(client_id);
+
   const cars = orders.map((order) => {
     if (order.car_order.length !== 0) {
       return [...order.car_order];
@@ -125,6 +126,38 @@ const rejectCar = async (req: Request, res: Response) => {
   res.json({ success: true });
 };
 
+const getBoughtCarsByClientId = async (req: Request, res: Response) => {
+  const client_id = req.params.clientId;
+  const orders = await orderHelpers.getAllOrdersForClient(client_id);
+
+  const cars = orders.map((order) => {
+    if (order.car_order.length !== 0) {
+      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Rejected');
+      return [...carsToReturn];
+    } else {
+      return;
+    }
+  });
+
+  return res.json(cars.flat(1).filter((car) => car != null));
+};
+
+const getRejectedCarsByClientId = async (req: Request, res: Response) => {
+  const client_id = req.params.clientId;
+  const orders = await orderHelpers.getAllOrdersForClient(client_id);
+
+  const cars = orders.map((order) => {
+    if (order.car_order.length !== 0) {
+      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Bought');
+      return [...carsToReturn];
+    } else {
+      return;
+    }
+  });
+
+  return res.json(cars.flat(1).filter((car) => car != null));
+};
+
 const getAllRejectedCars = async (req: Request, res: Response) => {
   const rejectedCars = await carHelpers.getRejectedCars();
   res.json({ success: true, rejectedCars });
@@ -135,6 +168,8 @@ export default {
   getAllCars,
   getClientCars,
   getAllRejectedCars,
+  getBoughtCarsByClientId,
+  getRejectedCarsByClientId,
   getCarsForTechnician,
 
   buyCar,
