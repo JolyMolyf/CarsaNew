@@ -5,7 +5,7 @@ const engines = require('./20211106100215-seed-engine');
 const locations = require('./20211105194523-seed-location');
 
 const driveTypes = ['AWD', '4WD', 'FWD', 'RWD'];
-const transmissionTypes = ['Manual', 'Automatic', 'CVT', 'DCT'];
+const transmissionTypes = ['Manual', 'Automatic'];
 const cars = [];
 
 for (let i = 0; i < 20; i++) {

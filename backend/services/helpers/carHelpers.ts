@@ -399,7 +399,7 @@ const rejectCar = async (car_id: string) => {
 const getRejectedCars = async () => {
   const car_order = await db.Car_Order.findAll({
     where: {
-      [Op.or]: [{ status: 'Rejected' }, { status: 'Declined' }]
+      status: 'Rejected'
     }
   });
   const car_order_ids = car_order.map((car_order) => car_order.car_id);

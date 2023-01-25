@@ -1,7 +1,7 @@
 const cars = require('./20211106103041-seed-car');
 const orders = require('./20211106160000-seed-order');
 
-const statuses = ['Reserved', 'Accepted', 'Declined', 'Expired', 'Bought'];
+const statuses = ['Reserved', 'Accepted', 'Rejected', 'Expired', 'Bought'];
 const records = [];
 
 let i = 0;
