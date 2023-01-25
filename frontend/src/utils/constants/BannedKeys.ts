@@ -6,6 +6,9 @@ export const bannedKeys = [
   'generation_id',
   'location_id',
   'deletedAt',
+  'updatedAt',
+  'createdAt',
+  'mainImage',
   'updated_at',
   'created_at',
   'CarBrand',
@@ -13,5 +16,6 @@ export const bannedKeys = [
   'CarModel',
   'Car_Order',
   'ReportOverviews',
-  'images'
+  'images',
+  'description'
 ];

@@ -2,8 +2,8 @@ import './editCar.scss';
 import Header from '../../components/header/Header';
 import Carousel from '../../components/carousel/Carousel';
 import { CarType } from '../../utils/models/Car';
-import { useEffect, useState } from 'react';
-import { buyCar, getCarById, getReportsByCarId, rejectCar, updateCar } from '../../utils/apis/CarsApi';
+import { useEffect, useState, useMemo } from 'react';
+import { buyCar, getCarById, getCarStatus, getReportsByCarId, rejectCar, updateCar } from '../../utils/apis/CarsApi';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import Button, { ButtonSize } from '../../components/common/button/Button';
 import { IReport } from '../../utils/models/Report';
@@ -46,8 +46,15 @@ const bannedKeys = [
   'Reports',
   'updatedAt',
   'createdAt',
-  'marketplace_link'
+  'marketplace_link',
+  'car_order'
 ];
+
+enum carStatus {
+  BOUGHT = 'Bought',
+  REJECTED = 'Rejected',
+  RESERVED = 'Reserved'
+}
 
 const EditCar = (props: IEditCarProps) => {
   const params = useParams();
@@ -56,6 +63,7 @@ const EditCar = (props: IEditCarProps) => {
   const userId = useSelector((appState: any) => appState.user.user?.Person?.id || appState.user?.user?.person_id);
 
   const [car, setCar] = useState<CarType>();
+  const [carStatus, setCarStatus] = useState();
   const [reports, setReports] = useState<Array<IReport>>();
   const [mode, setMode] = useState<CarPageModes>(CarPageModes.VIEW);
 
@@ -70,6 +78,7 @@ const EditCar = (props: IEditCarProps) => {
     getCarById(params.id || '').then((res) => {
       setCar(res);
       setReports(res.ReportOverviews?.[0]?.Reports);
+      getCarStatus(params.id || '');
     });
   }, []);
 

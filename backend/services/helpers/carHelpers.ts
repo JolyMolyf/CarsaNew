@@ -38,7 +38,8 @@ const getCarById = async (carId: string) => {
       { model: db.CarGeneration, attributes: ['id', 'name', 'start_year', 'end_year'] },
       { model: db.Engine },
       { model: db.Location },
-      { model: db.ReportOverview, include: [{ model: db.Report, include: [db.ReportType] }] }
+      { model: db.ReportOverview, include: [{ model: db.Report, include: [db.ReportType] }] },
+      { model: db.Order, as: 'car_order' }
     ]
   });
 

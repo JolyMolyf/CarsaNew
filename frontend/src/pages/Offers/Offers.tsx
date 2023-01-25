@@ -42,7 +42,7 @@ const OffersPage = () => {
       });
     }
 
-    if (filters?.models) {
+    if (filters?.model) {
       filteredCars = filteredCars.filter((car) => {
         return car.CarModel.name === filters.model;
       });

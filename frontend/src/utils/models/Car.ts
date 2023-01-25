@@ -31,6 +31,7 @@ export interface CarType {
   CarModel: CarModelType;
   CarGeneration: CarGenerationType;
   ReportOverviews?: Array<IReportOverview>;
+  car_order?: any;
   [key: string]: any;
 }
 

@@ -11,6 +11,11 @@ import { fetchCarByLink } from '../../utils/apis/CarScapperApi';
 import { useSelector } from 'react-redux';
 import { CarType } from '../../utils/models/Car';
 import CarCard, { CarCardModes } from '../../components/Cards/CarCard/CarCard';
+import styled from 'styled-components';
+
+const Error = styled.p`
+  color: tomato;
+`;
 
 const CreateOrder = () => {
   const navigate = useNavigate();
@@ -18,6 +23,7 @@ const CreateOrder = () => {
   const [carLink, setCarLink] = useState<string>('');
   const [car, setCar] = useState<CarType>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
   const [order, setOrder] = useState<any>({
     type: '',
     sum: 0,
@@ -63,6 +69,7 @@ const CreateOrder = () => {
         {order.sum === 200 && !car && (
           <SimpleCard>
             <div className="createOrder-header">Fetch Car By link</div>
+            <Error>{error}</Error>
             <div className="createOrder-body">
               <input
                 name="createOrder-link"
@@ -83,16 +90,19 @@ const CreateOrder = () => {
                 <Button
                   disabled={loading}
                   onClick={() => {
+                    setError('');
                     if (!carLink) {
                       alert('Please add car link to OTOMOTO');
                     }
                     if (!loading && carLink) {
                       setLoading(true);
-                      fetchCarByLink(carLink).then((car) => {
-                        setCar(car);
-                        if (car) {
-                          setLoading(false);
+                      fetchCarByLink(carLink).then((res) => {
+                        if (!res?.CarBrand) {
+                          setError(res?.error ?? 'Unknown error occurred');
+                        } else {
+                          setCar(res);
                         }
+                        setLoading(false);
                       });
                     }
                   }}

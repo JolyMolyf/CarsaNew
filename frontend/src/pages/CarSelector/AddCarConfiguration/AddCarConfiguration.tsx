@@ -59,7 +59,7 @@ const AddCarConfiguration = (props: IAddCarConfigurationProps) => {
     ) {
       onSubmit?.(manualConfiguration);
     } else {
-      alert('Please add some params so we can choose car for You');
+      alert('Please add at least 4 params so we can choose car for You( Brand and Model are mandatory )');
     }
   };
 

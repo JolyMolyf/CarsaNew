@@ -14,6 +14,8 @@ import { uuid } from '../../../utils/helpers/uuid';
 import { getExistingReportsForCar } from '../../../utils/apis/ReportApi';
 import { IReport } from '../../../utils/models/Report';
 import { report } from 'process';
+import { Roles } from '../../../App';
+import { bannedKeys } from '../../../utils/constants/BannedKeys';
 
 export enum CarCardModes {
   NONE = 'NONE',
@@ -33,14 +35,15 @@ const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 2.1,
-  slidesToScroll: 1
+  slidesToScroll: 1,
+  arrows: false
 };
 
 const CarCard = (props: ICarCardProps) => {
   const navigate = useNavigate();
   const user = useSelector((state: AppState) => state.user.user);
-
   const { car, defaultExpended, mode } = props;
+
   const [reports, setReports] = useState<Array<IReport>>([]);
   const [avg, setAvg] = useState<number>(0);
   const [isExtended, setIsExtended] = useState<boolean>(defaultExpended || false);
@@ -93,7 +96,7 @@ const CarCard = (props: ICarCardProps) => {
           {car?.vin || 'Brak numeru VIN'}
         </p>
         <div className="carCard-expanded-info-naming-buttons">
-          {user?.role !== 'Client' && isExtended && (
+          {[Roles.CARSELECTOR, Roles.MANAGER, Roles.TECHNICIAN].includes(user?.role) && isExtended && (
             <Button
               onClick={() => {
                 navigate(`/technician/report/add/${props?.car?.ReportOverviews?.[0]?.id ?? uuid()}/${car.id}`);
@@ -103,7 +106,7 @@ const CarCard = (props: ICarCardProps) => {
               size={ButtonSize.SMALL}
             />
           )}
-          {user?.role !== 'Client' && isExtended && (
+          {[Roles.CARSELECTOR, Roles.MANAGER, Roles.TECHNICIAN].includes(user?.role) && isExtended && (
             <Button
               onClick={() => {
                 navigate(`/car/edit/${car?.id}`);
@@ -156,23 +159,7 @@ const CarCard = (props: ICarCardProps) => {
         <div className="carCard-expanded-specs">
           <div className="carCard-expanded-specs-header">Specs</div>
           <div className="carCard-expanded-specs-wrapper">
-            {createKeyValueArrayFromObject(flattenObject(car), [
-              'state',
-              'id',
-              'images',
-              'mainImage',
-              'description',
-              'market',
-              'name',
-              'registrationPlate',
-              'model_id',
-              'vin',
-              'generation_id',
-              'location_id',
-              'engine_id',
-              'brand_id',
-              'ReportOverviews'
-            ]).map((item: any, index: number) => {
+            {createKeyValueArrayFromObject(flattenObject(car), bannedKeys).map((item: any, index: number) => {
               return (
                 <div key={index} className="carCard-expanded-specs-wrapper-item">
                   <div className="carCard-expanded-specs-wrapper-item-key">{item[0].replaceAll('_', ' ')} </div> :{' '}

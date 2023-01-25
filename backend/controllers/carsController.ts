@@ -132,7 +132,7 @@ const getBoughtCarsByClientId = async (req: Request, res: Response) => {
 
   const cars = orders.map((order) => {
     if (order.car_order.length !== 0) {
-      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Rejected');
+      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Bought');
       return [...carsToReturn];
     } else {
       return;
@@ -148,7 +148,7 @@ const getRejectedCarsByClientId = async (req: Request, res: Response) => {
 
   const cars = orders.map((order) => {
     if (order.car_order.length !== 0) {
-      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Bought');
+      const carsToReturn = order.car_order.filter((car) => order.car_order?.[0]?.Car_Order?.status === 'Rejected');
       return [...carsToReturn];
     } else {
       return;

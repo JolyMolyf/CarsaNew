@@ -15,6 +15,7 @@ const CarSelectorAddCar = () => {
   const userId = useSelector((appState: any) => appState.user.user.Person.id);
 
   const [carLink, setCarLink] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   return (
     <div>
       <Header />
@@ -32,16 +33,25 @@ const CarSelectorAddCar = () => {
           </div>
           <div className="createOrder-actions">
             <Button
+              disabled={loading}
               onClick={() => {
                 fetchCarByLink(carLink).then((car) => {
                   const configuration_id = params.configurationId;
-                  addCarToOrder({ car, configuration_id }).then((res) => {
-                    navigate('/carSelector/dashboard');
-                  });
+                  if (carLink) {
+                    setLoading(true);
+                  } else {
+                    alert('No link to otomoto added');
+                  }
+
+                  if (!loading) {
+                    addCarToOrder({ car, configuration_id }).then((res) => {
+                      navigate('/carSelector/dashboard');
+                    });
+                  }
                 });
               }}
               type={false}
-              name={'Submit'}></Button>
+              name={loading ? 'Loading' : 'Submit'}></Button>
           </div>
         </SimpleCard>
       </div>

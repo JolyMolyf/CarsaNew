@@ -109,3 +109,5 @@ export const getClientRejectedCars = async (client_id: string) => {
       console.log(e);
     });
 };
+
+export const getCarStatus = async (car_id: string) => {};
