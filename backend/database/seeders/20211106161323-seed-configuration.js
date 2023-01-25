@@ -6,7 +6,7 @@ const generations = require('./20211105192344-seed-car-generation');
 const orders = require('./20211106160000-seed-order');
 const locations = require('./20211105194523-seed-location');
 
-const transmissionTypes = ['Manual', 'Automatic', 'CVT', 'DCT'];
+const transmissionTypes = ['Manual', 'Auto'];
 const configurations = [];
 
 for (let i = 0; i < 20; i++) {
