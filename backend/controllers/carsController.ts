@@ -35,6 +35,15 @@ const getAllCars = async (req: Request, res: Response) => {
   return res.json(cars);
 };
 
+const getCarStatusForOrder = async (req: Request, res: Response) => {
+  const carId = req.params.carId;
+  const orderId = req.params.orderId;
+
+  const result = await carHelpers.getCarStatusForOrder(carId, orderId);
+
+  return result.success ? res.json(result.data) : res.status(StatusCodes.BAD_REQUEST).json({ message: result.message });
+};
+
 const getCarsForTechnician = async (req: Request, res: Response) => {
   const technicianId = req.params.id;
   const technician = await employeeHelper.getTechnicianById(technicianId);
@@ -166,6 +175,7 @@ const getAllRejectedCars = async (req: Request, res: Response) => {
 export default {
   getCarById,
   getAllCars,
+  getCarStatusForOrder,
   getClientCars,
   getAllRejectedCars,
   getBoughtCarsByClientId,

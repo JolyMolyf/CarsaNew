@@ -52,6 +52,22 @@ const getCarById = async (carId: string) => {
   return { success: true, car };
 };
 
+const getCarStatusForOrder = async (carId: string, orderId: string) => {
+  const car_order = await db.Car_Order.findOne({
+    attributes: ['status', 'start_reservation'],
+    where: {
+      car_id: carId,
+      order_id: orderId
+    }
+  });
+
+  if (!car_order) {
+    return { success: false, message: "Record with provided parameters hasn't been found" };
+  }
+
+  return { success: true, data: car_order };
+};
+
 const getAllCarsByLocationState = async (location) => {
   const cars = await getAllCars({});
   return cars.filter((car) => car.Location.state === location);
@@ -428,6 +444,7 @@ const getRejectedCars = async () => {
 export default {
   getAllCars,
   getCarById,
+  getCarStatusForOrder,
   getCarByDetails,
   getRejectedCars,
   getAllCarsByLocationState,
