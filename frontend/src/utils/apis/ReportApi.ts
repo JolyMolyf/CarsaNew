@@ -16,3 +16,7 @@ export const updateReport = async (report: IReport) => {
     console.error(e);
   });
 };
+
+export const deleteReport = async (report: IReport) => {
+  return await axios.delete(`${process.env.REACT_APP_API_URL}/reports/${report?.id || ''}`);
+};

@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { IReport, IReportType } from '../../../../utils/models/Report';
 import ReportCard from '../../../../components/Cards/ReportCard/ReportCard';
 import { uuid } from '../../../../utils/helpers/uuid';
-import { createReports, getExistingReportsForCar } from '../../../../utils/apis/ReportApi';
+import { createReports, deleteReport, getExistingReportsForCar } from '../../../../utils/apis/ReportApi';
 import { AppState } from '../../../../redux/store';
 import { useSelector } from 'react-redux';
 
@@ -28,7 +28,10 @@ const CreateReport = () => {
   });
 
   const addReport = () => {
-    if (!reports.map((report) => report.type).includes(pendingReport.type)) {
+    if (
+      !reports.map((report) => report.type).includes(pendingReport.type) &&
+      !serverReports.map((report) => report.type).includes(pendingReport.type)
+    ) {
       pendingReport.id = uuid();
       if (pendingReport.overview_id === '') {
         pendingReport.overview_id = params.id || '';
@@ -48,7 +51,19 @@ const CreateReport = () => {
   };
 
   const handleReportDelete = (deletedReport: IReport) => {
-    setReports(reports.filter((report) => report.id !== deletedReport.id));
+    const localReport = reports.find((report) => report.id !== deletedReport.id);
+    const serverReport = serverReports.find((report) => report.id !== deletedReport.id);
+    if (localReport) {
+      console.log('Deleting local report...');
+      setReports(reports.filter((report) => report.id !== deletedReport.id));
+    }
+
+    if (serverReport) {
+      console.log('Deleting server report...');
+      deleteReport(deletedReport).then(() => {
+        setServerReports(serverReports.filter((report) => report.id !== deletedReport.id));
+      });
+    }
   };
 
   const handleReportsSave = () => {
@@ -101,7 +116,7 @@ const CreateReport = () => {
                 })}
               />
               <TextInput
-                type='number'
+                type="number"
                 name="condition"
                 onChange={handleChange}
                 className="createReport-wrapper-blotter-section-input"
