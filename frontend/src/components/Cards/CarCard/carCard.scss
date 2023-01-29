@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 
 .carCard {
+  overflow-x: hidden;
   align-self: flex-end;
   padding: 5px;
   margin: 5px;
