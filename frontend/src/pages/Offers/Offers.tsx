@@ -153,23 +153,23 @@ const OffersPage = () => {
               options={[
                 { id: 1, name: 'Benzyna' },
                 { id: 2, name: 'Diesel' },
-                { id: 3, name: 'Hybrid' },
-                { id: 4, name: 'Electric' }
+                { id: 3, name: 'Hybryda' },
+                { id: 4, name: 'Elektryczny' }
               ]}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="drive"
               options={[
-                { id: 0, name: 'All' },
-                { id: 1, name: 'Front' },
-                { id: 2, name: 'Rear' }
+                { id: 0, name: '4X4' },
+                { id: 1, name: 'Na przednie koła' },
+                { id: 2, name: 'Na tylne koła' }
               ]}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="transmission"
               options={[
-                { id: 0, name: 'Auto' },
-                { id: 1, name: 'Manual' }
+                { id: 0, name: 'Automatyczna' },
+                { id: 1, name: 'Manualna' }
               ]}
               onChange={handleFilterEditing}></DropDown>
             <TextInput
