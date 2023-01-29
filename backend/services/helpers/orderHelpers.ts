@@ -145,6 +145,11 @@ const getAllOrdersByClientId = async (clientId: string) => {
   return orders;
 };
 
+const createOrder = async (orderBody: any) => {
+  const createdOrder = await db.Order.create(orderBody.order);
+  return createdOrder;
+};
+
 const createOrderWithCar = async (orderBody: any) => {
   try {
     const newOrderId = (await db.Order.create(orderBody.order)).id;
@@ -301,6 +306,7 @@ const getAllOrdersForClient = async (client_id: string) => {
 export default {
   getAllOrders,
   getOrderById,
+  createOrder,
   createOrderWithCar,
   createOrderWithConfiguration,
   updateOrderById,
