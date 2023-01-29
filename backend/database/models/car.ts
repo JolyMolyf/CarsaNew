@@ -96,7 +96,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false
       },
       drive: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(20),
         allowNull: false
       },
       transmission: {

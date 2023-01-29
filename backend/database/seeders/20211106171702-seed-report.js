@@ -11,7 +11,7 @@ for (let i = 0; i < overviews.overviews.length - 1; i++) {
       id: uuid.v4(),
       overview_id: overviews.overviews[i].id,
       type_id: types.reportTypes[j].id,
-      condition: randomInteger(0, 100),
+      condition: randomInteger(10, 100),
       details: faker.lorem.paragraph(),
       date: faker.date.recent()
     });

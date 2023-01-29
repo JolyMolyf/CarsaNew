@@ -5,14 +5,15 @@ const records = [];
 
 for (let i = 0; i < cars.cars.length; i++) {
   let set = new Set();
+  const setLength = randomInteger(10, 25);
 
-  while (set.size < 5) {
+  while (set.size < setLength) {
     set.add(equipments.equipments[randomInteger(0, equipments.equipments.length - 1)].id);
   }
 
   const iterator = set.values();
 
-  for (let j = 0; j < 5; j++) {
+  for (let j = 0; j < setLength; j++) {
     records.push({
       car_id: cars.cars[i].id,
       equipment_id: iterator.next().value

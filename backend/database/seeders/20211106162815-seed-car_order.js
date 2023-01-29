@@ -1,23 +1,37 @@
+const { faker } = require('@faker-js/faker');
 const cars = require('./20211106103041-seed-car');
 const orders = require('./20211106160000-seed-order');
 
-const statuses = ['Reserved', 'Accepted', 'Rejected', 'Expired', 'Bought'];
 const records = [];
 
-let i = 0;
-while (records.length < 10) {
-  records.push({
-    order_id: orders.orders[i].id,
-    car_id: cars.cars[i].id,
-    start_reservation: new Date(),
-    status: statuses[randomInteger(0, statuses.length - 1)]
-  });
-  i++;
-}
+const singleCarOrders = orders.orders.filter((order) => order.type === 'Single_Car');
+const configurationOrders = orders.orders.filter((order) => order.type === 'Configuration');
+const carsCopy = [...cars.cars].sort(() => Math.random() - 0.5);
 
-function randomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+singleCarOrders.forEach((order, i) => {
+  records.push({
+    order_id: order.id,
+    car_id: carsCopy[i].id,
+    start_reservation: faker.date.recent(),
+    status: 'Rejected'
+  });
+});
+
+configurationOrders.forEach((order) => {
+  records.push({
+    order_id: order.id,
+    car_id: carsCopy.pop().id,
+    start_reservation: faker.date.recent(),
+    status: 'Expired'
+  });
+
+  records.push({
+    order_id: order.id,
+    car_id: carsCopy.pop().id,
+    start_reservation: faker.date.recent(),
+    status: 'Reserved'
+  });
+});
 
 module.exports = {
   up: async (queryInterface) => {

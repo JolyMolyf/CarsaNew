@@ -7,20 +7,21 @@ const orders = require('./20211106160000-seed-order');
 const locations = require('./20211105194523-seed-location');
 
 const transmissionTypes = ['Manual', 'Auto'];
+const configurationOrders = orders.orders.filter((order) => order.type === 'Configuration');
 const configurations = [];
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < configurationOrders.length; i++) {
   const brand = brands.brands[randomInteger(0, brands.brands.length - 1)];
-  const model = brand ? models.models.find((model) => model.brand_id === brand.id) || null : null;
+  const model = models.models.find((model) => model.brand_id === brand.id);
   const generation = model ? generations.generations.find((gen) => gen.model === model.id) || null : null;
   const yearFrom = randomInteger(2005, 2015);
-  const yearUntil = randomInteger(yearFrom, 2021);
+  const yearUntil = randomInteger(yearFrom, 2023);
   const volumeFrom = 0.9 + Math.random() * 2;
   const volumeUntil = volumeFrom + Math.random() * 2;
   const priceFrom = randomInteger(3_000, 10_000);
-  const priceUntil = randomInteger(priceFrom, priceFrom + 10_000);
+  const priceUntil = randomInteger(priceFrom, priceFrom + 100_000);
   const mileageFrom = randomInteger(20_000, 100_000);
-  const mileageUntil = randomInteger(mileageFrom, mileageFrom + 100_000);
+  const mileageUntil = randomInteger(mileageFrom, mileageFrom + 300_000);
   const order_id = orders.orders[randomInteger(0, orders.orders.length - 1)].id;
 
   configurations.push({
@@ -39,7 +40,7 @@ for (let i = 0; i < 20; i++) {
     mileage_from: Math.random() > 0.7 ? mileageFrom : null,
     mileage_until: mileageUntil,
     location_id: Math.random() > 0.8 ? locations.locations[randomInteger(0, locations.locations.length - 1)].id : null,
-    order_id: order_id
+    order_id: configurationOrders[i].id
   });
 }
 
