@@ -6,6 +6,7 @@ import { AppState } from '../../../redux/store';
 import { bannedKeys } from '../../../utils/constants/BannedKeys';
 import Button from '../../common/button/Button';
 import './configurationCard.scss';
+import { Roles } from '../../../App';
 
 interface IConfigurationCardProps {
   configuration: any;
@@ -48,10 +49,10 @@ const ConfigurationCard = (props: IConfigurationCardProps) => {
       </div>
       <div className="configurationCard-separator"></div>
       <div className="configurationCard-part">
-        {user?.role !== 'CarSelector' ? (
+        {user?.role !== Roles.CARSELECTOR ? (
           <Button
             onClick={() => {
-              navigate(`/order/details/${configuration.id}`);
+              navigate(`/order/details/${configuration.order_id}`);
             }}
             name={'Details'}
             type={false}

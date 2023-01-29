@@ -16,7 +16,7 @@ const CarSelectorDashboard = () => {
       setConfigurations([...confs]);
     });
   }, []);
-
+  console.log(configurations);
   return (
     <div className="carSelector-dashboard">
       <Header />
@@ -25,8 +25,13 @@ const CarSelectorDashboard = () => {
         <p className="carSelector-dashboard-header-user"> Hello, {user?.first_name}</p>
       </div>
       <div className="carSelector-dashboard-configurations">
-        {configurations.map((Configuration) => {
-          const order = { id: Configuration.id, Configuration, type: 'Configuration' };
+        {configurations.map((Configuration: any) => {
+          const order = {
+            id: Configuration.id,
+            Configuration,
+            type: 'Configuration',
+            order_id: Configuration.order_id
+          };
           return <ConfigurationCard configuration={order} />;
         })}
       </div>
