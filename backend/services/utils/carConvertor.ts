@@ -3,18 +3,18 @@ export const convertScrappedDataToCar = (scrappedCar: any, link: string): any =>
   let transmission;
   let type = scrappedCar['Typ nadwozia'];
   if (scrappedCar['Napęd']?.toString()?.toLowerCase() === 'Naprzedniakola'.toLowerCase()) {
-    drive = 'Front';
+    drive = 'Na przednia kola';
   }
   if (scrappedCar['Napęd']?.toString()?.toLowerCase() === 'Natylnekola'.toLowerCase()) {
-    drive = 'Rear';
+    drive = 'Na tylne kola';
   } else {
-    drive = 'All';
+    drive = '4X4';
   }
 
   if (scrappedCar['Skrzynia biegów'] === 'Manualna') {
-    transmission = 'Manual';
+    transmission = 'Manualna';
   } else {
-    transmission = 'Auto';
+    transmission = 'Automatyczna';
   }
 
   const carToReturn = {

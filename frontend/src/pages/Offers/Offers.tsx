@@ -161,8 +161,8 @@ const OffersPage = () => {
               placeholder="drive"
               options={[
                 { id: 0, name: '4X4' },
-                { id: 1, name: 'Na przednie koła' },
-                { id: 2, name: 'Na tylne koła' }
+                { id: 1, name: 'Na przednie kola' },
+                { id: 2, name: 'Na tylne kola' }
               ]}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
