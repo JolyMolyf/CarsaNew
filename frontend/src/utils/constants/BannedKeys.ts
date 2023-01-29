@@ -18,5 +18,8 @@ export const bannedKeys = [
   'ReportOverviews',
   'images',
   'description',
-  'car_order'
+  'car_order',
+  '',
+  ' ',
+  'marketplace_link'
 ];

@@ -171,12 +171,15 @@ const CarCard = (props: ICarCardProps) => {
           <div className="carCard-expanded-specs-header">Specs</div>
           <div className="carCard-expanded-specs-wrapper">
             {createKeyValueArrayFromObject(flattenObject(car), bannedKeys).map((item: any, index: number) => {
-              return (
-                <div key={index} className="carCard-expanded-specs-wrapper-item">
-                  <div className="carCard-expanded-specs-wrapper-item-key">{item[0].replaceAll('_', ' ')} </div> :{' '}
-                  {['start_reservation'].includes(item[0]) ? moment(item[1]).format('MMM DD YYYY hh:mm') : item[1]}
-                </div>
-              );
+              if (item[0]) {
+                console.log(item[0]);
+                return (
+                  <div key={index} className="carCard-expanded-specs-wrapper-item">
+                    <div className="carCard-expanded-specs-wrapper-item-key">{item[0].replaceAll('_', ' ')} </div> :{' '}
+                    {['start_reservation'].includes(item[0]) ? moment(item[1]).format('MMM DD YYYY hh:mm') : item[1]}
+                  </div>
+                );
+              }
             })}
           </div>
         </div>
