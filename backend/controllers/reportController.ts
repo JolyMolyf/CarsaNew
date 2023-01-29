@@ -41,9 +41,20 @@ const uploadReportImages = async (req: Request, res: Response) => {
   return res.sendStatus(StatusCodes.OK);
 };
 
+const deleteReport = async (req: Request, res: Response) => {
+  const reportId = req.params.reportId;
+
+  const result = await reportHelpers.deleteReportById(reportId);
+
+  return result.success
+    ? res.sendStatus(StatusCodes.OK)
+    : res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: result.message });
+};
+
 export default {
   getAllReportForCar,
   saveAndUpdateReports,
   updateSingleReport,
-  uploadReportImages
+  uploadReportImages,
+  deleteReport
 };

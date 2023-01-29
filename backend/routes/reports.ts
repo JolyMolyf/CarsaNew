@@ -29,6 +29,7 @@ const upload = multer({
   }
 });
 
+router.delete('/:reportId', validateReportId, validateRequestSchema, reportsController.deleteReport);
 router.get('/car/:car_id', reportsController.getAllReportForCar);
 router.post('/save', reportsController.saveAndUpdateReports);
 router.put('/update', reportsController.updateSingleReport);

@@ -1,7 +1,8 @@
-import sequelize from 'sequelize';
+import sequelize, { Transaction } from 'sequelize';
 import db from '../../database/models';
 import { ReportOverviewType } from '../../types/reportOverview';
 import { IReport } from '../../DTOs/reportBody';
+import Logger from '../../logger';
 
 const getAllReports = async () => {
   return await db.ReportOverview.findAll();
@@ -115,6 +116,26 @@ const getReportTypes = async () => {
   return await db.ReportType.findAll();
 };
 
+const deleteReportById = async (reportId: string) => {
+  try {
+    await db.sequelize.transaction(async (transaction: Transaction) => {
+      await db.Report.destroy(
+        {
+          where: {
+            id: reportId
+          }
+        },
+        { transaction }
+      );
+    });
+  } catch (e) {
+    Logger.error(e);
+    return { success: false, message: 'Failed to delete report' };
+  }
+
+  return { success: true };
+};
+
 export default {
   getAllReports,
   getRecentCarReports,
@@ -122,5 +143,6 @@ export default {
   getAllReportsByOverviewId,
   createOrUpdateReports,
   updateReport,
-  updateSingleReport
+  updateSingleReport,
+  deleteReportById
 };
