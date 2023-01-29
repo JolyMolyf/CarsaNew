@@ -13,8 +13,6 @@ const TechnicianDashboard = () => {
   const technician = useSelector((state: AppState) => state.user.user);
   const [cars, setCars] = useState<Array<CarType>>([]);
 
-  const [allCars, setAllCars] = useState<Array<CarType>>([]);
-
   useEffect(() => {
     getCarsByTechnicianId(technician?.person_id).then((res) => {
       setCars(res);

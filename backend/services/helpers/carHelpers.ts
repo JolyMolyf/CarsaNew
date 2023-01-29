@@ -18,7 +18,8 @@ const getAllCars = async ({ limit = Number.MAX_SAFE_INTEGER, offset = 0 }: { lim
       { model: db.CarGeneration, attributes: ['id', 'name', 'start_year', 'end_year'] },
       { model: db.Engine },
       { model: db.Location },
-      { model: db.ReportOverview }
+      { model: db.ReportOverview },
+      { model: db.Order, as: 'car_order' }
     ],
     limit,
     offset
@@ -434,7 +435,8 @@ const getRejectedCars = async () => {
       { model: db.CarGeneration, attributes: ['id', 'name', 'start_year', 'end_year'] },
       { model: db.Engine },
       { model: db.Location },
-      { model: db.ReportOverview }
+      { model: db.ReportOverview },
+      { model: db.Order, as: 'car_order' }
     ]
   });
 

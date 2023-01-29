@@ -4,7 +4,7 @@ import Carousel from '../../components/carousel/Carousel';
 import { CarType } from '../../utils/models/Car';
 import { useEffect, useState, useMemo } from 'react';
 import { buyCar, getCarById, getCarStatus, getReportsByCarId, rejectCar, updateCar } from '../../utils/apis/CarsApi';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Button, { ButtonSize } from '../../components/common/button/Button';
 import { IReport } from '../../utils/models/Report';
 import ReportCard from '../../components/Cards/ReportCard/ReportCard';
@@ -50,7 +50,7 @@ const bannedKeys = [
   'car_order'
 ];
 
-enum carStatus {
+enum CarStatus {
   BOUGHT = 'Bought',
   REJECTED = 'Rejected',
   RESERVED = 'Reserved'
@@ -58,12 +58,13 @@ enum carStatus {
 
 const EditCar = (props: IEditCarProps) => {
   const params = useParams();
-  const navigate = useNavigate();
   const userRole = useSelector((state: AppState) => state.user.user.role);
   const userId = useSelector((appState: any) => appState.user.user?.Person?.id || appState.user?.user?.person_id);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const [car, setCar] = useState<CarType>();
   const [carStatus, setCarStatus] = useState();
+  const [car, setCar] = useState<CarType>();
   const [reports, setReports] = useState<Array<IReport>>();
   const [mode, setMode] = useState<CarPageModes>(CarPageModes.VIEW);
 
@@ -78,7 +79,11 @@ const EditCar = (props: IEditCarProps) => {
     getCarById(params.id || '').then((res) => {
       setCar(res);
       setReports(res.ReportOverviews?.[0]?.Reports);
-      getCarStatus(params.id || '');
+      if (searchParams.get('orderId')) {
+        getCarStatus(params?.id || '', searchParams.get('orderId') || '').then((res) => {
+          setCarStatus(res?.data?.status);
+        });
+      }
     });
   }, []);
 
@@ -138,12 +143,12 @@ const EditCar = (props: IEditCarProps) => {
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.registrationNumber}</div>
               <div className="editCar-header-info-section-subSection-smallinfo">{car?.vin}</div>
 
-              {!(!isInEditMode() && userRole === Roles.CLIENT) ? (
+              {!(!isInEditMode() && userRole === Roles.CLIENT && carStatus !== CarStatus.BOUGHT) ? (
                 ''
               ) : (
                 <Button size={ButtonSize.SMALL} onClick={handleBuy} type={true} name={'Buy'}></Button>
               )}
-              {!(!isInEditMode() && userRole === Roles.CLIENT) ? (
+              {!(!isInEditMode() && userRole === Roles.CLIENT && carStatus !== CarStatus.REJECTED) ? (
                 ''
               ) : (
                 <Button size={ButtonSize.SMALL} onClick={handleReject} type={true} name={'Reject'}></Button>

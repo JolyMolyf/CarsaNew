@@ -9,6 +9,7 @@ import { CarType } from '../../utils/models/Car';
 import { getAllGenerationsForModel, getAllModelsForBrand, getRejectedCars } from '../../utils/apis/CarsApi';
 import CarCard from '../../components/Cards/CarCard/CarCard';
 import TextInput from '../../components/common/input/TextInput';
+import { useSelector } from 'react-redux';
 
 const OffersPage = () => {
   const [cars, setCars] = useState<Array<CarType>>([]);
@@ -17,6 +18,8 @@ const OffersPage = () => {
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [generations, setGenerations] = useState([]);
+
+  const userId = useSelector((appState: any) => appState.user.user?.Person?.id || appState.user?.user?.person_id);
 
   const handleFilterEditing = (option: any, placeholder: string) => {
     setFilters({ ...filters, [placeholder]: option.name });
@@ -221,9 +224,12 @@ const OffersPage = () => {
         <div className="offers-wrapper-cars">
           {filteredCars.length === 0 ? 'No cars found that satisfy your filter' : ''}
           {[...(filteredCars || [])].map((car: CarType, index: number) => {
+            const orderId = car.car_order.find((car_order: any) => {
+              return car_order.client_id === userId;
+            })?.id;
             return (
               <div key={index}>
-                <CarCard car={car}></CarCard>
+                <CarCard car={car} orderId={orderId || 'Unknown'}></CarCard>
               </div>
             );
           })}

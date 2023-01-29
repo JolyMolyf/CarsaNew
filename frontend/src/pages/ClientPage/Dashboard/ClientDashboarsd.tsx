@@ -78,7 +78,7 @@ const ClientDashboard = () => {
           {boughtCars?.map((car) => {
             return (
               <div key={car.id}>
-                <CarCard car={car} />
+                <CarCard car={car} orderId={car.Car_Order.order_id} />
               </div>
             );
           })}
@@ -88,7 +88,7 @@ const ClientDashboard = () => {
           {rejectedCars?.map((car) => {
             return (
               <div key={car.id}>
-                <CarCard car={car} />
+                <CarCard car={car} orderId={car.Car_Order.order_id} />
               </div>
             );
           })}
@@ -98,7 +98,7 @@ const ClientDashboard = () => {
           {cars?.map((car) => {
             return (
               <div key={car.id}>
-                <CarCard car={car} />
+                <CarCard car={car} orderId={car.Car_Order.order_id} />
               </div>
             );
           })}

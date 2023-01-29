@@ -108,9 +108,7 @@ const buyCar = async (req: Request, res: Response) => {
   const orders = await orderHelpers.getAllOrdersForClient(body.user_id);
   const order_ids = orders.map((order) => order.id);
   const car_orders = await car_orderHelpers.getCarOrderByOrderIdAndCarId(order_ids, req.body.carid);
-  console.log('Found Car Orders for a client', car_orders);
   if (car_orders.length === 0) {
-    console.log('NO Orders found  _ -- _ _ - - - -_ - - - ');
     const car = await carHelpers.getCarById(req.body.carid);
     const selectors = await employeeHelper.getAllCarSelectors();
     const createdOrder = await orderHelpers.createOrder({
@@ -123,7 +121,6 @@ const buyCar = async (req: Request, res: Response) => {
       }
     });
     const createdOrderId = createdOrder.id;
-    console.log(createdOrder, ' huygUGUYGGUOYGYUGGOUYGUYUYGGYOUOUYUYGUYGUGYUGYUYOGUGOYUGOYOUGY  ');
     const carOrderLink = await car_orderHelpers.createCarOrderLink(car.car.id, createdOrderId || '');
   } else {
     car_orders.forEach((link) => {

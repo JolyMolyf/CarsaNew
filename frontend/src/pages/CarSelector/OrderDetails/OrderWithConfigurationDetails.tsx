@@ -12,104 +12,105 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../../../redux/store';
 import { ISpecification } from '../../../utils/models/Specification';
 
-const OrderWithConfigurationDetails =  (props:any) => {
-
+const OrderWithConfigurationDetails = (props: any) => {
   const params = useParams();
-  const user = useSelector((state:AppState) => state.user.user );
+  const user = useSelector((state: AppState) => state.user.user);
   const [orderConfiguration, setOrderConfiguration] = useState<IConfiguration>();
-  const [ specs, setSpecs] = useState<any>();
-
-
+  const [specs, setSpecs] = useState<any>();
 
   useEffect(() => {
-    if(!orderConfiguration){
+    if (!orderConfiguration) {
       getOrderbyDetails(params.id || '').then((res) => {
         setOrderConfiguration(res.data);
       });
     } else {
-      setSpecs(createKeyValueArrayFromObject(flatObj(orderConfiguration.Configuration, {}, ""), ['id', 'order_id', 'deletedAt']).map((feature) => {
-        return [feature?.[0]?.replaceAll('.', ' ')?.replaceAll('0', ''), feature?.[1] ]
-      }).filter((feature) => {
-          const res = !/id/i.test(feature[0])
-          return res;
-      }))
+      setSpecs(
+        createKeyValueArrayFromObject(flatObj(orderConfiguration.Configuration, {}, ''), [
+          'id',
+          'order_id',
+          'deletedAt'
+        ])
+          .map((feature) => {
+            return [feature?.[0]?.replaceAll('.', ' ')?.replaceAll('0', ''), feature?.[1]];
+          })
+          .filter((feature) => {
+            const res = !/id/i.test(feature[0]);
+            return res;
+          })
+      );
     }
-  }, [orderConfiguration])
+  }, [orderConfiguration]);
 
-  function flatObj(obj:any, newObj:any, parentKey:any) {
-    for(let key in obj) {
+  function flatObj(obj: any, newObj: any, parentKey: any) {
+    for (let key in obj) {
+      const currKey = parentKey.length > 0 ? `${parentKey}.${key}` : key;
 
-        const currKey = parentKey.length > 0 ? `${parentKey}.${key}` : key
-
-        if (typeof obj[key] === "object") {
-            flatObj(obj[key], newObj, currKey);
-        } else {
-            newObj[currKey] = obj[key];
-        }
+      if (typeof obj[key] === 'object') {
+        flatObj(obj[key], newObj, currKey);
+      } else {
+        newObj[currKey] = obj[key];
+      }
     }
 
     return newObj;
-};
+  }
 
-  return(
+  return (
     <div>
-      <Header/>
-      <div className='orderWithConfigurationDetails'>    
-            <div className='orderWithConfigurationDetails-header'>
-              <p className='orderWithConfigurationDetails-header-label'>Details</p>
-             { user?.role !== 'Client' ? <Button onClick={() => {}} type={true} name='Add Car'/> : '' } 
+      <Header />
+      <div className="orderWithConfigurationDetails">
+        <div className="orderWithConfigurationDetails-header">
+          <p className="orderWithConfigurationDetails-header-label">Details</p>
+          {user?.role !== 'Client' ? <Button onClick={() => {}} type={true} name="Add Car" /> : ''}
+        </div>
+        <div className="orderWithConfigurationDetails-details">
+          <div className="orderWithConfigurationDetails-details-order">
+            <div className="orderWithConfigurationDetails-details-header">
+              {orderConfiguration?.type === 'Configuration' ? 'Order Configuration' : 'Single Car'}
+              <div className="orderWithConfigurationDetails-details-header-label">#{orderConfiguration?.id}</div>
             </div>
-            <div className='orderWithConfigurationDetails-details'>
-              <div className='orderWithConfigurationDetails-details-order'>
-                <div className='orderWithConfigurationDetails-details-header'>
-                    { orderConfiguration?.type === 'Configuration' ? 'Order Configuration' : 'Single Car' }
-                    <div className='orderWithConfigurationDetails-details-header-label'>
-                      #{orderConfiguration?.id}
+            <div className="orderWithConfigurationDetails-details-order-body">
+              {[...(specs || [])].map((pair: any, index: number) => {
+                if (pair[1] !== null) {
+                  return (
+                    <div key={index} className="keyValuePair">
+                      {pair[0]?.replaceAll('_', ' ')} : {pair[1]}
                     </div>
-                </div>
-                <div className='orderWithConfigurationDetails-details-order-body'>
-                  { [...specs || []].map((pair:any, index:number) => {
-                    if (pair[1] !== null) {
-                      return  <div key={index} className='keyValuePair'>
-                                {pair[0]?.replaceAll('_', ' ') } : { pair[1] }
-                              </div>
-                    }
-                  
-                  })}
-                </div>
-              </div>
-              <div className='orderWithConfigurationDetails-details-client'>
-                <div className='orderWithConfigurationDetails-details-header'>
-                    Client
-                    <div className='orderWithConfigurationDetails-details-header-label'>
-                      # { orderConfiguration?.Client?.person_id }
-                    </div>
-                </div>
-                <div className='orderWithConfigurationDetails-details-client-body'>
-                  Name: { orderConfiguration?.Client?.first_name } { orderConfiguration?.Client?.last_name }
-                </div>
-              </div>
-            </div>
-
-            <div className='orderWithConfigurationDetails-cars'>
-                  <div className='orderWithConfigurationDetails-cars-header'>
-                    Cars
-                  </div>
-                  <div className='orderWithConfigurationDetails-cars-items'>
-                      { orderConfiguration?.OrderCars?.length === 0 ? 'No cars in this order' : orderConfiguration?.OrderCars?.map((car:CarType, index:number) => {
-                        return(
-                          <div key={index}>
-                            <CarCard car={car}/>
-                          </div>
-                          
-                        )
-                      }) }
-                  </div>
+                  );
+                }
+              })}
             </div>
           </div>
+          <div className="orderWithConfigurationDetails-details-client">
+            <div className="orderWithConfigurationDetails-details-header">
+              Client
+              <div className="orderWithConfigurationDetails-details-header-label">
+                # {orderConfiguration?.Client?.person_id}
+              </div>
+            </div>
+            <div className="orderWithConfigurationDetails-details-client-body">
+              Name: {orderConfiguration?.Client?.first_name} {orderConfiguration?.Client?.last_name}
+            </div>
+          </div>
+        </div>
+
+        <div className="orderWithConfigurationDetails-cars">
+          <div className="orderWithConfigurationDetails-cars-header">Cars</div>
+          <div className="orderWithConfigurationDetails-cars-items">
+            {orderConfiguration?.OrderCars?.length === 0
+              ? 'No cars in this order'
+              : orderConfiguration?.OrderCars?.map((car: CarType, index: number) => {
+                  return (
+                    <div key={index}>
+                      <CarCard car={car} orderId={orderConfiguration?.id} />
+                    </div>
+                  );
+                })}
+          </div>
+        </div>
+      </div>
     </div>
-   
-  )
-}
+  );
+};
 
 export default OrderWithConfigurationDetails;

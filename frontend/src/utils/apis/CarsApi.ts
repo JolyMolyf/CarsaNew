@@ -110,4 +110,6 @@ export const getClientRejectedCars = async (client_id: string) => {
     });
 };
 
-export const getCarStatus = async (car_id: string) => {};
+export const getCarStatus = async (car_id: string, order_id: string) => {
+  return await axios.get(`${process.env.REACT_APP_API_URL}/cars/${car_id}/orders/${order_id}/status`);
+};

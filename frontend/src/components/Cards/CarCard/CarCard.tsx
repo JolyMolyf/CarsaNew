@@ -6,7 +6,7 @@ import Button, { ButtonSize } from '../../common/button/Button';
 import { createKeyValueArrayFromObject, flattenObject } from '../../../utils/helpers/flattenObject';
 
 import Slider from 'react-slick';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../redux/store';
 import moment from 'moment';
@@ -28,6 +28,7 @@ interface ICarCardProps {
   defaultExpended?: boolean;
   car: CarType;
   mode?: CarCardModes;
+  orderId?: string;
 }
 
 const settings = {
@@ -42,7 +43,7 @@ const settings = {
 const CarCard = (props: ICarCardProps) => {
   const navigate = useNavigate();
   const user = useSelector((state: AppState) => state.user.user);
-  const { car, defaultExpended, mode } = props;
+  const { car, defaultExpended, mode, orderId } = props;
 
   const [reports, setReports] = useState<Array<IReport>>([]);
   const [avg, setAvg] = useState<number>(0);
@@ -109,7 +110,12 @@ const CarCard = (props: ICarCardProps) => {
           {[Roles.CARSELECTOR, Roles.MANAGER, Roles.TECHNICIAN].includes(user?.role) && isExtended && (
             <Button
               onClick={() => {
-                navigate(`/car/edit/${car?.id}`);
+                navigate({
+                  pathname: `/car/edit/${car?.id}`,
+                  search: createSearchParams({
+                    orderId: 'test'
+                  }).toString()
+                });
               }}
               type={false}
               name={'Edit'}
@@ -119,7 +125,12 @@ const CarCard = (props: ICarCardProps) => {
           {user?.role === 'Client' && isExtended && props.mode !== CarCardModes.NOACTION && (
             <Button
               onClick={() => {
-                navigate(`/car/edit/${car?.id}`);
+                navigate({
+                  pathname: `/car/edit/${car?.id}`,
+                  search: createSearchParams({
+                    orderId: orderId ?? 'Unknown'
+                  }).toString()
+                });
               }}
               type={false}
               name={'Details'}

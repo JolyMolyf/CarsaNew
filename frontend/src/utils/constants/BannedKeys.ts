@@ -17,5 +17,6 @@ export const bannedKeys = [
   'Car_Order',
   'ReportOverviews',
   'images',
-  'description'
+  'description',
+  'car_order'
 ];
