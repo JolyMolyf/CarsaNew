@@ -18,7 +18,7 @@ const cars = [
     POLECAM!!!!`,
     mileage: 103500,
     year: 2013,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Automatyczna',
     market_name: 'OTOMOTO',
     marketplace_link: 'https://www.otomoto.pl/oferta/lexus-es-pierwszy-wlasciciel-super-stan-ID6FedZV.html',
@@ -60,10 +60,10 @@ const cars = [
     Serwisowany tylko w autoryzowanym serwisie VW/Skoda
     komplet opon letnich i zimowych
     bagażnik dachowy Atera Signo RT
-    łańcuchy na koła`,
+    łańcuchy na kola`,
     mileage: 116000,
     year: 2014,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Manualna',
     market_name: 'OTOMOTO',
     marketplace_link:
@@ -105,7 +105,7 @@ const cars = [
     Jeśli lądować od gniazdka to 10 zł`,
     mileage: 12500,
     year: 2021,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Automatyczna',
     market_name: 'OTOMOTO',
     marketplace_link:
@@ -143,7 +143,7 @@ const cars = [
     Dziekuje Ci`,
     mileage: 177000,
     year: 2016,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Automatyczna',
     market_name: 'OTOMOTO',
     marketplace_link: 'https://www.otomoto.pl/oferta/audi-a4-ID6FgAAf.html',
@@ -176,7 +176,7 @@ const cars = [
     biało-czarne skóry jak nowe, stan techniczny bardzo dobry.`,
     mileage: 83200,
     year: 2017,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Automatyczna',
     market_name: 'OTOMOTO',
     marketplace_link: 'https://www.otomoto.pl/oferta/toyota-prius-toyota-prius-plug-in-biala-perla-ID6F3G4R.html',
@@ -224,7 +224,7 @@ const cars = [
     -olej w skrzyni wymieniany co 35/40 tys`,
     mileage: 328000,
     year: 2003,
-    drive: 'Na przednie koła',
+    drive: 'Na przednie kola',
     transmission: 'Automatyczna',
     market_name: 'OTOMOTO',
     marketplace_link: 'https://www.otomoto.pl/oferta/honda-accord-honda-accord-vii-2-4-automat-executive-ID6F3GVP.html',
