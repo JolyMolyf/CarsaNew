@@ -22,6 +22,8 @@ const ConfigurationCard = (props: IConfigurationCardProps) => {
     setSpecs(Object.entries(flattenObject(configuration.Configuration) || configuration?.car_order?.[0] || {}));
   }, []);
 
+  console.log(configuration);
+
   return (
     <div className="configurationCard">
       <div className="configurationCard-part">
@@ -52,7 +54,7 @@ const ConfigurationCard = (props: IConfigurationCardProps) => {
         {user?.role !== Roles.CARSELECTOR ? (
           <Button
             onClick={() => {
-              navigate(`/order/details/${configuration.order_id}`);
+              navigate(`/order/details/${configuration.order_id ?? configuration.id}`);
             }}
             name={'Details'}
             type={false}
