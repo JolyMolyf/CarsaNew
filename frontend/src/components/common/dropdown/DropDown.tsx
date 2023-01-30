@@ -23,6 +23,12 @@ const DropDown = (props: Props) => {
     }
   };
 
+  useEffect(() => {
+    if (outerOption === '' || !outerOption) {
+      setSelectedOption(`Choose  ${placeholder}`);
+    }
+  }, [outerOption]);
+
   const handleItemSelect = (item: { id: number; label: string; name: string }) => {
     setSelectedOption(item?.label ?? item.name);
     setIsOpened(!isOpened);
@@ -55,8 +61,7 @@ const DropDown = (props: Props) => {
               className="dropdown-menu-item"
               onClick={() => {
                 handleItemSelect(item);
-              }}
-            >
+              }}>
               {!item?.inactive && (item?.label ?? item.name)}
             </div>
           );

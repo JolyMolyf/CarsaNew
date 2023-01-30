@@ -145,9 +145,21 @@ const OffersPage = () => {
       <div className="offers-wrapper">
         <div className="offers-wrapper-filter">
           <div className="offers-wrapper-filter-form">
-            <DropDown placeholder="brand" options={brands} onChange={handleFilterEditing}></DropDown>
-            <DropDown placeholder="model" options={models} onChange={handleFilterEditing}></DropDown>
-            <DropDown placeholder="generation" options={generations} onChange={handleFilterEditing}></DropDown>
+            <DropDown
+              placeholder="brand"
+              options={brands}
+              onChange={handleFilterEditing}
+              outerOption={filters?.brand}></DropDown>
+            <DropDown
+              placeholder="model"
+              options={models}
+              onChange={handleFilterEditing}
+              outerOption={filters?.model}></DropDown>
+            <DropDown
+              placeholder="generation"
+              options={generations}
+              onChange={handleFilterEditing}
+              outerOption={filters?.generation}></DropDown>
             <DropDown
               placeholder="fuel"
               options={[
@@ -156,6 +168,7 @@ const OffersPage = () => {
                 { id: 3, name: 'Hybryda' },
                 { id: 4, name: 'Elektryczny' }
               ]}
+              outerOption={filters?.fuel}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="drive"
@@ -164,6 +177,7 @@ const OffersPage = () => {
                 { id: 1, name: 'Na przednie kola' },
                 { id: 2, name: 'Na tylne kola' }
               ]}
+              outerOption={filters?.drive}
               onChange={handleFilterEditing}></DropDown>
             <DropDown
               placeholder="transmission"
@@ -171,6 +185,7 @@ const OffersPage = () => {
                 { id: 0, name: 'Automatyczna' },
                 { id: 1, name: 'Manualna' }
               ]}
+              outerOption={filters?.transmission}
               onChange={handleFilterEditing}></DropDown>
             <TextInput
               name="minPrice"
