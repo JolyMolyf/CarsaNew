@@ -54,12 +54,10 @@ const CreateReport = () => {
     const localReport = reports.find((report) => report.id !== deletedReport.id);
     const serverReport = serverReports.find((report) => report.id !== deletedReport.id);
     if (localReport) {
-      console.log('Deleting local report...');
       setReports(reports.filter((report) => report.id !== deletedReport.id));
     }
 
     if (serverReport) {
-      console.log('Deleting server report...');
       deleteReport(deletedReport).then(() => {
         setServerReports(serverReports.filter((report) => report.id !== deletedReport.id));
       });

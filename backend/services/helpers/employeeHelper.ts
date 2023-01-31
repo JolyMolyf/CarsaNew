@@ -1,5 +1,6 @@
 import sequelize from 'sequelize';
 import db from '../../database/models';
+import Logger from '../../logger';
 
 const getEmployeesPosition = async (person_id: string) => {
   const carSelectors = await getAllCarSelectors();
@@ -75,7 +76,7 @@ const getEmployeeByEmail = async (email: string) => {
     raw: true,
     nest: true
   }).catch((e: any) => {
-    console.error('Error occurred', e);
+    Logger.error(`Error occurred: ${e}`);
   });
 
   if (employee) {

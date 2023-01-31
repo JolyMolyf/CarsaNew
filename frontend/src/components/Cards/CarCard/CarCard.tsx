@@ -172,7 +172,6 @@ const CarCard = (props: ICarCardProps) => {
           <div className="carCard-expanded-specs-wrapper">
             {createKeyValueArrayFromObject(flattenObject(car), bannedKeys).map((item: any, index: number) => {
               if (item[0]) {
-                console.log(item[0]);
                 return (
                   <div key={index} className="carCard-expanded-specs-wrapper-item">
                     <div className="carCard-expanded-specs-wrapper-item-key">{item[0].replaceAll('_', ' ')} </div> :{' '}

@@ -2,6 +2,7 @@ import sequelize, { Op } from 'sequelize';
 import db from '../../database/models';
 import { hashPassword } from '../utils/authUtils';
 import { CreatedClient } from '../../DTOs/createdClient';
+import Logger from '../../logger';
 
 interface ClientByEmail {
   client_id: string;
@@ -28,7 +29,7 @@ const getClientByEmail = async (email: string): Promise<ClientByEmail> => {
     raw: true,
     nest: true
   }).catch((e: any) => {
-    console.error('Error occurred', e);
+    Logger.error(`Error occurred: ${e}`);
   });
 
   return client;

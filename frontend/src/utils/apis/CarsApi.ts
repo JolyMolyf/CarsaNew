@@ -95,7 +95,7 @@ export const getClientBoughtCars = async (client_id: string) => {
       return res.data;
     })
     .catch((e) => {
-      console.log(e);
+      console.error('Something went wrong', e);
     });
 };
 
@@ -106,7 +106,7 @@ export const getClientRejectedCars = async (client_id: string) => {
       return res.data;
     })
     .catch((e) => {
-      console.log(e);
+      console.error('Something went wrong', e);
     });
 };
 

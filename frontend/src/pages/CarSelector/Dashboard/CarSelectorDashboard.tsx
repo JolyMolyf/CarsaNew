@@ -16,7 +16,7 @@ const CarSelectorDashboard = () => {
       setConfigurations([...confs]);
     });
   }, []);
-  console.log(configurations);
+
   return (
     <div className="carSelector-dashboard">
       <Header />

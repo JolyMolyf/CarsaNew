@@ -23,7 +23,7 @@ export const addCarToConfiguration = async (car: manualConfiguration | CarType |
       return res;
     })
     .catch((e) => {
-      console.error(e);
+      console.error('Something went wrong', e);
     });
 };
 

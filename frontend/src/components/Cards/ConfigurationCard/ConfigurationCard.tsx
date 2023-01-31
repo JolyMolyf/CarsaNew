@@ -22,8 +22,6 @@ const ConfigurationCard = (props: IConfigurationCardProps) => {
     setSpecs(Object.entries(flattenObject(configuration.Configuration) || configuration?.car_order?.[0] || {}));
   }, []);
 
-  console.log(configuration);
-
   return (
     <div className="configurationCard">
       <div className="configurationCard-part">
