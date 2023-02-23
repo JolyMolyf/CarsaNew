@@ -71,7 +71,7 @@ const getCarStatusForOrder = async (carId: string, orderId: string) => {
 
 const getAllCarsByLocationState = async (location) => {
   const cars = await getAllCars({});
-  return cars.filter((car) => car.Location.state === location);
+  return cars;
 };
 
 const createCar = async (carBody: any) => {
